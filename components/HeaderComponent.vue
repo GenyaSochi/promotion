@@ -5,7 +5,8 @@
 
 <style>
 .info {
-  color: #000;
+  color: #e6e0e0;
+  background-color: black;
 }
 
 

@@ -4,9 +4,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/fonts', '@nuxt/image'],
   css: ['~/assets/css/main.css'],
-  nitro: {
-    preset: 'static'
-  },
   app: {
     baseURL: process.env.BASE_URL || '/'
   }
