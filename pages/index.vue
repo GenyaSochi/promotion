@@ -1,8 +1,18 @@
 <template>
   <div class="home-page">
+    <!-- Hero Section -->
     <section class="hero">
+      <div class="hero-bg">
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="hero-glow hero-glow-3"></div>
+      </div>
       <div class="container">
         <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>Доступны для новых проектов</span>
+          </div>
           <h1>
             <span class="gradient-text">Цифровые решения</span>
             <br />
@@ -13,13 +23,29 @@
             которые помогают компаниям расти и привлекать клиентов
           </p>
           <div class="hero-buttons">
-            <NuxtLink to="/contact" class="btn-primary">Начать проект</NuxtLink>
-            <NuxtLink to="/services" class="btn-secondary">Наши услуги</NuxtLink>
+            <NuxtLink to="/contact" class="btn-primary">
+              Начать проект
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </NuxtLink>
+            <NuxtLink to="/services" class="btn-secondary">
+              Наши услуги
+            </NuxtLink>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item" v-for="(stat, index) in stats" :key="index">
+              <span class="stat-value">{{ stat.value }}</span>
+              <span class="stat-label">{{ stat.label }}</span>
+            </div>
           </div>
         </div>
       </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
     </section>
 
+    <!-- Features Section -->
     <section class="features">
       <div class="container">
         <div class="section-header">
@@ -36,6 +62,7 @@
       </div>
     </section>
 
+    <!-- Services Preview -->
     <section class="services-preview">
       <div class="container">
         <div class="section-header">
@@ -58,11 +85,17 @@
       </div>
     </section>
 
+    <!-- CTA Section -->
     <section class="cta">
       <div class="container">
-        <h2>Готовы обсудить проект?</h2>
-        <p>Свяжитесь с нами, и мы найдём лучшее решение для вашего бизнеса</p>
-        <NuxtLink to="/contact" class="btn-primary btn-large">Обсудить проект</NuxtLink>
+        <div class="cta-content">
+          <h2>Готовы обсудить проект?</h2>
+          <p>Свяжитесь с нами, и мы найдём лучшее решение для вашего бизнеса</p>
+          <NuxtLink to="/contact" class="btn-primary btn-large">
+            Обсудить проект
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </NuxtLink>
+        </div>
       </div>
     </section>
   </div>
@@ -83,6 +116,18 @@ interface Service {
   description: string
   link: string
 }
+
+interface Stat {
+  value: string
+  label: string
+}
+
+const stats: Stat[] = [
+  { value: '150+', label: 'Проектов' },
+  { value: '8 лет', label: 'Опыта' },
+  { value: '95%', label: 'Клиентов' },
+  { value: '24/7', label: 'Поддержка' }
+]
 
 const features: Feature[] = [
   {
@@ -165,52 +210,101 @@ useHead({
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-light) 100%);
-  color: var(--color-white);
-  padding: 8rem 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   overflow: hidden;
+  padding: 140px 1.5rem 80px;
+  box-sizing: border-box;
 }
 
-.hero::before {
-  content: '';
+.hero-bg {
   position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(0, 220, 130, 0.1) 0%, transparent 70%);
+  inset: 0;
   pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.5;
+}
+
+.hero-glow-1 {
+  width: 600px;
+  height: 600px;
+  background: rgba(0, 220, 130, 0.15);
+  top: -200px;
+  right: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero-glow-2 {
+  width: 500px;
+  height: 500px;
+  background: rgba(139, 92, 246, 0.12);
+  bottom: -150px;
+  left: -100px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.hero-glow-3 {
+  width: 400px;
+  height: 400px;
+  background: rgba(236, 72, 153, 0.1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 6s ease-in-out infinite;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
 
-.hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: var(--spacing-lg);
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  backdrop-filter: blur(10px);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: -0.03em;
 }
 
 .hero-description {
   font-size: 1.25rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   line-height: 1.8;
-  margin-bottom: var(--spacing-xl);
-  max-width: 600px;
+  margin-bottom: var(--spacing-2xl);
+  max-width: 650px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -220,108 +314,87 @@ useHead({
   gap: var(--spacing-md);
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: var(--spacing-3xl);
 }
 
-.btn-primary {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: var(--color-white);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  font-size: 1rem;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-3xl);
+  flex-wrap: wrap;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: var(--color-white);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all var(--transition-normal);
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.btn-secondary:hover {
-  background: var(--color-primary);
-  transform: translateY(-2px);
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
 }
 
-.btn-large {
-  padding: var(--spacing-lg) var(--spacing-2xl);
-  font-size: 1.1rem;
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--color-primary), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleY(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
 /* Features Section */
 .features {
-  padding: 5rem 0;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.section-header h2 {
-  font-size: 2.5rem;
-  color: var(--color-dark);
-  margin-bottom: var(--spacing-md);
-}
-
-.section-header p {
-  font-size: 1.1rem;
-  color: var(--color-text-light);
-  max-width: 600px;
-  margin: 0 auto;
+  padding: var(--spacing-4xl) 0;
+  position: relative;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--spacing-xl);
-}
-
-.feature-card {
-  text-align: center;
-  padding: var(--spacing-xl);
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-}
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-}
-
-.feature-card h3 {
-  font-size: 1.25rem;
-  color: var(--color-dark);
-  margin-bottom: var(--spacing-sm);
-}
-
-.feature-card p {
-  color: var(--color-text-light);
-  line-height: 1.6;
 }
 
 /* Services Preview */
 .services-preview {
-  padding: 5rem 0;
-  background: var(--color-light);
+  padding: var(--spacing-4xl) 0;
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .services-grid {
@@ -330,123 +403,60 @@ useHead({
   gap: var(--spacing-xl);
 }
 
-.service-card {
-  background: var(--color-white);
-  padding: var(--spacing-xl);
-  border-radius: var(--radius-lg);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-  border: 1px solid var(--color-border);
-}
-
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--color-primary);
-}
-
-.service-icon {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-}
-
-.service-card h3 {
-  font-size: 1.25rem;
-  color: var(--color-dark);
-  margin-bottom: var(--spacing-sm);
-}
-
-.service-card p {
-  color: var(--color-text-light);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
-}
-
-.service-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  color: var(--color-primary);
-  font-weight: 600;
-  transition: gap var(--transition-fast);
-}
-
-.service-link:hover {
-  gap: var(--spacing-sm);
-}
-
-.service-link .arrow {
-  transition: transform var(--transition-fast);
-}
-
-.service-link:hover .arrow {
-  transform: translateX(5px);
-}
-
 .section-footer {
   text-align: center;
-  margin-top: 3rem;
-}
-
-.btn-outline {
-  display: inline-block;
-  background: transparent;
-  color: var(--color-primary);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  transition: all var(--transition-normal);
-}
-
-.btn-outline:hover {
-  background: var(--color-primary);
-  color: var(--color-white);
+  margin-top: var(--spacing-2xl);
 }
 
 /* CTA Section */
 .cta {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: var(--color-white);
-  padding: 5rem 0;
+  padding: var(--spacing-4xl) 0;
+  position: relative;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
   text-align: center;
 }
 
 .cta h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
   margin-bottom: var(--spacing-md);
+  letter-spacing: -0.02em;
 }
 
 .cta p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
   margin-bottom: var(--spacing-xl);
-  opacity: 0.9;
 }
 
-.cta .btn-primary {
-  background: var(--color-white);
-  color: var(--color-primary);
-}
-
+/* Responsive */
 @media (max-width: 768px) {
   .hero {
-    padding: 5rem 0;
+    padding: 100px 0 60px;
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   .hero-description {
     font-size: 1rem;
   }
-
-  .section-header h2 {
-    font-size: 1.75rem;
+  
+  .hero-stats {
+    gap: var(--spacing-xl);
   }
-
-  .features-grid,
-  .services-grid {
-    grid-template-columns: 1fr;
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .scroll-indicator {
+    display: none;
   }
 }
 </style>

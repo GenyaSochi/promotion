@@ -1,9 +1,9 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ 'header-scrolled': isScrolled }">
     <div class="header-container">
       <NuxtLink to="/" class="logo">
-        <span class="logo-icon">🚀</span>
-        <span class="logo-text">Веб Промоушн</span>
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">Promotion</span>
       </NuxtLink>
       
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
@@ -13,7 +13,11 @@
         <NuxtLink to="/contact" class="nav-link" @click="closeMenu">Контакты</NuxtLink>
       </nav>
 
-      <button class="menu-toggle" @click="toggleMenu" aria-label="Меню">
+      <NuxtLink to="/contact" class="header-cta">
+        Связаться
+      </NuxtLink>
+
+      <button class="menu-toggle" @click="toggleMenu" aria-label="Меню" :class="{ 'active': isMenuOpen }">
         <span></span>
         <span></span>
         <span></span>
@@ -23,9 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const isMenuOpen = ref(false)
+const isScrolled = ref(false)
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -34,22 +39,43 @@ const toggleMenu = () => {
 const closeMenu = () => {
   isMenuOpen.value = false
 }
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 50
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style scoped>
 .header {
-  background: #1a1a1a;
-  color: #fff;
-  padding: 1rem 1.5rem;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.header-scrolled {
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 0;
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,21 +86,23 @@ const closeMenu = () => {
   align-items: center;
   gap: 0.5rem;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
-  transition: opacity 0.2s ease;
+  text-decoration: none;
 }
 
 .logo:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .logo-icon {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  text-shadow: 0 0 20px var(--color-primary-glow);
 }
 
 .logo-text {
-  background: linear-gradient(135deg, #00DC82 0%, #00a862 100%);
+  background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,73 +110,118 @@ const closeMenu = () => {
 
 .nav {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .nav-link {
-  padding: 0.5rem 1rem;
-  color: #ccc;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
+  padding: 0.625rem 1.25rem;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-full);
+  transition: all 0.25s ease;
   font-weight: 500;
+  font-size: 0.9375rem;
+  text-decoration: none;
 }
 
-.nav-link:hover,
-.nav-link.router-link-active {
+.nav-link:hover {
   color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.router-link-active {
+  color: var(--color-primary);
   background: rgba(0, 220, 130, 0.1);
 }
 
-.nav-link.router-link-active {
-  color: #00DC82;
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, var(--color-primary), #00b36b);
+  color: #0a0a0f;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 220, 130, 0.3);
+}
+
+.header-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 220, 130, 0.5);
 }
 
 .menu-toggle {
   display: none;
   flex-direction: column;
-  gap: 4px;
+  justify-content: center;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+  width: 32px;
+  height: 32px;
 }
 
 .menu-toggle span {
-  width: 24px;
+  display: block;
+  width: 100%;
   height: 2px;
   background: #fff;
+  border-radius: 2px;
   transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 900px) {
+  .header-cta {
+    display: none;
+  }
+
   .menu-toggle {
     display: flex;
   }
 
   .nav {
     position: fixed;
-    top: 70px;
+    top: 0;
     left: 0;
     right: 0;
-    background: #1a1a1a;
+    bottom: 0;
+    background: rgba(10, 10, 15, 0.98);
+    backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: 1rem;
-    gap: 0;
-    transform: translateY(-100%);
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
   }
 
   .nav-open {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
     visibility: visible;
   }
 
   .nav-link {
-    padding: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
   }
 }
 </style>
