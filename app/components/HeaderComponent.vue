@@ -3,14 +3,14 @@
     <div class="header-container">
       <NuxtLink to="/" class="logo">
         <span class="logo-icon">✦</span>
-        <span class="logo-text">Promotion</span>
+        <span class="logo-text">Веб Промоушн</span>
       </NuxtLink>
-      
+
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <NuxtLink to="/" class="nav-link" @click="closeMenu">Главная</NuxtLink>
-        <NuxtLink to="/about" class="nav-link" @click="closeMenu">О нас</NuxtLink>
-        <NuxtLink to="/services" class="nav-link" @click="closeMenu">Услуги</NuxtLink>
-        <NuxtLink to="/contact" class="nav-link" @click="closeMenu">Контакты</NuxtLink>
+        <a href="#hero" class="nav-link" @click="handleNavClick">Главная</a>
+        <a href="#about" class="nav-link" @click="handleNavClick">О нас</a>
+        <a href="#services" class="nav-link" @click="handleNavClick">Услуги</a>
+        <a href="#contact" class="nav-link" @click="handleNavClick">Контакты</a>
       </nav>
 
       <NuxtLink to="/contact" class="header-cta">
@@ -28,7 +28,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
 
@@ -42,6 +44,26 @@ const closeMenu = () => {
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
+}
+
+// Обработка клика по навигации
+const handleNavClick = (e: MouseEvent) => {
+  // Если мы не на главной странице, переходим на неё
+  if (route.path !== '/') {
+    // Переход будет осуществлён браузером по href
+    closeMenu()
+  } else {
+    // На главной странице предотвращаем стандартное поведение и скроллим
+    e.preventDefault()
+    const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href')
+    if (targetId) {
+      const element = document.querySelector(targetId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    closeMenu()
+  }
 }
 
 onMounted(() => {
@@ -115,7 +137,7 @@ onUnmounted(() => {
 
 .nav-link {
   padding: 0.625rem 1.25rem;
-  color: var(--color-text-secondary);
+  color: #fff;
   border-radius: var(--radius-full);
   transition: all 0.25s ease;
   font-weight: 500;
@@ -124,7 +146,7 @@ onUnmounted(() => {
 }
 
 .nav-link:hover {
-  color: #fff;
+  color: var(--color-primary);
   background: rgba(255, 255, 255, 0.05);
 }
 

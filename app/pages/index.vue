@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="hero" class="hero">
       <div class="hero-bg">
         <div class="hero-glow hero-glow-1"></div>
         <div class="hero-glow hero-glow-2"></div>
@@ -40,13 +40,13 @@
         </div>
       </div>
       <div class="scroll-indicator">
-        <span>Scroll</span>
+        <span>Листай вниз</span>
         <div class="scroll-line"></div>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section id="about" class="features">
       <div class="container">
         <div class="section-header">
           <h2>Почему выбирают нас</h2>
@@ -54,7 +54,13 @@
         </div>
         <div class="features-grid">
           <div class="feature-card" v-for="feature in features" :key="feature.id">
-            <div class="feature-icon">{{ feature.icon }}</div>
+            <div class="gradient-border"></div>
+            <div class="feature-icon">
+              <svg v-if="feature.iconName === 'zap'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <svg v-else-if="feature.iconName === 'target'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <svg v-else-if="feature.iconName === 'users'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a1 1 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <svg v-else-if="feature.iconName === 'lightbulb'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+            </div>
             <h3>{{ feature.title }}</h3>
             <p>{{ feature.description }}</p>
           </div>
@@ -63,7 +69,7 @@
     </section>
 
     <!-- Services Preview -->
-    <section class="services-preview">
+    <section id="services" class="services-preview">
       <div class="container">
         <div class="section-header">
           <h2>Наши услуги</h2>
@@ -71,7 +77,13 @@
         </div>
         <div class="services-grid">
           <div class="service-card" v-for="service in servicesPreview" :key="service.id">
-            <div class="service-icon">{{ service.icon }}</div>
+            <div class="gradient-border"></div>
+            <div class="service-icon">
+              <svg v-if="service.iconName === 'code'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <svg v-else-if="service.iconName === 'smartphone'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+              <svg v-else-if="service.iconName === 'palette'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              <svg v-else-if="service.iconName === 'trending-up'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
             <h3>{{ service.title }}</h3>
             <p>{{ service.description }}</p>
             <NuxtLink :to="service.link" class="service-link">
@@ -86,7 +98,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section id="contact" class="cta">
       <div class="container">
         <div class="cta-content">
           <h2>Готовы обсудить проект?</h2>
@@ -104,14 +116,14 @@
 <script setup lang="ts">
 interface Feature {
   id: number
-  icon: string
+  iconName: string
   title: string
   description: string
 }
 
 interface Service {
   id: number
-  icon: string
+  iconName: string
   title: string
   description: string
   link: string
@@ -126,31 +138,31 @@ const stats: Stat[] = [
   { value: '150+', label: 'Проектов' },
   { value: '8 лет', label: 'Опыта' },
   { value: '95%', label: 'Клиентов' },
-  { value: '24/7', label: 'Поддержка' }
+  { value: '365', label: 'Дней поддержки' }
 ]
 
 const features: Feature[] = [
   {
     id: 1,
-    icon: '⚡',
+    iconName: 'zap',
     title: 'Быстро',
     description: 'Соблюдаем сроки и оперативно реагируем на изменения'
   },
   {
     id: 2,
-    icon: '🎯',
+    iconName: 'target',
     title: 'Качественно',
     description: 'Используем современные технологии и лучшие практики'
   },
   {
     id: 3,
-    icon: '🤝',
+    iconName: 'users',
     title: 'Надёжно',
     description: 'Гарантируем поддержку и стабильную работу проектов'
   },
   {
     id: 4,
-    icon: '💡',
+    iconName: 'lightbulb',
     title: 'Инновационно',
     description: 'Внедряем передовые решения для максимальной эффективности'
   }
@@ -159,28 +171,28 @@ const features: Feature[] = [
 const servicesPreview: Service[] = [
   {
     id: 1,
-    icon: '🌐',
+    iconName: 'code',
     title: 'Веб-разработка',
     description: 'Современные сайты и веб-приложения',
     link: '/services'
   },
   {
     id: 2,
-    icon: '📱',
+    iconName: 'smartphone',
     title: 'Мобильные приложения',
     description: 'Нативные и кроссплатформенные решения',
     link: '/services'
   },
   {
     id: 3,
-    icon: '🎨',
+    iconName: 'palette',
     title: 'UI/UX Дизайн',
     description: 'Удобные и красивые интерфейсы',
     link: '/services'
   },
   {
     id: 4,
-    icon: '📈',
+    iconName: 'trending-up',
     title: 'SEO и Маркетинг',
     description: 'Продвижение вашего бизнеса',
     link: '/services'
@@ -188,15 +200,15 @@ const servicesPreview: Service[] = [
 ]
 
 definePageMeta({
-  title: 'Promotion - Цифровые решения для вашего бизнеса'
+  title: 'Веб Промоушн - Цифровые решения для вашего бизнеса'
 })
 
 useHead({
-  title: 'Promotion - Цифровые решения для вашего бизнеса',
+  title: 'Веб Промоушн - Цифровые решения для вашего бизнеса',
   meta: [
     { name: 'description', content: 'Создаём современные веб-сайты, мобильные приложения и цифровые продукты. Полный спектр услуг для вашего бизнеса.' },
     { name: 'keywords', content: 'веб-разработка, мобильные приложения, дизайн, SEO, цифровые решения' },
-    { property: 'og:title', content: 'Promotion - Цифровые решения для вашего бизнеса' },
+    { property: 'og:title', content: 'Веб Промоушн - Цифровые решения для вашего бизнеса' },
     { property: 'og:description', content: 'Создаём современные веб-сайты и мобильные приложения' },
     { property: 'og:type', content: 'website' }
   ]
@@ -206,6 +218,8 @@ useHead({
 <style scoped>
 .home-page {
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 /* Hero Section */
@@ -263,7 +277,7 @@ useHead({
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
@@ -297,6 +311,7 @@ useHead({
   line-height: 1.1;
   margin-bottom: var(--spacing-lg);
   letter-spacing: -0.03em;
+  color: var(--color-text);
 }
 
 .hero-description {
@@ -346,7 +361,7 @@ useHead({
 
 .scroll-indicator {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -389,6 +404,102 @@ useHead({
   gap: var(--spacing-xl);
 }
 
+/* Feature Cards */
+.feature-card {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card .gradient-border {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  padding: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-cyan),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  animation: gradient-rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+.feature-card:hover .gradient-border {
+  opacity: 1;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-primary);
+  background: var(--color-bg-card-hover);
+}
+
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.1), rgba(139, 92, 246, 0.1));
+  border-radius: var(--radius-xl);
+  color: var(--color-primary);
+  transition: all var(--transition-normal);
+}
+
+.feature-card:hover .feature-icon {
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.2), rgba(139, 92, 246, 0.2));
+  color: var(--color-primary-light);
+  transform: scale(1.05);
+}
+
+.feature-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.feature-card h3 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.feature-card p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
 /* Services Preview */
 .services-preview {
   padding: var(--spacing-4xl) 0;
@@ -401,6 +512,89 @@ useHead({
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-xl);
+}
+
+.service-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card .gradient-border {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  padding: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-cyan),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  animation: gradient-rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+.service-card:hover .gradient-border {
+  opacity: 1;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-primary);
+  background: var(--color-bg-card-hover);
+}
+
+.service-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.1), rgba(139, 92, 246, 0.1));
+  border-radius: var(--radius-xl);
+  color: var(--color-primary);
+  transition: all var(--transition-normal);
+}
+
+.service-card:hover .service-icon {
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.2), rgba(139, 92, 246, 0.2));
+  color: var(--color-primary-light);
+  transform: scale(1.05);
+}
+
+.service-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.service-card h3 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.service-card p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-lg);
 }
 
 .section-footer {

@@ -81,7 +81,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
 }
 
 body {
@@ -93,13 +92,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  cursor: none;
-}
-
-@media (max-width: 768px), (hover: none), (pointer: coarse) {
-  body {
-    cursor: auto;
-  }
 }
 
 /* Background Pattern */

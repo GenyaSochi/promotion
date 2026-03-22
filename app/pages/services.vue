@@ -1,6 +1,6 @@
 <template>
   <div class="services-page">
-    <section class="hero">
+    <section id="services" class="hero">
       <div class="container">
         <h1>Наши услуги</h1>
         <p class="subtitle">Полный спектр цифровых решений для вашего бизнеса</p>
@@ -11,7 +11,15 @@
       <div class="container">
         <div class="services-grid">
           <div class="service-card" v-for="service in services" :key="service.id">
-            <div class="service-icon">{{ service.icon }}</div>
+            <div class="gradient-border"></div>
+            <div class="service-icon">
+              <svg v-if="service.iconName === 'code'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <svg v-else-if="service.iconName === 'smartphone'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+              <svg v-else-if="service.iconName === 'palette'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              <svg v-else-if="service.iconName === 'trending-up'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <svg v-else-if="service.iconName === 'wrench'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <svg v-else-if="service.iconName === 'lightbulb'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+            </div>
             <h2>{{ service.title }}</h2>
             <p>{{ service.description }}</p>
             <ul class="service-features">
@@ -41,7 +49,7 @@ interface Service {
   id: number
   title: string
   description: string
-  icon: string
+  iconName: string
   features: string[]
 }
 
@@ -50,7 +58,7 @@ const services: Service[] = [
     id: 1,
     title: 'Веб-разработка',
     description: 'Создаём современные, быстрые и адаптивные веб-сайты',
-    icon: '🌐',
+    iconName: 'code',
     features: [
       'Landing Page и многостраничные сайты',
       'Интернет-магазины',
@@ -62,7 +70,7 @@ const services: Service[] = [
     id: 2,
     title: 'Мобильные приложения',
     description: 'Разрабатываем нативные и кроссплатформенные приложения',
-    icon: '📱',
+    iconName: 'smartphone',
     features: [
       'iOS и Android приложения',
       'Кроссплатформенная разработка',
@@ -74,7 +82,7 @@ const services: Service[] = [
     id: 3,
     title: 'UI/UX Дизайн',
     description: 'Проектируем удобные и красивые интерфейсы',
-    icon: '🎨',
+    iconName: 'palette',
     features: [
       'Исследование пользователей',
       'Прототипирование',
@@ -86,7 +94,7 @@ const services: Service[] = [
     id: 4,
     title: 'SEO и Маркетинг',
     description: 'Продвигаем ваш бизнес в поисковых системах',
-    icon: '📈',
+    iconName: 'trending-up',
     features: [
       'Техническая оптимизация',
       'Контент-стратегия',
@@ -98,9 +106,9 @@ const services: Service[] = [
     id: 5,
     title: 'Техническая поддержка',
     description: 'Обеспечиваем стабильную работу ваших проектов',
-    icon: '🔧',
+    iconName: 'wrench',
     features: [
-      'Мониторинг 24/7',
+      'Мониторинг',
       'Обновления и патчи',
       'Резервное копирование',
       'Консультации'
@@ -110,7 +118,7 @@ const services: Service[] = [
     id: 6,
     title: 'Консалтинг',
     description: 'Помогаем выбрать оптимальные технологические решения',
-    icon: '💼',
+    iconName: 'lightbulb',
     features: [
       'Аудит текущих систем',
       'Технологический консалтинг',
@@ -121,11 +129,11 @@ const services: Service[] = [
 ]
 
 definePageMeta({
-  title: 'Услуги - Promotion'
+  title: 'Услуги - Веб Промоушн'
 })
 
 useHead({
-  title: 'Услуги - Promotion',
+  title: 'Услуги - Веб Промоушн',
   meta: [
     { name: 'description', content: 'Полный спектр цифровых услуг: веб-разработка, мобильные приложения, дизайн, SEO' }
   ]
@@ -138,8 +146,8 @@ useHead({
 }
 
 .hero {
-  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-light) 100%);
-  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
+  color: var(--color-text);
   padding: 5rem 0;
   text-align: center;
 }
@@ -151,11 +159,12 @@ useHead({
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: var(--color-primary);
 }
 
 .hero .subtitle {
   font-size: 1.25rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -171,32 +180,94 @@ useHead({
 }
 
 .service-card {
-  background: var(--color-white);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card .gradient-border {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  padding: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-cyan),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  animation: gradient-rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+.service-card:hover .gradient-border {
+  opacity: 1;
 }
 
 .service-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--color-primary);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-primary);
+}
+
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .service-icon {
-  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
   margin-bottom: var(--spacing-md);
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.1), rgba(139, 92, 246, 0.1));
+  border-radius: var(--radius-xl);
+  color: var(--color-primary);
+  transition: all var(--transition-normal);
+}
+
+.service-card:hover .service-icon {
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.2), rgba(139, 92, 246, 0.2));
+  color: var(--color-primary-light);
+  transform: scale(1.05);
+}
+
+.service-icon svg {
+  width: 40px;
+  height: 40px;
 }
 
 .service-card h2 {
   font-size: 1.5rem;
   margin-bottom: var(--spacing-sm);
-  color: var(--color-dark);
+  color: var(--color-text);
 }
 
 .service-card > p {
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
   margin-bottom: var(--spacing-lg);
   line-height: 1.6;
 }
@@ -207,7 +278,7 @@ useHead({
 
 .service-features li {
   padding: var(--spacing-xs) 0;
-  color: var(--color-text);
+  color: var(--color-text-secondary);
   padding-left: 1.5rem;
   position: relative;
 }
@@ -242,27 +313,30 @@ useHead({
 }
 
 .cta {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
+  color: var(--color-text);
   padding: 5rem 0;
   text-align: center;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .cta h2 {
   font-size: 2rem;
   margin-bottom: var(--spacing-md);
+  color: var(--color-text);
 }
 
 .cta p {
   font-size: 1.1rem;
   margin-bottom: var(--spacing-xl);
-  opacity: 0.9;
+  color: var(--color-text-secondary);
 }
 
 .btn-primary {
   display: inline-block;
-  background: var(--color-white);
-  color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), #00b36b);
+  color: var(--color-bg);
   padding: var(--spacing-md) var(--spacing-xl);
   border-radius: var(--radius-full);
   font-weight: 600;
@@ -271,7 +345,7 @@ useHead({
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-glow-primary);
 }
 
 @media (max-width: 768px) {

@@ -1,5 +1,6 @@
 <template>
   <div class="layout">
+    <CustomCursor />
     <HeaderComponent />
     <main class="main">
       <slot />
