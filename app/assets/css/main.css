@@ -381,20 +381,158 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .section-header p {
+    font-size: 1.0625rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .section-header h2 {
     font-size: 1.75rem;
   }
-  
+
   .section-header p {
     font-size: 1rem;
   }
-  
+
   .cta h2 {
     font-size: 1.75rem;
   }
-  
+
   .cta p {
     font-size: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-large {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header p {
+    font-size: 0.9375rem;
+  }
+
+  .cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .feature-card {
+    padding: var(--spacing-lg);
+  }
+
+  .service-card {
+    padding: var(--spacing-lg);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+  }
+
+  .service-icon {
+    font-size: 2.5rem;
+  }
+}
+
+/* Для очень маленьких экранов (360px) */
+@media (max-width: 360px) {
+  .section-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .section-header p {
+    font-size: 0.875rem;
+  }
+
+  .cta h2 {
+    font-size: 1.25rem;
+  }
+
+  .cta p {
+    font-size: 0.875rem;
+  }
+
+  .feature-card,
+  .service-card {
+    padding: var(--spacing-md);
+  }
+
+  .feature-icon,
+  .service-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+}
+
+/* Для 320px экранов */
+@media (max-width: 320px) {
+  .section-header h2 {
+    font-size: 1.125rem;
+  }
+
+  .section-header p {
+    font-size: 0.8125rem;
+  }
+
+  .cta h2 {
+    font-size: 1.125rem;
+  }
+
+  .cta p {
+    font-size: 0.8125rem;
+  }
+
+  .feature-card,
+  .service-card {
+    padding: var(--spacing-sm);
+  }
+
+  .feature-icon,
+  .service-icon {
+    font-size: 1.75rem;
+    width: 45px;
+    height: 45px;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
   }
 }

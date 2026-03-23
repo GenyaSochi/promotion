@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-cursor">
+  <div v-if="isDesktop" class="custom-cursor">
     <div class="cursor-dot" :style="cursorStyle"></div>
     <div class="cursor-outline" :style="cursorOutlineStyle"></div>
   </div>
@@ -13,6 +13,7 @@ const cursorY = ref(0)
 const outlineX = ref(0)
 const outlineY = ref(0)
 const isHovering = ref(false)
+const isDesktop = ref(false)
 
 const cursorStyle = computed(() => ({
   left: `${cursorX.value}px`,
@@ -25,7 +26,7 @@ const cursorOutlineStyle = computed(() => ({
   width: isHovering.value ? '60px' : '40px',
   height: isHovering.value ? '60px' : '40px',
   borderColor: isHovering.value ? 'var(--color-accent-purple)' : 'var(--color-primary)',
-  boxShadow: isHovering.value 
+  boxShadow: isHovering.value
     ? '0 0 20px var(--color-primary-glow), inset 0 0 20px rgba(139, 92, 246, 0.2)'
     : '0 0 15px var(--color-primary-glow), inset 0 0 15px var(--color-primary-glow)'
 }))
@@ -51,10 +52,11 @@ const animateOutline = () => {
 }
 
 onMounted(() => {
-  // Проверка на мобильные устройства
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-  
-  if (!isTouchDevice) {
+  // Проверка на мобильные устройства и тач-экраны
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.userAgent.includes('Android') || navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')
+
+  if (!isTouchDevice && window.innerWidth > 768) {
+    isDesktop.value = true
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseover', handleMouseOver)
     animateOutline()
@@ -92,18 +94,14 @@ onUnmounted(() => {
   width: 8px;
   height: 8px;
   background: var(--color-primary);
+  background: #00DC82; /* Фоллбэк */
   box-shadow: 0 0 10px var(--color-primary-glow), 0 0 20px var(--color-primary-glow);
 }
 
 .cursor-outline {
   border: 2px solid var(--color-primary);
+  border: 2px solid #00DC82; /* Фоллбэк */
   box-shadow: 0 0 15px var(--color-primary-glow), inset 0 0 15px var(--color-primary-glow);
   transition: all 0.15s ease-out;
-}
-
-@media (max-width: 768px), (hover: none), (pointer: coarse) {
-  .custom-cursor {
-    display: none;
-  }
 }
 </style>

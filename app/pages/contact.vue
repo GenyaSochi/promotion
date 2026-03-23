@@ -562,5 +562,216 @@ useHead({
   .contact-form-wrapper {
     padding: var(--spacing-lg);
   }
+
+  .contact-item {
+    padding: var(--spacing-sm);
+  }
+
+  .contact-icon {
+    font-size: 1.75rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .social-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 4rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero .subtitle {
+    font-size: 1rem;
+  }
+
+  .contact-content {
+    padding: 3rem 0;
+  }
+
+  .contact-info h2,
+  .contact-form-wrapper h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-form-wrapper {
+    padding: var(--spacing-md);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: var(--spacing-md);
+    font-size: 16px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .map-section {
+    padding: 3rem 0;
+  }
+
+  .map-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .map-address {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero .subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .contact-content {
+    padding: 2rem 0;
+  }
+
+  .contact-info h2,
+  .contact-form-wrapper h2 {
+    font-size: 1.25rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-sm);
+  }
+
+  .contact-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .contact-details h3 {
+    font-size: 0.875rem;
+  }
+
+  .contact-details p,
+  .contact-link {
+    font-size: 0.875rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+  }
+
+  .social-link {
+    width: 100%;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
+  }
+
+  .contact-form-wrapper {
+    padding: var(--spacing-sm);
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .btn-submit {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9375rem;
+  }
+
+  .map-section {
+    padding: 2rem 0;
+  }
+
+  .map-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .map-address {
+    font-size: 0.9375rem;
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero h1 {
+    font-size: 1.25rem;
+  }
+
+  .hero .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .contact-info h2,
+  .contact-form-wrapper h2 {
+    font-size: 1.125rem;
+  }
+
+  .contact-icon {
+    font-size: 1.25rem;
+  }
+
+  .contact-details h3 {
+    font-size: 0.8125rem;
+  }
+
+  .contact-details p,
+  .contact-link {
+    font-size: 0.8125rem;
+  }
+
+  .social-link {
+    font-size: 0.8125rem;
+  }
+
+  .form-group label {
+    font-size: 0.8125rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 14px;
+  }
+
+  .btn-submit {
+    font-size: 0.875rem;
+  }
+
+  .map-section h2 {
+    font-size: 1.125rem;
+  }
+
+  .map-address {
+    font-size: 0.875rem;
+  }
 }
 </style>

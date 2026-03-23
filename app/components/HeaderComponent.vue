@@ -89,6 +89,8 @@ onUnmounted(() => {
 
 .header-scrolled {
   background: rgba(10, 10, 15, 0.85);
+  background: rgba(10, 10, 15, 0.98); /* Фоллбэк для браузеров без backdrop-filter */
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
   padding: 0.75rem 0;
@@ -244,6 +246,34 @@ onUnmounted(() => {
   .nav-link {
     font-size: 1.5rem;
     padding: 1rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .logo-icon {
+    font-size: 1.25rem;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-link {
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
   }
 }
 </style>

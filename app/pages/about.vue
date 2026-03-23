@@ -311,4 +311,196 @@ useHead({
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero .subtitle {
+    font-size: 1rem;
+  }
+
+  .about-content {
+    padding: 3rem 0;
+  }
+
+  .about-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-text p {
+    font-size: 0.9375rem;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .stat-card {
+    padding: var(--spacing-lg);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .values {
+    padding: 3rem 0;
+  }
+
+  .values h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .value-card {
+    padding: var(--spacing-lg);
+  }
+
+  .value-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .value-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .value-card h3 {
+    font-size: 1.125rem;
+  }
+
+  .value-card p {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    padding: 2.5rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero .subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .about-content {
+    padding: 2.5rem 0;
+  }
+
+  .about-text h2 {
+    font-size: 1.25rem;
+  }
+
+  .about-text p {
+    font-size: 0.875rem;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .stat-card {
+    padding: var(--spacing-md);
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.8125rem;
+  }
+
+  .values {
+    padding: 2.5rem 0;
+  }
+
+  .values h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .value-card {
+    padding: var(--spacing-md);
+  }
+
+  .value-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .value-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .value-card h3 {
+    font-size: 1rem;
+  }
+
+  .value-card p {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero h1 {
+    font-size: 1.25rem;
+  }
+
+  .hero .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.125rem;
+  }
+
+  .about-text p {
+    font-size: 0.8125rem;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+
+  .values h2 {
+    font-size: 1.125rem;
+  }
+
+  .value-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .value-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .value-card h3 {
+    font-size: 0.9375rem;
+  }
+
+  .value-card p {
+    font-size: 0.8125rem;
+  }
+}
 </style>

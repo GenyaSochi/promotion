@@ -82,6 +82,7 @@ const currentYear = new Date().getFullYear()
   width: 800px;
   height: 400px;
   background: radial-gradient(ellipse, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.08) 0%, transparent 70%); /* Фоллбэк */
   pointer-events: none;
 }
 
@@ -235,6 +236,69 @@ const currentYear = new Date().getFullYear()
     flex-direction: column;
     gap: var(--spacing-md);
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--spacing-3xl) 0 var(--spacing-lg);
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+
+  .footer-tagline {
+    max-width: 100%;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 0 1rem;
+  }
+
+  .footer-logo {
+    font-size: 1.25rem;
+  }
+
+  .footer-logo .logo-text {
+    display: none;
+  }
+
+  .footer-main {
+    gap: var(--spacing-xl);
+  }
+
+  .footer-links {
+    gap: var(--spacing-xl);
+  }
+
+  .footer-column h4 {
+    font-size: 0.9375rem;
+  }
+
+  .footer-column a,
+  .footer-column li:not(a) {
+    font-size: 0.875rem;
+  }
+
+  .social-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-legal {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-legal a {
+    font-size: 0.8125rem;
   }
 }
 </style>

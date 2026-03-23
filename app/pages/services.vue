@@ -357,4 +357,185 @@ useHead({
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero .subtitle {
+    font-size: 1rem;
+  }
+
+  .services-content {
+    padding: 3rem 0;
+  }
+
+  .service-card {
+    padding: var(--spacing-lg);
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .service-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .service-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .service-card > p {
+    font-size: 0.9375rem;
+  }
+
+  .service-features li {
+    font-size: 0.875rem;
+  }
+
+  .cta {
+    padding: 3rem 0;
+  }
+
+  .cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .cta p {
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    padding: 2.5rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero .subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .services-content {
+    padding: 2.5rem 0;
+  }
+
+  .service-card {
+    padding: var(--spacing-md);
+  }
+
+  .service-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .service-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .service-card h2 {
+    font-size: 1.125rem;
+  }
+
+  .service-card > p {
+    font-size: 0.875rem;
+  }
+
+  .service-features li {
+    font-size: 0.8125rem;
+    padding-left: 1.25rem;
+  }
+
+  .service-features li::before {
+    font-size: 0.875rem;
+  }
+
+  .cta {
+    padding: 2.5rem 0;
+  }
+
+  .cta h2 {
+    font-size: 1.25rem;
+  }
+
+  .cta p {
+    font-size: 0.9375rem;
+  }
+
+  .btn-primary {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero h1 {
+    font-size: 1.25rem;
+  }
+
+  .hero .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .service-card {
+    padding: var(--spacing-sm);
+  }
+
+  .service-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .service-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .service-card h2 {
+    font-size: 1rem;
+  }
+
+  .service-card > p {
+    font-size: 0.8125rem;
+  }
+
+  .service-features li {
+    font-size: 0.75rem;
+    padding-left: 1.125rem;
+  }
+
+  .cta {
+    padding: 2rem 0;
+  }
+
+  .cta h2 {
+    font-size: 1.125rem;
+  }
+
+  .cta p {
+    font-size: 0.875rem;
+  }
+
+  .btn-primary {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
+  }
+}
 </style>
