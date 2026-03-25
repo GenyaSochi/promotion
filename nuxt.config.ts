@@ -3,14 +3,22 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxt/fonts', '@nuxt/image'],
-  srcDir: 'app/',
+  
   css: [
     '~/assets/reset.css',
     '~/assets/style.css',
     '~/assets/css/main.css'
   ],
+  ssr: true,
+  nitro: {
+    static: true,
+    prerender: {
+      failOnError: false
+    }
+  },
   app: {
-    baseURL: process.env.BASE_URL || '/',
+    baseURL: '/promotion/',
+    buildAssetsDir: '/assets/',
     head: {
       title: 'Веб Промоушн - Цифровые решения для вашего бизнеса',
       meta: [
