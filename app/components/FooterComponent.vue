@@ -28,10 +28,10 @@
           <div class="footer-column">
             <h4>Навигация</h4>
             <ul>
-              <li><a href="/#hero">Главная</a></li>
-              <li><a href="/#about">О нас</a></li>
-              <li><a href="/#services">Услуги</a></li>
-              <li><a href="/#contact">Контакты</a></li>
+              <li><NuxtLink to="/">Главная</NuxtLink></li>
+              <li><NuxtLink to="/about">О нас</NuxtLink></li>
+              <li><NuxtLink to="/services">Услуги</NuxtLink></li>
+              <li><NuxtLink to="/contact">Контакты</NuxtLink></li>
             </ul>
           </div>
 
@@ -235,6 +235,47 @@ const currentYear = new Date().getFullYear()
     flex-direction: column;
     gap: var(--spacing-md);
     text-align: center;
+  }
+}
+
+/* Mobile 320px */
+@media (max-width: 380px) {
+  .footer {
+    padding: var(--spacing-2xl) 0 var(--spacing-md);
+  }
+  
+  .footer-container {
+    padding: 0 1rem;
+  }
+  
+  .footer-logo {
+    font-size: 1.25rem;
+  }
+  
+  .footer-tagline {
+    font-size: 0.875rem;
+  }
+  
+  .footer-column h4 {
+    font-size: 0.875rem;
+  }
+  
+  .footer-column a,
+  .footer-column li:not(a) {
+    font-size: 0.8125rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.75rem;
+  }
+  
+  .footer-legal {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .footer-legal a {
+    font-size: 0.75rem;
   }
 }
 </style>

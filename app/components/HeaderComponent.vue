@@ -7,10 +7,10 @@
       </NuxtLink>
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <a href="#hero" class="nav-link" @click="handleNavClick">Главная</a>
-        <a href="#about" class="nav-link" @click="handleNavClick">О нас</a>
-        <a href="#services" class="nav-link" @click="handleNavClick">Услуги</a>
-        <a href="#contact" class="nav-link" @click="handleNavClick">Контакты</a>
+        <NuxtLink to="/" class="nav-link" @click="handleNavClick('/')">Главная</NuxtLink>
+        <NuxtLink to="/about" class="nav-link" @click="handleNavClick('/about')">О нас</NuxtLink>
+        <NuxtLink to="/services" class="nav-link" @click="handleNavClick('/services')">Услуги</NuxtLink>
+        <NuxtLink to="/contact" class="nav-link" @click="handleNavClick('/contact')">Контакты</NuxtLink>
       </nav>
 
       <NuxtLink to="/contact" class="header-cta">
@@ -28,9 +28,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
 
@@ -47,17 +48,15 @@ const handleScroll = () => {
 }
 
 // Обработка клика по навигации
-const handleNavClick = (e: MouseEvent) => {
-  // Если мы не на главной странице, переходим на неё
-  if (route.path !== '/') {
-    // Переход будет осуществлён браузером по href
+const handleNavClick = (path: string) => {
+  // Если мы не на той странице, куда ведёт ссылка, переходим
+  if (route.path !== path) {
+    router.push(path)
     closeMenu()
   } else {
-    // На главной странице предотвращаем стандартное поведение и скроллим
-    e.preventDefault()
-    const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href')
-    if (targetId) {
-      const element = document.querySelector(targetId)
+    // Если мы уже на нужной странице и это главная — скроллим к якорю
+    if (path === '/') {
+      const element = document.querySelector('#hero')
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
@@ -150,7 +149,8 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.nav-link.router-link-active {
+.nav-link.router-link-active,
+.nav-link.router-link-exact-active {
   color: var(--color-primary);
   background: rgba(0, 220, 130, 0.1);
 }
@@ -244,6 +244,26 @@ onUnmounted(() => {
   .nav-link {
     font-size: 1.5rem;
     padding: 1rem 2rem;
+  }
+}
+
+/* Mobile 320px */
+@media (max-width: 380px) {
+  .header-container {
+    padding: 0 1rem;
+  }
+  
+  .logo {
+    font-size: 1.25rem;
+  }
+  
+  .logo-text {
+    display: none;
+  }
+  
+  .nav-link {
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
   }
 }
 

@@ -311,12 +311,12 @@ useHead({
   line-height: 1.1;
   margin-bottom: var(--spacing-lg);
   letter-spacing: -0.03em;
-  color: var(--color-text);
+  color: #ffffff !important;
 }
 
 .hero-description {
   font-size: 1.25rem;
-  color: var(--color-text-secondary);
+  color: #cccccc !important;
   line-height: 1.8;
   margin-bottom: var(--spacing-2xl);
   max-width: 650px;
@@ -651,6 +651,119 @@ useHead({
   
   .scroll-indicator {
     display: none;
+  }
+  
+  .features-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+  
+  .cta h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Mobile 320px */
+@media (max-width: 380px) {
+  .hero {
+    padding: 80px 1rem 40px;
+  }
+  
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .hero-badge {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .hero-buttons a {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .hero-stats {
+    gap: var(--spacing-lg);
+  }
+  
+  .stat-item {
+    min-width: 70px;
+  }
+  
+  .stat-value {
+    font-size: 1.25rem;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+  }
+  
+  .features,
+  .services-preview,
+  .cta {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .section-header {
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .section-header p {
+    font-size: 0.9rem;
+  }
+  
+  .feature-card,
+  .service-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .feature-icon,
+  .service-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .feature-icon svg,
+  .service-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .feature-card h3,
+  .service-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .feature-card p,
+  .service-card p {
+    font-size: 0.875rem;
+  }
+  
+  .cta h2 {
+    font-size: 1.25rem;
+  }
+  
+  .cta p {
+    font-size: 0.9rem;
   }
 }
 </style>
