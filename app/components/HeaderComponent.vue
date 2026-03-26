@@ -7,15 +7,15 @@
       </NuxtLink>
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <NuxtLink to="/" class="nav-link" @click="handleNavClick('/')">Главная</NuxtLink>
-        <NuxtLink to="/about" class="nav-link" @click="handleNavClick('/about')">О нас</NuxtLink>
-        <NuxtLink to="/services" class="nav-link" @click="handleNavClick('/services')">Услуги</NuxtLink>
-        <NuxtLink to="/contact" class="nav-link" @click="handleNavClick('/contact')">Контакты</NuxtLink>
+        <NuxtLink to="/" class="nav-link" @click="handleNavClick('#hero')">Главная</NuxtLink>
+        <NuxtLink to="/#about" class="nav-link" @click="handleNavClick('#about')">О нас</NuxtLink>
+        <NuxtLink to="/#services" class="nav-link" @click="handleNavClick('#services')">Услуги</NuxtLink>
+        <NuxtLink to="/#contact" class="nav-link" @click="handleNavClick('#contact')">Контакты</NuxtLink>
       </nav>
 
-      <NuxtLink to="/contact" class="header-cta">
+      <button class="header-cta" @click="openContactModal">
         Связаться
-      </NuxtLink>
+      </button>
 
       <button class="menu-toggle" @click="toggleMenu" aria-label="Меню" :class="{ 'active': isMenuOpen }">
         <span></span>
@@ -23,6 +23,8 @@
         <span></span>
       </button>
     </div>
+
+    <ContactModal v-model:model-value="isContactModalOpen" />
   </header>
 </template>
 
@@ -34,6 +36,11 @@ const route = useRoute()
 const router = useRouter()
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
+const isContactModalOpen = ref(false)
+
+const openContactModal = () => {
+  isContactModalOpen.value = true
+}
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -50,19 +57,19 @@ const handleScroll = () => {
 // Обработка клика по навигации
 const handleNavClick = (path: string) => {
   // Если мы не на той странице, куда ведёт ссылка, переходим
-  if (route.path !== path) {
-    router.push(path)
-    closeMenu()
-  } else {
+  // if (route.path !== path) {
+  //   router.push(path)
+  //   closeMenu()
+  // } else {
     // Если мы уже на нужной странице и это главная — скроллим к якорю
-    if (path === '/') {
-      const element = document.querySelector('#hero')
+    // if (path === '/') {
+      const element = document.querySelector(path)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
-    }
+    // }
     closeMenu()
-  }
+  // }
 }
 
 onMounted(() => {
@@ -158,13 +165,15 @@ onUnmounted(() => {
 .header-cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 0.625rem 1.25rem;
   background: linear-gradient(135deg, var(--color-primary), #00b36b);
   color: #0a0a0f;
+  border: none;
   border-radius: var(--radius-full);
   font-weight: 700;
   font-size: 0.9375rem;
-  text-decoration: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 0 20px rgba(0, 220, 130, 0.3);
 }

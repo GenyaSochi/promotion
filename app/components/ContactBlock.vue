@@ -2,7 +2,7 @@
   <div class="contact-page">
     <section id="contact" class="hero">
       <div class="container">
-        <h1>Контакты</h1>
+        <h1>Заказать проект</h1>
         <p class="subtitle">Свяжитесь с нами — мы всегда рады помочь</p>
       </div>
     </section>
@@ -17,7 +17,12 @@
             </p>
 
             <div class="contact-item" v-for="item in contactItems" :key="item.id">
-              <div class="contact-icon">{{ item.icon }}</div>
+              <div class="contact-icon">
+                <svg v-if="item.iconName === 'email'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <svg v-else-if="item.iconName === 'phone'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <svg v-else-if="item.iconName === 'location'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg v-else-if="item.iconName === 'clock'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
               <div class="contact-details">
                 <h3>{{ item.title }}</h3>
                 <a v-if="item.href" :href="item.href" class="contact-link">{{ item.value }}</a>
@@ -138,17 +143,17 @@
 <script setup lang="ts">
 interface ContactItem {
   id: number
-  icon: string
+  iconName: string
   title: string
   value: string
   href?: string
 }
 
 const contactItems: ContactItem[] = [
-  { id: 1, icon: '📧', title: 'Email', value: 'promotion.w@yandex.ru', href: 'mailto:promotion.w@yandex.ru' },
-  { id: 2, icon: '📞', title: 'Телефон', value: '+7 (999) 000-00-00', href: 'tel:+79990000000' },
-  { id: 3, icon: '📍', title: 'Адрес', value: 'г. Сочи, Аллея Челтенхэма 8/8' },
-  { id: 4, icon: '🕐', title: 'Режим работы', value: 'Пн-Пт: 9:00 - 18:00' }
+  { id: 1, iconName: 'email', title: 'Email', value: 'promotion.w@yandex.ru', href: 'mailto:promotion.w@yandex.ru' },
+  { id: 2, iconName: 'phone', title: 'Телефон', value: '+7 (988) 144-71-12 ', href: 'tel:+79881447112' },
+  { id: 3, iconName: 'location', title: 'Адрес', value: 'г. Сочи, Аллея Челтенхэма 8/8' },
+  { id: 4, iconName: 'clock', title: 'Режим работы', value: 'Пн-Пт: 9:00 - 18:00' }
 ]
 
 const services = [
@@ -322,7 +327,25 @@ useHead({
 }
 
 .contact-icon {
-  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.1), rgba(139, 92, 246, 0.1));
+  border-radius: var(--radius-md);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.contact-item:hover .contact-icon {
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.2), rgba(139, 92, 246, 0.2));
+  color: var(--color-primary-light);
+}
+
+.contact-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .contact-details h3 {

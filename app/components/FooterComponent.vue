@@ -42,7 +42,7 @@
                 <a href="mailto:hello@promotion.ru">promotion.w@yandex.ru</a>
               </li>
               <li>
-                <a href="tel:+79990000000">+7 (999) 000-00-00</a>
+                <a href="tel:+79990000000">+7 (988) 144-71-12</a>
               </li>
               <li>Сочи</li>
             </ul>
@@ -51,7 +51,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} Веб Промоушн. Все права защищены.</p>
+        <p>&copy; {{ currentYear }} Веб Промоушн. Все права защищены</p>
         <div class="footer-legal">
           <NuxtLink to="/privacy">Политика конфиденциальности</NuxtLink>
           <NuxtLink to="/terms">Условия использования</NuxtLink>

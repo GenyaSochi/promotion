@@ -25,7 +25,7 @@
             <ul class="service-features">
               <li v-for="feature in service.features" :key="feature">{{ feature }}</li>
             </ul>
-            <NuxtLink to="/contact" class="service-link">
+            <NuxtLink to="/#contact" class="service-link">
               Заказать
               <span class="arrow">→</span>
             </NuxtLink>
@@ -203,8 +203,8 @@ useHead({
     var(--color-primary)
   );
   background-size: 300% 300%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -297,7 +297,12 @@ useHead({
   gap: var(--spacing-xs);
   color: var(--color-primary);
   font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   transition: gap var(--transition-fast);
+  font-size: inherit;
 }
 
 .service-link:hover {

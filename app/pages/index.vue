@@ -23,7 +23,7 @@
             которые помогают компаниям расти и привлекать клиентов
           </p>
           <div class="hero-buttons">
-            <NuxtLink to="/contact" class="btn-primary">
+            <NuxtLink to="/#contact" class="btn-primary">
               Начать проект
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </NuxtLink>
@@ -46,7 +46,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="about" class="features">
+    <section class="features">
       <div class="container">
         <div class="section-header">
           <h2>Почему выбирают нас</h2>
@@ -83,25 +83,31 @@
               <svg v-else-if="service.iconName === 'smartphone'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
               <svg v-else-if="service.iconName === 'palette'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
               <svg v-else-if="service.iconName === 'trending-up'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <svg v-else-if="service.iconName === 'wrench'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <svg v-else-if="service.iconName === 'lightbulb'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
             </div>
             <h3>{{ service.title }}</h3>
             <p>{{ service.description }}</p>
-            <NuxtLink :to="service.link" class="service-link">
-              Подробнее <span class="arrow">→</span>
-            </NuxtLink>
+            <ul class="service-features">
+              <li v-for="feature in service.features" :key="feature">{{ feature }}</li>
+            </ul>
           </div>
         </div>
         <div class="section-footer">
-          <NuxtLink to="/services" class="btn-outline">Все услуги</NuxtLink>
+          <NuxtLink to="/contact" class="btn-outline">Заказать услугу</NuxtLink>
         </div>
       </div>
     </section>
+
+    <AboutBlock/>
+
+    <ContactBlock/>
 
     <!-- CTA Section -->
     <section id="contact" class="cta">
       <div class="container">
         <div class="cta-content">
-          <h2>Готовы обсудить проект?</h2>
+          <h2>Заказать проект</h2>
           <p>Свяжитесь с нами, и мы найдём лучшее решение для вашего бизнеса</p>
           <NuxtLink to="/contact" class="btn-primary btn-large">
             Обсудить проект
@@ -127,6 +133,7 @@ interface Service {
   title: string
   description: string
   link: string
+  features: string[]
 }
 
 interface Stat {
@@ -173,29 +180,79 @@ const servicesPreview: Service[] = [
     id: 1,
     iconName: 'code',
     title: 'Веб-разработка',
-    description: 'Современные сайты и веб-приложения',
-    link: '/services'
+    description: 'Создаём современные, быстрые и адаптивные веб-сайты',
+    link: '/contact',
+    features: [
+      'Landing Page и многостраничные сайты',
+      'Интернет-магазины',
+      'Корпоративные порталы',
+      'Адаптивный дизайн'
+    ]
   },
   {
     id: 2,
     iconName: 'smartphone',
     title: 'Мобильные приложения',
-    description: 'Нативные и кроссплатформенные решения',
-    link: '/services'
+    description: 'Разрабатываем нативные и кроссплатформенные приложения',
+    link: '/contact',
+    features: [
+      'iOS и Android приложения',
+      'Кроссплатформенная разработка',
+      'Интеграция с API',
+      'Публикация в сторах'
+    ]
   },
   {
     id: 3,
     iconName: 'palette',
     title: 'UI/UX Дизайн',
-    description: 'Удобные и красивые интерфейсы',
-    link: '/services'
+    description: 'Проектируем удобные и красивые интерфейсы',
+    link: '/contact',
+    features: [
+      'Исследование пользователей',
+      'Прототипирование',
+      'Визуальный дизайн',
+      'Дизайн-системы'
+    ]
   },
   {
     id: 4,
     iconName: 'trending-up',
     title: 'SEO и Маркетинг',
-    description: 'Продвижение вашего бизнеса',
-    link: '/services'
+    description: 'Продвигаем ваш бизнес в поисковых системах',
+    link: '/contact',
+    features: [
+      'Техническая оптимизация',
+      'Контент-стратегия',
+      'Контекстная реклама',
+      'Аналитика и отчётность'
+    ]
+  },
+  {
+    id: 5,
+    iconName: 'wrench',
+    title: 'Техническая поддержка',
+    description: 'Обеспечиваем стабильную работу ваших проектов',
+    link: '/contact',
+    features: [
+      'Мониторинг',
+      'Обновления и патчи',
+      'Резервное копирование',
+      'Консультации'
+    ]
+  },
+  {
+    id: 6,
+    iconName: 'lightbulb',
+    title: 'Консалтинг',
+    description: 'Помогаем выбрать оптимальные технологические решения',
+    link: '/contact',
+    features: [
+      'Аудит текущих систем',
+      'Технологический консалтинг',
+      'Оптимизация процессов',
+      'Обучение команды'
+    ]
   }
 ]
 
@@ -260,7 +317,7 @@ useHead({
   width: 500px;
   height: 500px;
   background: rgba(139, 92, 246, 0.12);
-  bottom: -150px;
+  bottom: 40px;
   left: -100px;
   animation: float 10s ease-in-out infinite reverse;
 }
@@ -513,7 +570,7 @@ useHead({
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-xl);
 }
 
@@ -600,7 +657,27 @@ useHead({
 .service-card p {
   color: var(--color-text-secondary);
   line-height: 1.7;
+  margin-bottom: var(--spacing-md);
+}
+
+.service-features {
   margin-bottom: var(--spacing-lg);
+}
+
+.service-features li {
+  padding: var(--spacing-xs) 0;
+  color: var(--color-text-secondary);
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.875rem;
+}
+
+.service-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 700;
 }
 
 .section-footer {
