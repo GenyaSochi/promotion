@@ -94,7 +94,7 @@
           </div>
         </div>
         <div class="section-footer">
-          <NuxtLink to="/contact" class="btn-outline">Заказать услугу</NuxtLink>
+          <NuxtLink to="/#contact" class="btn-outline">Заказать услугу</NuxtLink>
         </div>
       </div>
     </section>

@@ -6,8 +6,13 @@
       <slot />
     </main>
     <FooterComponent />
+    <ButtonComponent />
   </div>
 </template>
+
+<script setup lang="ts">
+import ButtonComponent from '~/components/ButtonComponent.vue'
+</script>
 
 <style scoped>
 .layout {
