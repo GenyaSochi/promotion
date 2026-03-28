@@ -38,7 +38,7 @@
       <div class="container">
         <h2>Готовы начать проект?</h2>
         <p>Свяжитесь с нами, и мы обсудим ваши задачи</p>
-        <NuxtLink to="/contact" class="btn-primary">Обсудить проект</NuxtLink>
+        <NuxtLink to="/#contact" class="btn-primary">Обсудить проект</NuxtLink>
       </div>
     </section>
   </div>
