@@ -1,0 +1,1 @@
+import{_ as o}from"./C1lyFyfV.js";import{e as n,c as s,a,b as r,w as _,o as p,d}from"./5K8yRe7z.js";const i={style:{padding:"50px","text-align":"center"}},x=n({__name:"test",setup(m){return(c,t)=>{const e=o;return p(),s("div",i,[t[1]||(t[1]=a("h1",null,"TEST PAGE WORKS!",-1)),r(e,{to:"/"},{default:_(()=>[...t[0]||(t[0]=[d("← На главную",-1)])]),_:1})])}}});export{x as default};
