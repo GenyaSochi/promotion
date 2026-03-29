@@ -92,6 +92,19 @@
                 ></textarea>
               </div>
 
+              <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    v-model="form.agreement"
+                    required
+                  />
+                  <span class="checkbox-text">
+                    Я даю согласие на обработку персональных данных
+                  </span>
+                </label>
+              </div>
+
               <div class="form-actions">
                 <button type="button" class="btn-cancel" @click="handleClose">
                   Отмена
@@ -148,7 +161,8 @@ const form = ref({
   email: '',
   phone: '',
   service: '',
-  message: ''
+  message: '',
+  agreement: false
 })
 
 const isSubmitting = ref(false)
@@ -159,7 +173,7 @@ const handleClose = () => {
   isOpen.value = false
   emit('update:modelValue', false)
   setTimeout(() => {
-    form.value = { name: '', email: '', phone: '', service: '', message: '' }
+    form.value = { name: '', email: '', phone: '', service: '', message: '', agreement: false }
     submitMessage.value = ''
   }, 300)
 }
@@ -364,6 +378,35 @@ const submitForm = async () => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
+}
+
+.checkbox-group {
+  margin-bottom: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  justify-content: center;
+  text-align: center;
+}
+
+.checkbox-label input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.checkbox-text {
+  user-select: none;
 }
 
 .form-actions {

@@ -12,13 +12,10 @@
             Создаём цифровые решения, которые помогают бизнесу расти и развиваться
           </p>
           <div class="footer-social">
-            <a href="#" class="social-btn" aria-label="Telegram">
+            <a href="https://t.me/GenyaSochi" class="social-btn" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-            </a>
-            <a href="#" class="social-btn" aria-label="VK">
-              <span style="font-weight: 800; font-size: 13px; font-family: sans-serif;">VK</span>
-            </a>
-            <a href="#" class="social-btn" aria-label="Max">
+            </a>        
+            <a  href="https://max.ru/u/f9LHodD0cOI-TPMMpsfZv29lGZ9rHyGWIOQKmB4uCt1OOJsBt-3rhVcvLjA" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Max">
               <span style="font-weight: 800; font-size: 13px; font-family: sans-serif;">M</span>
             </a>
           </div>

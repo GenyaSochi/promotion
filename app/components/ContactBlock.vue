@@ -33,13 +33,10 @@
             <div class="social-section">
               <h3>Мы в соцсетях</h3>
               <div class="social-links">
-                <a href="#" class="social-link" aria-label="Telegram">
+                <a href="https://t.me/GenyaSochi" class="social-link" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
                   <span>Telegram</span>
-                </a>
-                <a href="#" class="social-link" aria-label="VK">
-                  <span>VK</span>
-                </a>
-                <a href="#" class="social-link" aria-label="Max">
+                </a>           
+                <a href="https://max.ru/u/f9LHodD0cOI-TPMMpsfZv29lGZ9rHyGWIOQKmB4uCt1OOJsBt-3rhVcvLjA"  target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Max">
                   <span>Max</span>
                 </a>
               </div>
@@ -108,6 +105,19 @@
                 ></textarea>
               </div>
 
+              <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    v-model="form.agreement"
+                    required
+                  />
+                  <span class="checkbox-text">
+                    Я даю согласие на обработку персональных данных
+                  </span>
+                </label>
+              </div>
+
               <button type="submit" class="btn-submit" :disabled="isSubmitting">
                 {{ isSubmitting ? 'Отправка...' : 'Отправить сообщение' }}
               </button>
@@ -121,10 +131,10 @@
       </div>
     </section>
 
-    <section class="map-section">
+    <!-- <section class="map-section">
       <div class="container">
         <h2>Наш офис</h2>
-        <p class="map-address">г. Сочи, Аллея Челтенхэма 8/8</p>
+        <p class="map-address">г. Сочи</p>
         <div class="map-wrapper">
           <iframe 
             src="https://yandex.ru/map-widget/v1/?text=Сочи%20Аллея%20Челтенхэма%208%2F8&z=17" 
@@ -136,7 +146,7 @@
           ></iframe>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
@@ -152,7 +162,7 @@ interface ContactItem {
 const contactItems: ContactItem[] = [
   { id: 1, iconName: 'email', title: 'Email', value: 'promotion.w@yandex.ru', href: 'mailto:promotion.w@yandex.ru' },
   { id: 2, iconName: 'phone', title: 'Телефон', value: '+7 (988) 144-71-12 ', href: 'tel:+79881447112' },
-  { id: 3, iconName: 'location', title: 'Адрес', value: 'г. Сочи, Аллея Челтенхэма 8/8' },
+  { id: 3, iconName: 'location', title: 'Адрес', value: 'г. Сочи' },
   { id: 4, iconName: 'clock', title: 'Режим работы', value: 'Пн-Пт: 9:00 - 18:00' }
 ]
 
@@ -170,7 +180,8 @@ const form = ref({
   email: '',
   phone: '',
   service: '',
-  message: ''
+  message: '',
+  agreement: false
 })
 
 const isSubmitting = ref(false)
@@ -196,7 +207,8 @@ const submitForm = async () => {
       email: '',
       phone: '',
       service: '',
-      message: ''
+      message: '',
+      agreement: false
     }
   } catch (error) {
     submitMessage.value = 'Ошибка при отправке. Попробуйте позже или напишите нам напрямую на почту.'
@@ -502,6 +514,33 @@ useHead({
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+.checkbox-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.checkbox-text {
+  user-select: none;
 }
 
 .btn-submit {

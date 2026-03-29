@@ -88,6 +88,19 @@
           ></textarea>
         </div>
 
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              v-model="form.agreement"
+              required
+            />
+            <span class="checkbox-text">
+              Я даю согласие на обработку персональных данных
+            </span>
+          </label>
+        </div>
+
         <div class="form-actions">
           <button type="button" class="btn-cancel" @click="handleClose">
             Отмена
@@ -133,7 +146,8 @@ const form = ref({
   email: '',
   phone: '',
   service: '',
-  message: ''
+  message: '',
+  agreement: false
 })
 
 const isSubmitting = ref(false)
@@ -155,7 +169,8 @@ const handleClose = () => {
       email: '',
       phone: '',
       service: '',
-      message: ''
+      message: '',
+      agreement: false
     }
     submitMessage.value = ''
   }, 300)
@@ -264,6 +279,33 @@ const submitForm = async () => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-md);
+}
+
+.checkbox-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.checkbox-text {
+  user-select: none;
 }
 
 .form-actions {
