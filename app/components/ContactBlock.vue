@@ -161,14 +161,14 @@ interface ContactItem {
 
 const contactItems: ContactItem[] = [
   { id: 1, iconName: 'email', title: 'Email', value: 'promotion.w@yandex.ru', href: 'mailto:promotion.w@yandex.ru' },
-  { id: 2, iconName: 'phone', title: 'Телефон', value: '+7 (988) 144-71-12 ', href: 'tel:+79881447112' },
+  { id: 2, iconName: 'phone', title: 'Телефон', value: '+7 (928) 454-38-48 ', href: 'tel:+79284543848' },
   { id: 3, iconName: 'location', title: 'Адрес', value: 'г. Сочи' },
   { id: 4, iconName: 'clock', title: 'Режим работы', value: 'Пн-Пт: 9:00 - 18:00' }
 ]
 
 const services = [
   'Веб-разработка',
-  'Мобильные приложения',
+  'Мобильные приложения', 
   'UI/UX Дизайн',
   'SEO и Маркетинг',
   'Техническая поддержка',
