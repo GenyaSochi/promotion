@@ -129,11 +129,11 @@ const services: Service[] = [
 ]
 
 definePageMeta({
-  title: 'Услуги - Веб Промоушн'
+  title: 'Услуги - Апп Веб'
 })
 
 useHead({
-  title: 'Услуги - Веб Промоушн',
+  title: 'Услуги - Апп Веб',
   meta: [
     { name: 'description', content: 'Полный спектр цифровых услуг: веб-разработка, мобильные приложения, дизайн, SEO' }
   ]

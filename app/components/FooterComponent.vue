@@ -6,7 +6,7 @@
         <div class="footer-brand">
           <NuxtLink to="/" class="footer-logo">
             <span class="logo-icon">✦</span>
-            <span class="logo-text">Веб Промоушн</span>
+            <span class="logo-text">Апп Веб</span>
           </NuxtLink>
           <p class="footer-tagline">
             Создаём цифровые решения, которые помогают бизнесу расти и развиваться
@@ -48,7 +48,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} Веб Промоушн. Все права защищены</p>
+        <p>&copy; {{ currentYear }} Апп Веб. Все права защищены</p>
         <div class="footer-legal">
           <NuxtLink to="/privacy">Политика конфиденциальности</NuxtLink>
           <NuxtLink to="/terms">Условия использования</NuxtLink>

@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     baseURL: '/promotion/',
     buildAssetsDir: '/assets/',
     head: {
-      title: 'Веб Промоушн - Цифровые решения для вашего бизнеса',
+      title: 'Апп Веб - Цифровые решения для вашего бизнеса',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

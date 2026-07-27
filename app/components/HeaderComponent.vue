@@ -3,7 +3,7 @@
     <div class="header-container">
       <NuxtLink to="/" class="logo">
         <span class="logo-icon">✦</span>
-        <span class="logo-text">Веб Промоушн</span>
+        <span class="logo-text">Апп Веб</span>
       </NuxtLink>
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">

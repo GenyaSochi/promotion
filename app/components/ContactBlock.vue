@@ -225,11 +225,11 @@ const submitForm = async () => {
 }
 
 definePageMeta({
-  title: 'Контакты - Веб Промоушн'
+  title: 'Контакты - Апп Веб'
 })
 
 useHead({
-  title: 'Контакты - Веб Промоушн',
+  title: 'Контакты - Апп Веб',
   meta: [
     { name: 'description', content: 'Свяжитесь с нами для обсуждения вашего проекта' }
   ]
