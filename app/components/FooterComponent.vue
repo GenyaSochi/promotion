@@ -5,17 +5,26 @@
       <div class="footer-main">
         <div class="footer-brand">
           <NuxtLink to="/" class="footer-logo">
-            <span class="logo-icon">✦</span>
-            <span class="logo-text">Апп Веб</span>
+            <div style="display: flex; gap: .5rem">
+              <span class="logo-icon">✦</span>
+              <span class="logo-text">AppWeb</span>
+            </div>
+            <span style="font-size: 12px;">разработка сайтов и мобильных приложений</span>
           </NuxtLink>
           <p class="footer-tagline">
             Создаём цифровые решения, которые помогают бизнесу расти и развиваться
           </p>
           <div class="footer-social">
-            <a href="https://t.me/GenyaSochi" class="social-btn" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-            </a>        
-            <a  href="https://max.ru/u/f9LHodD0cOI-TPMMpsfZv29lGZ9rHyGWIOQKmB4uCt1OOJsBt-3rhVcvLjA" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Max">
+            <a href="https://t.me/GenyaSochi" class="social-btn" aria-label="Telegram" target="_blank"
+              rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m22 2-7 20-4-9-9-4Z" />
+                <path d="M22 2 11 13" />
+              </svg>
+            </a>
+            <a href="https://max.ru/u/f9LHodD0cOI-TPMMpsfZv29lGZ9rHyGWIOQKmB4uCt1OOJsBt-3rhVcvLjA" target="_blank"
+              rel="noopener noreferrer" class="social-btn" aria-label="Max">
               <span style="font-weight: 800; font-size: 13px; font-family: sans-serif;">M</span>
             </a>
           </div>
@@ -25,10 +34,18 @@
           <div class="footer-column">
             <h4>Навигация</h4>
             <ul>
-              <li><NuxtLink to="/">Главная</NuxtLink></li>
-              <li><NuxtLink to="/about">О нас</NuxtLink></li>
-              <li><NuxtLink to="/services">Услуги</NuxtLink></li>
-              <li><NuxtLink to="/contact">Контакты</NuxtLink></li>
+              <li>
+                <NuxtLink to="/">Главная</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/#about">О нас</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/#services">Услуги</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/#contact">Контакты</NuxtLink>
+              </li>
             </ul>
           </div>
 
@@ -48,7 +65,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} Апп Веб. Все права защищены</p>
+        <p>&copy; {{ currentYear }} AppWeb Все права защищены</p>
         <div class="footer-legal">
           <NuxtLink to="/privacy">Политика конфиденциальности</NuxtLink>
           <NuxtLink to="/terms">Условия использования</NuxtLink>
@@ -98,8 +115,9 @@ const currentYear = new Date().getFullYear()
 }
 
 .footer-logo {
-  display: inline-flex;
-  align-items: center;
+  display: inline-flex;  
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.5rem;
   font-size: 1.5rem;
   font-weight: 800;
@@ -240,37 +258,37 @@ const currentYear = new Date().getFullYear()
   .footer {
     padding: var(--spacing-2xl) 0 var(--spacing-md);
   }
-  
+
   .footer-container {
     padding: 0 1rem;
   }
-  
+
   .footer-logo {
     font-size: 1.25rem;
   }
-  
+
   .footer-tagline {
     font-size: 0.875rem;
   }
-  
+
   .footer-column h4 {
     font-size: 0.875rem;
   }
-  
+
   .footer-column a,
   .footer-column li:not(a) {
     font-size: 0.8125rem;
   }
-  
+
   .footer-bottom p {
     font-size: 0.75rem;
   }
-  
+
   .footer-legal {
     flex-direction: column;
     gap: var(--spacing-sm);
   }
-  
+
   .footer-legal a {
     font-size: 0.75rem;
   }

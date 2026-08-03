@@ -2,8 +2,11 @@
   <header class="header" :class="{ 'header-scrolled': isScrolled }">
     <div class="header-container">
       <NuxtLink to="/" class="logo">
-        <span class="logo-icon">✦</span>
-        <span class="logo-text">Апп Веб</span>
+        <div style="display: flex; gap: .5rem">
+          <span class="logo-icon">✦</span>
+          <span class="logo-text">AppWeb</span> 
+        </div>
+        <span style="font-size: 12px;">разработка сайтов и мобильных приложений</span>
       </NuxtLink>
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
@@ -111,8 +114,8 @@ onUnmounted(() => {
 
 .logo {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
   font-size: 1.5rem;
   font-weight: 800;
   color: #fff;
@@ -261,15 +264,11 @@ onUnmounted(() => {
   .header-container {
     padding: 0 1rem;
   }
-  
+
   .logo {
     font-size: 1.25rem;
   }
-  
-  .logo-text {
-    display: none;
-  }
-  
+
   .nav-link {
     font-size: 1.25rem;
     padding: 0.75rem 1.5rem;

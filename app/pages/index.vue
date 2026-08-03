@@ -257,15 +257,15 @@ const servicesPreview: Service[] = [
 ]
 
 definePageMeta({
-  title: 'Апп Веб - Цифровые решения для вашего бизнеса'
+  title: 'AppWeb - Цифровые решения для вашего бизнеса'
 })
 
 useHead({
-  title: 'Апп Веб - Цифровые решения для вашего бизнеса',
+  title: 'AppWeb - Цифровые решения для вашего бизнеса',
   meta: [
     { name: 'description', content: 'Создаём современные веб-сайты, мобильные приложения и цифровые продукты. Полный спектр услуг для вашего бизнеса.' },
     { name: 'keywords', content: 'веб-разработка, мобильные приложения, дизайн, SEO, цифровые решения' },
-    { property: 'og:title', content: 'Апп Веб - Цифровые решения для вашего бизнеса' },
+    { property: 'og:title', content: 'AppWeb - Цифровые решения для вашего бизнеса' },
     { property: 'og:description', content: 'Создаём современные веб-сайты и мобильные приложения' },
     { property: 'og:type', content: 'website' }
   ]

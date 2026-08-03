@@ -118,9 +118,9 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Условия использования - Апп Веб',
+  title: 'Условия использования - AppWeb',
   meta: [
-    { name: 'description', content: 'Условия использования услуг компании Апп Веб' }
+    { name: 'description', content: 'Условия использования услуг компании AppWeb' }
   ]
 })
 </script>

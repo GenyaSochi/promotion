@@ -85,9 +85,9 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Политика конфиденциальности - Апп Веб',
+  title: 'Политика конфиденциальности - AppWeb',
   meta: [
-    { name: 'description', content: 'Политика конфиденциальности компании Апп Веб' }
+    { name: 'description', content: 'Политика конфиденциальности компании AppWeb' }
   ]
 })
 </script>

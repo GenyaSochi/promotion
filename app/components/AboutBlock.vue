@@ -89,7 +89,7 @@
 import { useHead } from '#imports'
 
 useHead({
-  title: 'О нас - Апп Веб',
+  title: 'О нас - AppWeb',
   meta: [
     { name: 'description', content: 'Узнайте больше о нашей компании, миссии и ценностях' }
   ]
