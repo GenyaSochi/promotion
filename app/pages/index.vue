@@ -22,6 +22,71 @@
             Создаём современные веб-сайты, мобильные приложения и цифровые продукты,
             которые помогают компаниям расти и привлекать клиентов
           </p>
+         <div class="hero-hook">
+            <div class="hero-hook-glow"></div>
+
+            <h2 class="hero-hook-title">
+              <span class="gradient-text">Ваш сайт не приносит деньги</span>
+              <br />
+              <span class="gradient-text">Он их теряет</span>
+            </h2>
+          </div>
+
+          <div class="hero-diagnosis-cards">
+            <div class="hero-diagnosis-card hero-diagnosis-card--timer">
+              <div class="hero-diagnosis-card-glow"></div>
+              <div class="hero-diagnosis-icon">⏱</div>
+              <div ref="timerRef" class="hero-timer-wrapper">
+                <p class="hero-timer-question">Сайт грузится 5 секунд?</p>
+                <div class="hero-timer-funfact">
+                  <span>За это время в мире успевают родиться</span>
+                  <span class="gradient-text hero-timer-funfact-num">15</span>
+                  <span>детей</span>
+                </div>
+
+                <div class="hero-timer-ring" :class="timerColorClass">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="hero-timer-track" cx="100" cy="100" r="90" />
+                    <circle
+                      class="hero-timer-progress"
+                      cx="100" cy="100" r="90"
+                      :stroke-dasharray="circumference"
+                      :stroke-dashoffset="dashOffset"
+                    />
+                  </svg>
+                  <div class="hero-timer-digit" :class="{ 'shake': timerValue === 0 }">
+                    {{ timerValue }}
+                  </div>
+                </div>
+
+                <p class="hero-timer-label">{{ timerLabel }}</p>
+              </div>
+            </div>
+
+            <div class="hero-diagnosis-card hero-diagnosis-card--problem">
+              <div class="hero-diagnosis-card-glow"></div>
+              <div class="hero-diagnosis-icon">💀</div>
+              <p class="hero-hook-card-text">
+                Дизайн — ок, цвета — уютные, но кнопка «Купить» нашлась только с третьей попытки, а на смартфоне всё расползается, будто сайт попал под дождь.
+              </p>
+              <p class="hero-hook-card-text">
+                Вы льёте трафик из рекламы, а он утекает в никуда, потому что конверсия ниже, чем уровень воды в Аральском море.
+              </p>
+              <p class="hero-hook-card-text">
+                Сайт есть. Но он работает, как тренажёр в спортзале, который вечно занят — вроде и стоит, а толку ноль.
+              </p>
+            </div>
+
+            <div class="hero-diagnosis-card hero-diagnosis-card--solution">
+              <div class="hero-diagnosis-card-glow"></div>
+              <div class="hero-diagnosis-icon">🚀</div>
+              <p class="hero-hook-card-text hero-hook-card-text--solution">
+                Проектируем так, чтобы клиент не искал, а сразу нажимал. Скорость загрузки — ниже <strong>0.8 сек</strong> (это быстрее, чем вы закрываете назойливый поп-ап). Адаптив — идеальный. Даже на старой Nokia будет видно, где кнопка «Заказать».
+              </p>
+            </div>
+          </div>
+            
+           
           <div class="hero-buttons">
             <NuxtLink to="/#contact" class="btn-primary">
               Начать проект
@@ -140,6 +205,74 @@ interface Stat {
   value: string
   label: string
 }
+
+// --- Таймер «5 секунд» ---
+const TIMER_DURATION = 5
+const circumference = 2 * Math.PI * 90 // r=90
+const timerValue = ref(TIMER_DURATION)
+const timerFinished = ref(false)
+const timerStarted = ref(false)
+let timerInterval: ReturnType<typeof setInterval> | null = null
+
+const dashOffset = computed(() => {
+  const progress = timerValue.value / TIMER_DURATION
+  return circumference * (1 - progress)
+})
+
+const timerColorClass = computed(() => {
+  if (timerValue.value <= 0) return 'timer-red'
+  if (timerValue.value <= 2) return 'timer-red'
+  if (timerValue.value <= 3) return 'timer-yellow'
+  return 'timer-green'
+})
+
+const timerLabel = computed(() => {
+  if (timerValue.value > 3) return 'Клиент ещё ждёт...'
+  if (timerValue.value > 1) return 'Терпение на исходе...'
+  if (timerValue.value === 1) return 'Последний шанс!'
+  return 'Клиент ушёл к конкуренту.'
+})
+
+let resetTimeout: ReturnType<typeof setTimeout> | null = null
+let observer: IntersectionObserver | null = null
+
+const timerRef = ref<HTMLElement | null>(null)
+
+const startTimer = () => {
+  if (timerStarted.value) return
+  timerStarted.value = true
+  timerInterval = setInterval(() => {
+    if (timerValue.value > 0) {
+      timerValue.value--
+    } else if (!timerFinished.value) {
+      timerFinished.value = true
+      resetTimeout = setTimeout(() => {
+        timerValue.value = TIMER_DURATION
+        timerFinished.value = false
+      }, 2000)
+    }
+  }, 1000)
+}
+
+onMounted(() => {
+  if (!timerRef.value) return
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry && entry.isIntersecting) {
+        startTimer()
+        observer?.disconnect()
+      }
+    },
+    { threshold: 0.5 }
+  )
+  observer.observe(timerRef.value)
+})
+
+onUnmounted(() => {
+  if (timerInterval) clearInterval(timerInterval)
+  if (resetTimeout) clearTimeout(resetTimeout)
+  observer?.disconnect()
+})
 
 const stats: Stat[] = [
   { value: '150+', label: 'Проектов' },
@@ -381,6 +514,535 @@ useHead({
   margin-right: auto;
 }
 
+.hero-hook {
+  position: relative;
+  margin: var(--spacing-2xl) auto var(--spacing-2xl);
+  max-width: 800px;
+  padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  text-align: center;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.hero-hook::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-cyan),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient-rotate 6s linear infinite;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hero-hook:hover::before {
+  opacity: 1;
+}
+
+.hero-hook:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 220, 130, 0.15);
+}
+
+.hero-hook-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-hook-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+
+.hero-hook-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+}
+
+.hero-hook-card-text {
+  font-size: clamp(0.875rem, 1.3vw, 1rem);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  text-align: left;
+  margin-bottom: var(--spacing-md);
+}
+
+.hero-hook-card-text:last-child {
+  margin-bottom: 0;
+}
+
+.hero-hook-card-text--solution {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.hero-hook-card-text--solution strong {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Три отдельные карточки диагностики */
+.hero-diagnosis-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  margin: var(--spacing-2xl) auto;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-diagnosis-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.hero-diagnosis-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-cyan),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient-rotate 6s linear infinite;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.hero-diagnosis-card:hover::before {
+  opacity: 0.8;
+}
+
+.hero-diagnosis-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.hero-diagnosis-card-glow {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.hero-diagnosis-card--timer .hero-diagnosis-card-glow {
+  background: var(--color-primary);
+}
+
+.hero-diagnosis-card--problem .hero-diagnosis-card-glow {
+  background: var(--color-accent-pink);
+}
+
+.hero-diagnosis-card--solution .hero-diagnosis-card-glow {
+  background: var(--color-accent-cyan);
+}
+
+.hero-diagnosis-icon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-diagnosis-card--timer {
+  border-color: rgba(0, 220, 130, 0.15);
+}
+
+.hero-diagnosis-card--timer:hover {
+  border-color: rgba(0, 220, 130, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 220, 130, 0.1);
+}
+
+.hero-diagnosis-card--problem {
+  border-color: rgba(236, 72, 153, 0.15);
+}
+
+.hero-diagnosis-card--problem:hover {
+  border-color: rgba(236, 72, 153, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(236, 72, 153, 0.1);
+}
+
+.hero-diagnosis-card--solution {
+  border-color: rgba(6, 182, 212, 0.15);
+}
+
+.hero-diagnosis-card--solution:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(6, 182, 212, 0.1);
+}
+
+.hero-hook-glow {
+  position: absolute;
+  top: -60%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 220, 130, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.hero-hook-title {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-hook-title .gradient-text {
+  display: inline-block;
+  text-shadow: 0 0 40px var(--color-primary-glow);
+}
+
+.hero-hook-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-hook-divider svg {
+  width: 200px;
+  height: 12px;
+  overflow: visible;
+  filter: drop-shadow(0 0 6px var(--color-primary-glow));
+}
+
+.hero-hook-subtitle {
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  font-style: italic;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  max-width: 620px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Таймер «5 секунд» */
+.hero-timer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-xl) auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-timer-question {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.hero-timer-funfact {
+  position: relative;
+  font-size: clamp(0.8125rem, 1.4vw, 0.9375rem);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  margin-top: calc(var(--spacing-sm) * -1);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+}
+
+.hero-timer-funfact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-cyan),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient-rotate 4s linear infinite;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero-timer-funfact-num {
+  font-size: 1.25em;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 0 20px var(--color-primary-glow);
+}
+
+.hero-timer-ring {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-timer-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.hero-timer-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 6;
+}
+
+.hero-timer-progress {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.4s ease, stroke 0.4s ease;
+}
+
+.timer-green .hero-timer-progress {
+  stroke: var(--color-primary);
+  filter: drop-shadow(0 0 8px var(--color-primary-glow));
+}
+
+.timer-yellow .hero-timer-progress {
+  stroke: #f0c36d;
+  filter: drop-shadow(0 0 8px rgba(240, 195, 109, 0.35));
+}
+
+.timer-red .hero-timer-progress {
+  stroke: #f08080;
+  filter: drop-shadow(0 0 8px rgba(240, 128, 128, 0.35));
+}
+
+.hero-timer-digit {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.timer-green .hero-timer-digit {
+  color: var(--color-primary);
+  text-shadow: 0 0 30px var(--color-primary-glow);
+}
+
+.timer-yellow .hero-timer-digit {
+  color: #f5d58b;
+  text-shadow: 0 0 30px rgba(240, 195, 109, 0.35);
+}
+
+.timer-red .hero-timer-digit {
+  color: #f08080;
+  text-shadow: 0 0 30px rgba(240, 128, 128, 0.35);
+}
+
+.hero-timer-digit.shake {
+  animation: timer-shake 0.5s ease-in-out;
+}
+
+@keyframes timer-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px) rotate(-3deg); }
+  40% { transform: translateX(8px) rotate(3deg); }
+  60% { transform: translateX(-6px) rotate(-2deg); }
+  80% { transform: translateX(6px) rotate(2deg); }
+}
+
+.hero-timer-label {
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  min-height: 1.5em;
+  transition: color 0.3s ease;
+}
+
+.timer-red ~ .hero-timer-label {
+  color: #f08080;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .hero-timer-ring {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-timer-digit {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-timer-ring {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hero-timer-digit {
+    font-size: 2.5rem;
+  }
+
+  .hero-timer-question {
+    font-size: 0.9375rem;
+  }
+}
+
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+}
+
+@media (max-width: 768px) {
+  .hero-hook {
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+    margin: var(--spacing-lg) auto var(--spacing-xl);
+  }
+
+  .hero-hook-title {
+    font-size: clamp(1.375rem, 5vw, 2rem);
+  }
+
+  .hero-hook-subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .hero-hook-cards,
+  .hero-diagnosis-cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .hero-hook-card,
+  .hero-diagnosis-card {
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-hook {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  }
+
+  .hero-hook-title {
+    font-size: 1.25rem;
+  }
+
+  .hero-hook-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .hero-hook-card,
+  .hero-diagnosis-card {
+    padding: var(--spacing-md);
+  }
+
+  .hero-hook-card-text {
+    font-size: 0.8125rem;
+  }
+
+  .hero-diagnosis-icon {
+    font-size: 1.5rem;
+  }
+}
+
 .hero-buttons {
   display: flex;
   gap: var(--spacing-md);
@@ -437,6 +1099,7 @@ useHead({
   background: linear-gradient(180deg, var(--color-primary), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
+
 
 @keyframes scrollPulse {
   0%, 100% {
