@@ -22,48 +22,134 @@
             Создаём современные веб-сайты, мобильные приложения и цифровые продукты,
             которые помогают компаниям расти и привлекать клиентов
           </p>
-         <div class="hero-hook">
-            <div class="hero-hook-glow"></div>
-
+         <div ref="hookRef" class="hero-hook">
             <h2 class="hero-hook-title">
-              <span class="gradient-text">Ваш сайт не приносит деньги</span>
+              <span class="gradient-text">Ваш сайт не приносит ДЕНЬГИ?</span>
               <br />
-              <span class="gradient-text">Он их теряет</span>
+              <span class="gradient-text">Он ИХ теряет?</span>
             </h2>
           </div>
 
           <div class="hero-diagnosis-cards">
-            <div class="hero-diagnosis-card hero-diagnosis-card--timer">
+            <Transition name="timer-slide" appear @after-enter="startTimer">
+            <div
+              v-if="cardVisible"
+              ref="cardRef"
+              class="hero-diagnosis-card hero-diagnosis-card--timer"
+            >
               <div class="hero-diagnosis-card-glow"></div>
-              <div class="hero-diagnosis-icon">⏱</div>
               <div ref="timerRef" class="hero-timer-wrapper">
-                <p class="hero-timer-question">Сайт грузится 5 секунд?</p>
-                <div class="hero-timer-funfact">
-                  <span>За это время в мире успевают родиться</span>
-                  <span class="gradient-text hero-timer-funfact-num">15</span>
-                  <span>детей</span>
+                <div class="hero-timer-heading">
+                  <p class="hero-timer-question">Сайт грузится 5 секунд?</p>
+                  <p class="hero-timer-question-accent" :class="{ 'is-alarm': timerValue <= 1 }">Конкурент уже забрал вашего клиента</p>
                 </div>
 
-                <div class="hero-timer-ring" :class="timerColorClass">
-                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="hero-timer-track" cx="100" cy="100" r="90" />
+                <div
+                  class="hero-timer-ring"
+                  :class="[timerColorClass, { 'is-boom': timerValue === 0 }]"
+                >
+                  <div class="hero-timer-glow"></div>
+
+                  <!-- Внешнее орбитальное кольцо с тиками -->
+                  <svg class="hero-timer-orbit" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="hero-timer-orbit-track" cx="120" cy="120" r="115" />
+                    <g class="hero-timer-ticks">
+                      <line
+                        v-for="i in 24"
+                        :key="i"
+                        :class="{ 'is-major': i % 3 === 0 }"
+                        x1="120" y1="10" x2="120" y2="20"
+                        :transform="`rotate(${(i - 1) * 15} 120 120)`"
+                      />
+                    </g>
+                    <g class="hero-timer-satellite">
+                      <circle cx="120" cy="8" r="4" />
+                    </g>
+                  </svg>
+
+                  <!-- Внутренний progress -->
+                  <svg class="hero-timer-core" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--timer-c1)" />
+                        <stop offset="100%" stop-color="var(--timer-c2)" />
+                      </linearGradient>
+                      <filter id="timerGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+                    <circle class="hero-timer-track" cx="100" cy="100" r="88" />
                     <circle
                       class="hero-timer-progress"
-                      cx="100" cy="100" r="90"
+                      cx="100" cy="100" r="88"
                       :stroke-dasharray="circumference"
                       :stroke-dashoffset="dashOffset"
+                      stroke="url(#timerGrad)"
+                      filter="url(#timerGlow)"
+                    />
+                    <circle
+                      class="hero-timer-dot"
+                      cx="188"
+                      cy="100"
+                      r="7"
+                      :transform="`rotate(${progressAngle} 100 100)`"
                     />
                   </svg>
-                  <div class="hero-timer-digit" :class="{ 'shake': timerValue === 0 }">
-                    {{ timerValue }}
-                  </div>
-                </div>
 
-                <p class="hero-timer-label">{{ timerLabel }}</p>
+                  <div class="hero-timer-digit" :class="{ shake: timerValue === 0 }">
+                    <span class="hero-timer-digit-main">{{ timerValue }}</span>
+                    <span class="hero-timer-digit-sub">сек</span>
+                  </div>
+
+                  <div class="hero-timer-shockwave"></div>
+                  <div class="hero-timer-shockwave hero-timer-shockwave--delay"></div>
+                </div>
               </div>
             </div>
+            </Transition>
 
-            <div class="hero-diagnosis-card hero-diagnosis-card--problem">
+            <Transition name="card-slide">
+            <div
+              v-if="card2Visible"
+              class="hero-diagnosis-card hero-diagnosis-card--solution"
+            >
+              <div class="hero-diagnosis-card-glow"></div>
+              <div class="hero-solution-wrapper">
+                <div class="hero-solution-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                </div>
+                <h3 class="hero-solution-title">
+                  <span class="gradient-text-solution">Делаем сайты,</span>
+                  <span class="hero-solution-accent">которые в ТОП-10</span>
+                  <span class="gradient-text-solution">и грузятся за доли секунды</span>
+                </h3>
+                <div class="hero-solution-stats">
+                  <div class="hero-solution-stat">
+                    <span class="hero-solution-stat-value">&lt;0.8s</span>
+                    <span class="hero-solution-stat-label">загрузка</span>
+                  </div>
+                  <div class="hero-solution-stat">
+                    <span class="hero-solution-stat-value">ТОП-10</span>
+                    <span class="hero-solution-stat-label">Google / Яндекс</span>
+                  </div>
+                  <div class="hero-solution-stat">
+                    <span class="hero-solution-stat-value">100/100</span>
+                    <span class="hero-solution-stat-label">PageSpeed</span>
+                  </div>
+                </div>
+                <button type="button" class="hero-solution-cta" @click="openContactModal">
+                  <span>Жми для заказа и консультации</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+            </Transition>
+
+            <!-- <div class="hero-diagnosis-card hero-diagnosis-card--problem">
               <div class="hero-diagnosis-card-glow"></div>
               <div class="hero-diagnosis-icon">💀</div>
               <p class="hero-hook-card-text">
@@ -75,15 +161,15 @@
               <p class="hero-hook-card-text">
                 Сайт есть. Но он работает, как тренажёр в спортзале, который вечно занят — вроде и стоит, а толку ноль.
               </p>
-            </div>
+            </div> -->
 
-            <div class="hero-diagnosis-card hero-diagnosis-card--solution">
+            <!-- <div class="hero-diagnosis-card hero-diagnosis-card--solution">
               <div class="hero-diagnosis-card-glow"></div>
               <div class="hero-diagnosis-icon">🚀</div>
               <p class="hero-hook-card-text hero-hook-card-text--solution">
                 Проектируем так, чтобы клиент не искал, а сразу нажимал. Скорость загрузки — ниже <strong>0.8 сек</strong> (это быстрее, чем вы закрываете назойливый поп-ап). Адаптив — идеальный. Даже на старой Nokia будет видно, где кнопка «Заказать».
               </p>
-            </div>
+            </div> -->
           </div>
             
            
@@ -182,6 +268,8 @@
       </div>
     </section>
   </div>
+
+  <ContactModal v-model:model-value="isContactModalOpen" />
 </template>
 
 <script setup lang="ts">
@@ -208,7 +296,7 @@ interface Stat {
 
 // --- Таймер «5 секунд» ---
 const TIMER_DURATION = 5
-const circumference = 2 * Math.PI * 90 // r=90
+const circumference = 2 * Math.PI * 88 // r=88 (внутренний progress)
 const timerValue = ref(TIMER_DURATION)
 const timerFinished = ref(false)
 const timerStarted = ref(false)
@@ -219,6 +307,10 @@ const dashOffset = computed(() => {
   return circumference * (1 - progress)
 })
 
+const progressAngle = computed(() => {
+  return (timerValue.value / TIMER_DURATION) * 360
+})
+
 const timerColorClass = computed(() => {
   if (timerValue.value <= 0) return 'timer-red'
   if (timerValue.value <= 2) return 'timer-red'
@@ -226,17 +318,25 @@ const timerColorClass = computed(() => {
   return 'timer-green'
 })
 
-const timerLabel = computed(() => {
-  if (timerValue.value > 3) return 'Клиент ещё ждёт...'
-  if (timerValue.value > 1) return 'Терпение на исходе...'
-  if (timerValue.value === 1) return 'Последний шанс!'
-  return 'Клиент ушёл к конкуренту.'
-})
+// const timerLabel = computed(() => {
+//   if (timerValue.value > 3) return 'Клиент ещё ждёт...'
+//   if (timerValue.value > 1) return 'Терпение на исходе...'
+//   if (timerValue.value === 1) return 'Последний шанс!'
+//   return 'Клиент ушёл к конкуренту.'
+// })
 
 let resetTimeout: ReturnType<typeof setTimeout> | null = null
-let observer: IntersectionObserver | null = null
 
+const cardVisible = ref(false)
+const card2Visible = ref(false)
+const cardRef = ref<HTMLElement | null>(null)
 const timerRef = ref<HTMLElement | null>(null)
+const hookRef = ref<HTMLElement | null>(null)
+
+const isContactModalOpen = ref(false)
+const openContactModal = () => {
+  isContactModalOpen.value = true
+}
 
 const startTimer = () => {
   if (timerStarted.value) return
@@ -254,24 +354,36 @@ const startTimer = () => {
   }, 1000)
 }
 
+let hookScrollHandler: (() => void) | null = null
+let revealTimeout: ReturnType<typeof setTimeout> | null = null
+
 onMounted(() => {
-  if (!timerRef.value) return
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry && entry.isIntersecting) {
-        startTimer()
-        observer?.disconnect()
-      }
-    },
-    { threshold: 0.5 }
-  )
-  observer.observe(timerRef.value)
+  const checkHookPosition = () => {
+    if (!hookRef.value) return
+    // Заголовок «Ваш сайт не приносит ДЕНЬГИ?» доскроллился до хедера
+    if (hookRef.value.getBoundingClientRect().top <= 100) {
+      if (hookScrollHandler) window.removeEventListener('scroll', hookScrollHandler)
+      hookScrollHandler = null
+      revealTimeout = setTimeout(() => {
+        cardVisible.value = true
+        // Вторая карточка появляется через 1.5с после первой
+        setTimeout(() => {
+          card2Visible.value = true
+        }, 1500)
+      }, 400)
+    }
+  }
+
+  hookScrollHandler = () => checkHookPosition()
+  window.addEventListener('scroll', hookScrollHandler, { passive: true })
+  checkHookPosition()
 })
 
 onUnmounted(() => {
   if (timerInterval) clearInterval(timerInterval)
   if (resetTimeout) clearTimeout(resetTimeout)
-  observer?.disconnect()
+  if (revealTimeout) clearTimeout(revealTimeout)
+  if (hookScrollHandler) window.removeEventListener('scroll', hookScrollHandler)
 })
 
 const stats: Stat[] = [
@@ -390,7 +502,8 @@ const servicesPreview: Service[] = [
 ]
 
 definePageMeta({
-  title: 'AppWeb - Цифровые решения для вашего бизнеса'
+  title: 'AppWeb - Цифровые решения для вашего бизнеса',
+  scrollToTop: true
 })
 
 useHead({
@@ -401,6 +514,12 @@ useHead({
     { property: 'og:title', content: 'AppWeb - Цифровые решения для вашего бизнеса' },
     { property: 'og:description', content: 'Создаём современные веб-сайты и мобильные приложения' },
     { property: 'og:type', content: 'website' }
+  ],
+  script: [
+    {
+      innerHTML: `try{if('scrollRestoration'in history)history.scrollRestoration='manual';window.scrollTo(0,0)}catch(e){}`,
+      type: 'text/javascript'
+    }
   ]
 })
 </script>
@@ -419,7 +538,7 @@ useHead({
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   padding: 140px 1.5rem 80px;
   box-sizing: border-box;
 }
@@ -515,56 +634,11 @@ useHead({
 }
 
 .hero-hook {
-  position: relative;
-  margin: var(--spacing-2xl) auto var(--spacing-2xl);
   max-width: 800px;
-  padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
-  border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
+  margin: 0 auto var(--spacing-xl);
   text-align: center;
-  overflow: hidden;
-  transition: all var(--transition-normal);
 }
 
-.hero-hook::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-xl);
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent-purple),
-    var(--color-accent-pink),
-    var(--color-accent-cyan),
-    var(--color-primary)
-  );
-  background-size: 300% 300%;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: gradient-rotate 6s linear infinite;
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.hero-hook:hover::before {
-  opacity: 1;
-}
-
-.hero-hook:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 220, 130, 0.15);
-}
 
 .hero-hook-cards {
   display: grid;
@@ -710,12 +784,24 @@ useHead({
 }
 
 .hero-diagnosis-card--timer {
-  border-color: rgba(0, 220, 130, 0.15);
+  border-color: transparent;
+  background: transparent;
+  overflow: visible;
+}
+
+.hero-diagnosis-card--timer::before {
+  display: none;
+}
+
+.hero-diagnosis-card--timer .hero-diagnosis-card-glow {
+  display: none;
 }
 
 .hero-diagnosis-card--timer:hover {
-  border-color: rgba(0, 220, 130, 0.3);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 220, 130, 0.1);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
 .hero-diagnosis-card--problem {
@@ -734,18 +820,6 @@ useHead({
 .hero-diagnosis-card--solution:hover {
   border-color: rgba(6, 182, 212, 0.3);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(6, 182, 212, 0.1);
-}
-
-.hero-hook-glow {
-  position: absolute;
-  top: -60%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0, 220, 130, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-  animation: pulse 6s ease-in-out infinite;
 }
 
 .hero-hook-title {
@@ -790,7 +864,193 @@ useHead({
   z-index: 1;
 }
 
-/* Таймер «5 секунд» */
+/* ── Slide-in card animation (Vue Transition) ── */
+.timer-slide-enter-from {
+  opacity: 0;
+  transform: translateX(100vw);
+}
+
+.timer-slide-enter-active {
+  transition: opacity 2.2s ease-out, transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timer-slide-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Card 2 slide from left ── */
+.card-slide-enter-from {
+  opacity: 0;
+  transform: translateX(-100vw);
+}
+
+.card-slide-enter-active {
+  transition: opacity 2s ease-out, transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-slide-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Solution card styles ── */
+.hero-diagnosis-card--solution {
+  border-color: transparent;
+  background: transparent;
+  overflow: visible;
+}
+
+.hero-diagnosis-card--solution::before {
+  display: none;
+}
+
+.hero-diagnosis-card--solution .hero-diagnosis-card-glow {
+  display: none;
+}
+
+.hero-diagnosis-card--solution:hover {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.hero-solution-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl) 0;
+}
+
+.hero-solution-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(0, 220, 130, 0.15));
+  border-radius: var(--radius-xl);
+  color: var(--color-accent-cyan);
+  animation: rocket-float 3s ease-in-out infinite;
+}
+
+@keyframes rocket-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-3deg); }
+}
+
+.hero-solution-icon svg {
+  width: 44px;
+  height: 44px;
+}
+
+.hero-solution-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.gradient-text-solution {
+  background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-solution-accent {
+  color: #ffffff;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  text-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+}
+
+.hero-solution-stats {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-md);
+}
+
+.hero-solution-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.hero-solution-stat-value {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  color: var(--color-primary);
+  text-shadow: 0 0 20px var(--color-primary-glow);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-solution-stat-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.hero-solution-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-2xl);
+  margin-top: var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-primary) 100%);
+  color: #0a0a0f;
+  font-weight: 800;
+  font-size: clamp(0.9375rem, 1.8vw, 1.125rem);
+  letter-spacing: 0.01em;
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.35), 0 0 60px rgba(0, 220, 130, 0.2);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.hero-solution-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.hero-solution-cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 50px rgba(6, 182, 212, 0.6), 0 0 90px rgba(0, 220, 130, 0.35);
+  color: #0a0a0f;
+}
+
+.hero-solution-cta:hover::before {
+  left: 100%;
+}
+
+.hero-solution-cta svg {
+  transition: transform var(--transition-normal);
+}
+
+.hero-solution-cta:hover svg {
+  transform: translateX(4px);
+}
+
+.hero-solution-cta:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* ── Timer wrapper ── */
 .hero-timer-wrapper {
   display: flex;
   flex-direction: column;
@@ -801,10 +1061,39 @@ useHead({
   z-index: 1;
 }
 
+.hero-timer-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
 .hero-timer-question {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--color-text-secondary);
-  font-weight: 500;
+  font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+.hero-timer-question-accent {
+  font-size: clamp(0.875rem, 1.6vw, 1.0625rem);
+  color: #ff4040;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 24px rgba(255, 20, 20, 0.5);
+  transition: all 0.3s ease;
+}
+
+.hero-timer-question-accent.is-alarm {
+  color: #ff2020;
+  text-shadow: 0 0 32px rgba(255, 0, 0, 0.8), 0 0 64px rgba(255, 0, 0, 0.4);
+  animation: alarm-pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes alarm-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.04); }
 }
 
 .hero-timer-funfact {
@@ -859,73 +1148,142 @@ useHead({
   text-shadow: 0 0 20px var(--color-primary-glow);
 }
 
+/* ── Color-state CSS variables ── */
+.timer-green {
+  --timer-c1: var(--color-primary);
+  --timer-c2: var(--color-accent-cyan);
+  --timer-glow: var(--color-primary-glow);
+  --timer-text: var(--color-primary);
+}
+
+.timer-yellow {
+  --timer-c1: #ffdc40;
+  --timer-c2: #ffb300;
+  --timer-glow: rgba(255, 220, 64, 0.6);
+  --timer-text: #ffe066;
+}
+
+.timer-red {
+  --timer-c1: #ff3333;
+  --timer-c2: #ff0000;
+  --timer-glow: rgba(255, 20, 20, 0.75);
+  --timer-text: #ff4040;
+}
+
+/* ── Ring container ── */
 .hero-timer-ring {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.hero-timer-ring svg {
+/* Ambient glow behind the ring */
+.hero-timer-glow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--timer-glow) 0%, transparent 70%);
+  opacity: 0.35;
+  filter: blur(30px);
+  transition: background 0.4s ease;
+  pointer-events: none;
+}
+
+/* ── Orbit SVG (outer ring with ticks + satellite) ── */
+.hero-timer-orbit {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  animation: orbit-spin 12s linear infinite;
+}
+
+.hero-timer-orbit-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 1;
+}
+
+.hero-timer-ticks line {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.hero-timer-ticks line.is-major {
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 1.5;
+}
+
+.hero-timer-satellite circle {
+  fill: var(--timer-c1);
+  filter: drop-shadow(0 0 6px var(--timer-glow));
+  transition: fill 0.4s ease;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Core SVG (progress arc + dot) ── */
+.hero-timer-core {
+  position: absolute;
+  inset: 20px;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
   transform: rotate(-90deg);
 }
 
 .hero-timer-track {
   fill: none;
   stroke: rgba(255, 255, 255, 0.06);
-  stroke-width: 6;
+  stroke-width: 5;
 }
 
 .hero-timer-progress {
   fill: none;
-  stroke-width: 6;
+  stroke-width: 5;
   stroke-linecap: round;
-  transition: stroke-dashoffset 0.4s ease, stroke 0.4s ease;
+  transition: stroke-dashoffset 0.4s ease;
 }
 
-.timer-green .hero-timer-progress {
-  stroke: var(--color-primary);
-  filter: drop-shadow(0 0 8px var(--color-primary-glow));
+.hero-timer-dot {
+  fill: #fff;
+  filter: drop-shadow(0 0 8px var(--timer-glow));
+  transition: filter 0.4s ease;
 }
 
-.timer-yellow .hero-timer-progress {
-  stroke: #f0c36d;
-  filter: drop-shadow(0 0 8px rgba(240, 195, 109, 0.35));
-}
-
-.timer-red .hero-timer-progress {
-  stroke: #f08080;
-  filter: drop-shadow(0 0 8px rgba(240, 128, 128, 0.35));
-}
-
+/* ── Digit ── */
 .hero-timer-digit {
-  font-size: 4rem;
-  font-weight: 900;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: #fff;
   transition: color 0.3s ease;
 }
 
-.timer-green .hero-timer-digit {
-  color: var(--color-primary);
-  text-shadow: 0 0 30px var(--color-primary-glow);
+.hero-timer-digit-main {
+  font-size: 4.5rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  color: var(--timer-text);
+  text-shadow: 0 0 40px var(--timer-glow);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.timer-yellow .hero-timer-digit {
-  color: #f5d58b;
-  text-shadow: 0 0 30px rgba(240, 195, 109, 0.35);
-}
-
-.timer-red .hero-timer-digit {
-  color: #f08080;
-  text-shadow: 0 0 30px rgba(240, 128, 128, 0.35);
+.hero-timer-digit-sub {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 4px;
 }
 
 .hero-timer-digit.shake {
@@ -940,42 +1298,125 @@ useHead({
   80% { transform: translateX(6px) rotate(2deg); }
 }
 
-.hero-timer-label {
-  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  min-height: 1.5em;
-  transition: color 0.3s ease;
+/* ── Shockwave on zero ── */
+.hero-timer-shockwave {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--timer-c1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.timer-red ~ .hero-timer-label {
-  color: #f08080;
-  font-weight: 700;
+.is-boom .hero-timer-shockwave {
+  animation: shockwave-expand 0.8s ease-out forwards;
 }
 
+.is-boom .hero-timer-shockwave--delay {
+  animation-delay: 0.15s;
+}
+
+@keyframes shockwave-expand {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .hero-timer-ring {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
   }
 
-  .hero-timer-digit {
-    font-size: 3rem;
+  .hero-timer-digit-main {
+    font-size: 3.5rem;
+  }
+
+  .timer-slide-enter-from {
+    transform: translateX(100vw);
+  }
+
+  .timer-slide-enter-active {
+    transition: opacity 1.6s ease-out, transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-slide-enter-from {
+    transform: translateX(-100vw);
+  }
+
+  .card-slide-enter-active {
+    transition: opacity 1.4s ease-out, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-solution-stats {
+    gap: var(--spacing-md);
+  }
+
+  .hero-solution-stat-value {
+    font-size: 1.25rem;
   }
 }
 
 @media (max-width: 380px) {
   .hero-timer-ring {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
   }
 
-  .hero-timer-digit {
-    font-size: 2.5rem;
+  .hero-timer-digit-main {
+    font-size: 2.75rem;
   }
 
   .hero-timer-question {
     font-size: 0.9375rem;
+  }
+
+  .timer-slide-enter-from {
+    transform: translateX(100vw);
+  }
+
+  .timer-slide-enter-active {
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-slide-enter-from {
+    transform: translateX(-100vw);
+  }
+
+  .card-slide-enter-active {
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-solution-title {
+    font-size: 1.125rem;
+  }
+
+  .hero-solution-accent {
+    font-size: 1.375rem;
+  }
+
+  .hero-solution-stats {
+    gap: var(--spacing-sm);
+  }
+
+  .hero-solution-stat-value {
+    font-size: 1rem;
+  }
+
+  .hero-solution-stat-label {
+    font-size: 0.625rem;
+  }
+
+  .hero-solution-cta {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 0.875rem;
   }
 }
 
