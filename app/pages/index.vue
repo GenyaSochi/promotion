@@ -145,31 +145,14 @@
                   <span>Жми для заказа и консультации</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </button>
+                <div class="hero-solution-press-block">
+                  <button type="button" class="hero-solution-press" aria-label="Жми для заказа" @click="openContactModal">
+                    <span class="hero-solution-press-label">жми</span>
+                  </button>
+                </div>
               </div>
             </div>
-            </Transition>
-
-            <!-- <div class="hero-diagnosis-card hero-diagnosis-card--problem">
-              <div class="hero-diagnosis-card-glow"></div>
-              <div class="hero-diagnosis-icon">💀</div>
-              <p class="hero-hook-card-text">
-                Дизайн — ок, цвета — уютные, но кнопка «Купить» нашлась только с третьей попытки, а на смартфоне всё расползается, будто сайт попал под дождь.
-              </p>
-              <p class="hero-hook-card-text">
-                Вы льёте трафик из рекламы, а он утекает в никуда, потому что конверсия ниже, чем уровень воды в Аральском море.
-              </p>
-              <p class="hero-hook-card-text">
-                Сайт есть. Но он работает, как тренажёр в спортзале, который вечно занят — вроде и стоит, а толку ноль.
-              </p>
-            </div> -->
-
-            <!-- <div class="hero-diagnosis-card hero-diagnosis-card--solution">
-              <div class="hero-diagnosis-card-glow"></div>
-              <div class="hero-diagnosis-icon">🚀</div>
-              <p class="hero-hook-card-text hero-hook-card-text--solution">
-                Проектируем так, чтобы клиент не искал, а сразу нажимал. Скорость загрузки — ниже <strong>0.8 сек</strong> (это быстрее, чем вы закрываете назойливый поп-ап). Адаптив — идеальный. Даже на старой Nokia будет видно, где кнопка «Заказать».
-              </p>
-            </div> -->
+            </Transition>            
           </div>
             
            
@@ -692,10 +675,11 @@ useHead({
 /* Три отдельные карточки диагностики */
 .hero-diagnosis-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-lg);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: var(--spacing-xl);
   margin: var(--spacing-2xl) auto;
-  max-width: 900px;
+  max-width: 100%;
   position: relative;
   z-index: 1;
 }
@@ -709,6 +693,7 @@ useHead({
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
   transition: all var(--transition-normal);
 }
@@ -946,6 +931,14 @@ useHead({
   height: 44px;
 }
 
+.hero-solution-press-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-lg);
+  width: 100%;
+}
+
 .hero-solution-title {
   display: flex;
   flex-direction: column;
@@ -955,6 +948,74 @@ useHead({
   font-weight: 800;
   text-align: center;
   line-height: 1.3;
+}
+
+.hero-solution-press {
+  --press-size: 220px;
+  position: relative;
+  flex: 0 0 var(--press-size);
+  width: var(--press-size);
+  height: var(--press-size);
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  color: #ffffff;
+  background: radial-gradient(circle at 30% 30%, #ff0000 0%, #dc2626 55%, #b91c1c 100%);
+  box-shadow:
+    0 0 40px rgba(255, 0, 0, 0.7),
+    0 0 80px rgba(255, 0, 0, 0.5),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 6px 14px rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  animation: press-pulse 2.4s ease-in-out infinite;
+  isolation: isolate;
+}
+
+.hero-solution-press-label {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(0.75rem, 1.4vw, 0.9375rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero-solution-press:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:
+    0 0 60px rgba(255, 0, 0, 0.9),
+    0 0 120px rgba(255, 0, 0, 0.7),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 6px 14px rgba(255, 255, 255, 0.3);
+}
+
+.hero-solution-press:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+@keyframes press-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 40px rgba(255, 0, 0, 0.7),
+      0 0 80px rgba(255, 0, 0, 0.5),
+      inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+      inset 0 6px 14px rgba(255, 255, 255, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 55px rgba(255, 0, 0, 0.85),
+      0 0 100px rgba(255, 0, 0, 0.65),
+      inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+      inset 0 6px 14px rgba(255, 255, 255, 0.3);
+  }
 }
 
 .gradient-text-solution {
@@ -1335,6 +1396,16 @@ useHead({
     height: 180px;
   }
 
+  .hero-solution-row {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .hero-solution-press {
+    --press-size: 180px;
+    font-size: 1.75rem;
+  }
+
   .hero-timer-digit-main {
     font-size: 3.5rem;
   }
@@ -1368,6 +1439,11 @@ useHead({
   .hero-timer-ring {
     width: 150px;
     height: 150px;
+  }
+
+  .hero-solution-press {
+    --press-size: 150px;
+    font-size: 1.5rem;
   }
 
   .hero-timer-digit-main {
@@ -1521,7 +1597,7 @@ useHead({
 
 .scroll-indicator {
   position: absolute;
-  bottom: 20px;
+  bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

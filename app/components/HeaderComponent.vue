@@ -10,10 +10,10 @@
       </NuxtLink>
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <NuxtLink to="/" class="nav-link" @click="handleNavClick('#hero')">Главная</NuxtLink>
-        <NuxtLink to="/#about" class="nav-link" @click="handleNavClick('#about')">О нас</NuxtLink>
-        <NuxtLink to="/#services" class="nav-link" @click="handleNavClick('#services')">Услуги</NuxtLink>
-        <NuxtLink to="/#contact" class="nav-link" @click="handleNavClick('#contact')">Контакты</NuxtLink>
+        <NuxtLink to="/#hero" class="nav-link" @click="closeMenu">Главная</NuxtLink>
+        <NuxtLink to="/#about" class="nav-link" @click="closeMenu">О нас</NuxtLink>
+        <NuxtLink to="/#services" class="nav-link" @click="closeMenu">Услуги</NuxtLink>
+        <NuxtLink to="/#contact" class="nav-link" @click="closeMenu">Контакты</NuxtLink>
       </nav>
 
       <button class="header-cta" @click="openContactModal">
@@ -33,10 +33,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 
-const route = useRoute()
-const router = useRouter()
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
 const isContactModalOpen = ref(false)
@@ -55,24 +52,6 @@ const closeMenu = () => {
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
-}
-
-// Обработка клика по навигации
-const handleNavClick = (path: string) => {
-  // Если мы не на той странице, куда ведёт ссылка, переходим
-  // if (route.path !== path) {
-  //   router.push(path)
-  //   closeMenu()
-  // } else {
-    // Если мы уже на нужной странице и это главная — скроллим к якорю
-    // if (path === '/') {
-      const element = document.querySelector(path)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    // }
-    closeMenu()
-  // }
 }
 
 onMounted(() => {
@@ -149,8 +128,8 @@ onUnmounted(() => {
   color: #fff;
   border-radius: var(--radius-full);
   transition: all 0.25s ease;
-  font-weight: 500;
-  font-size: 0.9375rem;
+  font-weight: 700;
+  font-size: 1.2rem;
   text-decoration: none;
 }
 
