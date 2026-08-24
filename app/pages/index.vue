@@ -145,14 +145,16 @@
                   <span>Жми для заказа и консультации</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </button>
-                <div class="hero-solution-press-block">
-                  <button type="button" class="hero-solution-press" aria-label="Жми для заказа" @click="openContactModal">
-                    <span class="hero-solution-press-label">жми</span>
-                  </button>
-                </div>
               </div>
             </div>
-            </Transition>            
+          </Transition>
+          <Transition name="press-slide">
+            <div v-if="pressVisible" class="hero-solution-press-block">
+              <button type="button" class="hero-solution-press" aria-label="Жми для заказа" @click="openContactModal">
+                <span class="hero-solution-press-label">жми</span>
+              </button>
+            </div>
+          </Transition>
           </div>
             
            
@@ -312,6 +314,7 @@ let resetTimeout: ReturnType<typeof setTimeout> | null = null
 
 const cardVisible = ref(false)
 const card2Visible = ref(false)
+const pressVisible = ref(false)
 const cardRef = ref<HTMLElement | null>(null)
 const timerRef = ref<HTMLElement | null>(null)
 const hookRef = ref<HTMLElement | null>(null)
@@ -339,6 +342,7 @@ const startTimer = () => {
 
 let hookScrollHandler: (() => void) | null = null
 let revealTimeout: ReturnType<typeof setTimeout> | null = null
+let pressTimeout: ReturnType<typeof setTimeout> | null = null
 
 onMounted(() => {
   const checkHookPosition = () => {
@@ -353,6 +357,10 @@ onMounted(() => {
         setTimeout(() => {
           card2Visible.value = true
         }, 1500)
+        // Кнопка появляется через 3с после первой карточки (после solution)
+        pressTimeout = setTimeout(() => {
+          pressVisible.value = true
+        }, 3000)
       }, 400)
     }
   }
@@ -366,6 +374,7 @@ onUnmounted(() => {
   if (timerInterval) clearInterval(timerInterval)
   if (resetTimeout) clearTimeout(resetTimeout)
   if (revealTimeout) clearTimeout(revealTimeout)
+  if (pressTimeout) clearTimeout(pressTimeout)
   if (hookScrollHandler) window.removeEventListener('scroll', hookScrollHandler)
 })
 
@@ -570,7 +579,7 @@ useHead({
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 900px;
+  max-width: 1130px;
   margin: 0 auto;
   text-align: center;
 }
@@ -675,13 +684,14 @@ useHead({
 /* Три отдельные карточки диагностики */
 .hero-diagnosis-cards {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
   gap: var(--spacing-xl);
   margin: var(--spacing-2xl) auto;
   max-width: 100%;
   position: relative;
   z-index: 1;
+  overflow: visible;
 }
 
 .hero-diagnosis-card {
@@ -695,7 +705,7 @@ useHead({
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: background var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
 
 .hero-diagnosis-card::before {
@@ -772,6 +782,8 @@ useHead({
   border-color: transparent;
   background: transparent;
   overflow: visible;
+  grid-column: 1;
+  align-self: center;
 }
 
 .hero-diagnosis-card--timer::before {
@@ -879,11 +891,42 @@ useHead({
   transform: translateX(0);
 }
 
+/* ── Press button slide-in from left (last) ── */
+.press-slide-enter-from {
+  opacity: 0;
+  transform: translateX(-100vw);
+}
+
+.press-slide-enter-active {
+  transition: opacity 1.4s ease-out, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.press-slide-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.press-slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.press-slide-leave-active {
+  transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+}
+
+.press-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-100vw);
+}
+
 /* ── Solution card styles ── */
 .hero-diagnosis-card--solution {
   border-color: transparent;
   background: transparent;
   overflow: visible;
+  grid-column: 2;
+  align-self: center;
 }
 
 .hero-diagnosis-card--solution::before {
@@ -937,6 +980,8 @@ useHead({
   align-items: center;
   margin-top: var(--spacing-lg);
   width: 100%;
+  grid-column: 3;
+  align-self: center;
 }
 
 .hero-solution-title {
@@ -1130,7 +1175,7 @@ useHead({
 }
 
 .hero-timer-question {
-  font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+  font-size: 20px;
   color: #ffffff;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -1143,7 +1188,7 @@ useHead({
   font-weight: 700;
   letter-spacing: 0.02em;
   text-shadow: 0 0 24px rgba(255, 20, 20, 0.5);
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .hero-timer-question-accent.is-alarm {
@@ -1525,6 +1570,12 @@ useHead({
   .hero-diagnosis-cards {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
+  }
+
+  .hero-diagnosis-card--timer,
+  .hero-diagnosis-card--solution,
+  .hero-solution-press-block {
+    grid-column: 1;
   }
 
   .hero-hook-card,

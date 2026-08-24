@@ -50,7 +50,7 @@
           <div class="value-card">
             <div class="gradient-border"></div>
             <div class="value-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <h3>Качество</h3>
             <p>Мы не идём на компромиссы, когда дело касается качества кода и дизайна</p>
@@ -58,7 +58,7 @@
           <div class="value-card">
             <div class="gradient-border"></div>
             <div class="value-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a1 1 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a1 1 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <h3>Доверие</h3>
             <p>Строим долгосрочные отношения с клиентами на основе честности и прозрачности</p>
@@ -66,7 +66,7 @@
           <div class="value-card">
             <div class="gradient-border"></div>
             <div class="value-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
             </div>
             <h3>Инновации</h3>
             <p>Постоянно изучаем и внедряем новые технологии для лучших результатов</p>
@@ -74,7 +74,7 @@
           <div class="value-card">
             <div class="gradient-border"></div>
             <div class="value-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
             <h3>Скорость</h3>
             <p>Ценим время клиентов и соблюдаем все сроки</p>
@@ -84,17 +84,6 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useHead } from '#imports'
-
-useHead({
-  title: 'О нас - AppWeb',
-  meta: [
-    { name: 'description', content: 'Узнайте больше о нашей компании, миссии и ценностях' }
-  ]
-})
-</script>
 
 <style scoped>
 .about-page {
@@ -234,11 +223,13 @@ useHead({
   opacity: 0;
   transition: opacity var(--transition-normal);
   animation: gradient-rotate 4s linear infinite;
+  animation-play-state: paused;
   pointer-events: none;
 }
 
 .value-card:hover .gradient-border {
   opacity: 1;
+  animation-play-state: running;
 }
 
 .value-card:hover {
