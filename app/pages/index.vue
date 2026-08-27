@@ -24,13 +24,10 @@
           </p>
          <div ref="hookRef" class="hero-hook">
             <h2 class="hero-hook-title">
-              <span class="gradient-text">Ваш сайт не приносит ДЕНЬГИ?</span>
+              <span class="gradient-text">Мы делаем не просто "сайты мечты"</span>
               <br />
-              <span class="gradient-text">Он ИХ теряет?</span>
-            </h2>
-          </div>
-
-          <div class="hero-diagnosis-cards">
+              <span class="gradient-text">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют круглосуточного присмотра</span>            
+            </h2> 
             <Transition name="timer-slide" appear @after-enter="startTimer">
             <div
               v-if="cardVisible"
@@ -39,10 +36,10 @@
             >
               <div class="hero-diagnosis-card-glow"></div>
               <div ref="timerRef" class="hero-timer-wrapper">
-                <div class="hero-timer-heading">
+                <!-- <div class="hero-timer-heading">
                   <p class="hero-timer-question">Сайт грузится 5 секунд?</p>
                   <p class="hero-timer-question-accent" :class="{ 'is-alarm': timerValue <= 1 }">Конкурент уже забрал вашего клиента</p>
-                </div>
+                </div> -->
 
                 <div
                   class="hero-timer-ring"
@@ -100,9 +97,9 @@
                     />
                   </svg>
 
-                  <div class="hero-timer-digit" :class="{ shake: timerValue === 0 }">
+                  <div class="hero-timer-digit" :class="{ shake: timerValue === 0 }" @click="openContactModal">
                     <span class="hero-timer-digit-main">{{ timerValue }}</span>
-                    <span class="hero-timer-digit-sub">сек</span>
+                    <button type="button" class="hero-timer-digit-sub">жми</button>
                   </div>
 
                   <div class="hero-timer-shockwave"></div>
@@ -110,9 +107,12 @@
                 </div>
               </div>
             </div>
-            </Transition>
+            </Transition>           
+          </div>
 
-            <Transition name="card-slide">
+          <div class="hero-diagnosis-cards">        
+
+            <!-- <Transition name="card-slide">
             <div
               v-if="card2Visible"
               class="hero-diagnosis-card hero-diagnosis-card--solution"
@@ -147,25 +147,26 @@
                 </button>
               </div>
             </div>
-          </Transition>
-          <Transition name="press-slide">
+          </Transition> -->
+          <!-- <Transition name="press-slide">
             <div v-if="pressVisible" class="hero-solution-press-block">
               <button type="button" class="hero-solution-press" aria-label="Жми для заказа" @click="openContactModal">
                 <span class="hero-solution-press-label">жми</span>
               </button>
             </div>
-          </Transition>
+          </Transition> -->
           </div>
             
            
           <div class="hero-buttons">
             <NuxtLink to="/#contact" class="btn-primary">
-              Начать проект
+              начать проект
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </NuxtLink>
             <NuxtLink to="/services" class="btn-secondary">
-              Наши услуги
+              НАШИ УСЛУГИ
             </NuxtLink>
+            <NuxtLink class="btn-secondary" to="/activity">ДЛЯ КОГО</NuxtLink>
           </div>
           <div class="hero-stats">
             <div class="stat-item" v-for="(stat, index) in stats" :key="index">
@@ -1371,6 +1372,7 @@ useHead({
   flex-direction: column;
   align-items: center;
   line-height: 1;
+  cursor: default;
   transition: color 0.3s ease;
 }
 
@@ -1390,6 +1392,10 @@ useHead({
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin-top: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: default;
 }
 
 .hero-timer-digit.shake {
