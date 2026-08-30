@@ -25,9 +25,8 @@
          <div ref="hookRef" class="hero-hook">
             <h2 class="hero-hook-title">
               <span class="gradient-text">Мы делаем не просто "сайты мечты"</span>
-              <br />
-              <span class="gradient-text">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют круглосуточного присмотра</span>            
-            </h2> 
+            </h2>           
+              <div class="hero-description">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют круглосуточного присмотра</div>            
             <Transition name="timer-slide" appear @after-enter="startTimer">
             <div
               v-if="cardVisible"
@@ -35,11 +34,7 @@
               class="hero-diagnosis-card hero-diagnosis-card--timer"
             >
               <div class="hero-diagnosis-card-glow"></div>
-              <div ref="timerRef" class="hero-timer-wrapper">
-                <!-- <div class="hero-timer-heading">
-                  <p class="hero-timer-question">Сайт грузится 5 секунд?</p>
-                  <p class="hero-timer-question-accent" :class="{ 'is-alarm': timerValue <= 1 }">Конкурент уже забрал вашего клиента</p>
-                </div> -->
+              <div ref="timerRef" class="hero-timer-wrapper">            
 
                 <div
                   class="hero-timer-ring"
@@ -110,52 +105,8 @@
             </Transition>           
           </div>
 
-          <div class="hero-diagnosis-cards">        
-
-            <!-- <Transition name="card-slide">
-            <div
-              v-if="card2Visible"
-              class="hero-diagnosis-card hero-diagnosis-card--solution"
-            >
-              <div class="hero-diagnosis-card-glow"></div>
-              <div class="hero-solution-wrapper">
-                <div class="hero-solution-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-                </div>
-                <h3 class="hero-solution-title">
-                  <span class="gradient-text-solution">Делаем сайты,</span>
-                  <span class="hero-solution-accent">которые в ТОП-10</span>
-                  <span class="gradient-text-solution">и грузятся за доли секунды</span>
-                </h3>
-                <div class="hero-solution-stats">
-                  <div class="hero-solution-stat">
-                    <span class="hero-solution-stat-value">&lt;0.8s</span>
-                    <span class="hero-solution-stat-label">загрузка</span>
-                  </div>
-                  <div class="hero-solution-stat">
-                    <span class="hero-solution-stat-value">ТОП-10</span>
-                    <span class="hero-solution-stat-label">Google / Яндекс</span>
-                  </div>
-                  <div class="hero-solution-stat">
-                    <span class="hero-solution-stat-value">100/100</span>
-                    <span class="hero-solution-stat-label">PageSpeed</span>
-                  </div>
-                </div>
-                <button type="button" class="hero-solution-cta" @click="openContactModal">
-                  <span>Жми для заказа и консультации</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </button>
-              </div>
-            </div>
-          </Transition> -->
-          <!-- <Transition name="press-slide">
-            <div v-if="pressVisible" class="hero-solution-press-block">
-              <button type="button" class="hero-solution-press" aria-label="Жми для заказа" @click="openContactModal">
-                <span class="hero-solution-press-label">жми</span>
-              </button>
-            </div>
-          </Transition> -->
-          </div>
+          <div class="hero-diagnosis-cards">   
+           </div>
             
            
           <div class="hero-buttons">
@@ -303,13 +254,6 @@ const timerColorClass = computed(() => {
   if (timerValue.value <= 3) return 'timer-yellow'
   return 'timer-green'
 })
-
-// const timerLabel = computed(() => {
-//   if (timerValue.value > 3) return 'Клиент ещё ждёт...'
-//   if (timerValue.value > 1) return 'Терпение на исходе...'
-//   if (timerValue.value === 1) return 'Последний шанс!'
-//   return 'Клиент ушёл к конкуренту.'
-// })
 
 let resetTimeout: ReturnType<typeof setTimeout> | null = null
 
@@ -833,6 +777,19 @@ useHead({
 .hero-hook-title .gradient-text {
   display: inline-block;
   text-shadow: 0 0 40px var(--color-primary-glow);
+}
+
+.hero-hook-title .hero-description.gradient-text {
+  font-size: clamp(0.9375rem, 1.8vw, 1.25rem);
+  line-height: 1.55;
+  font-weight: 400;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text;
+  -webkit-background-clip: text;
+  margin-bottom: 0;
+  max-width: none;
+  letter-spacing: -0.01em;
 }
 
 .hero-hook-divider {

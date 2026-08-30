@@ -128,8 +128,8 @@ onUnmounted(() => {
   color: #fff;
   border-radius: var(--radius-full);
   transition: all 0.25s ease;
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1.0rem;
   text-decoration: none;
 }
 

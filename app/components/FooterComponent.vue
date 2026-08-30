@@ -54,10 +54,7 @@
             <ul>
               <li>
                 <a href="mailto:hello@promotion.ru">promotion.w@yandex.ru</a>
-              </li>
-              <li>
-                <a href="tel:+79990000000">+7 (928) 454-38-48</a>
-              </li>
+              </li>           
               <li>Сочи</li>
             </ul>
           </div>
