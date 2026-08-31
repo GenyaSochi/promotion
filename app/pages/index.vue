@@ -111,13 +111,9 @@
            
           <div class="hero-buttons">
             <NuxtLink to="/#contact" class="btn-primary">
-              начать проект
+              обсудить проект
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </NuxtLink>
-            <NuxtLink to="/services" class="btn-secondary">
-              НАШИ УСЛУГИ
-            </NuxtLink>
-            <NuxtLink class="btn-secondary" to="/activity">ДЛЯ КОГО</NuxtLink>
+            </NuxtLink>          
           </div>
           <div class="hero-stats">
             <div class="stat-item" v-for="(stat, index) in stats" :key="index">
@@ -137,8 +133,8 @@
     <section class="features">
       <div class="container">
         <div class="section-header">
-          <h2>Почему выбирают нас</h2>
-          <p>Мы создаём продукты, которые работают на ваш успех</p>
+          <h2>Никакой сложной терминологии</h2>
+          <p>Просто настраиваем всё, чтобы клиенты находили вас, доверяли и покупали</p>
         </div>
         <div class="features-grid">
           <div class="feature-card" v-for="feature in features" :key="feature.id">
@@ -190,20 +186,6 @@
     <AboutBlock/>
 
     <ContactBlock/>
-
-    <!-- CTA Section -->
-    <section id="contact" class="cta">
-      <div class="container">
-        <div class="cta-content">
-          <h2>Заказать проект</h2>
-          <p>Свяжитесь с нами, и мы найдём лучшее решение для вашего бизнеса</p>
-          <NuxtLink to="/#contact" class="btn-primary btn-large">
-            Обсудить проект
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
   </div>
 
   <ContactModal v-model:model-value="isContactModalOpen" />
@@ -258,8 +240,6 @@ const timerColorClass = computed(() => {
 let resetTimeout: ReturnType<typeof setTimeout> | null = null
 
 const cardVisible = ref(false)
-const card2Visible = ref(false)
-const pressVisible = ref(false)
 const cardRef = ref<HTMLElement | null>(null)
 const timerRef = ref<HTMLElement | null>(null)
 const hookRef = ref<HTMLElement | null>(null)
@@ -287,25 +267,15 @@ const startTimer = () => {
 
 let hookScrollHandler: (() => void) | null = null
 let revealTimeout: ReturnType<typeof setTimeout> | null = null
-let pressTimeout: ReturnType<typeof setTimeout> | null = null
 
 onMounted(() => {
   const checkHookPosition = () => {
     if (!hookRef.value) return
-    // Заголовок «Ваш сайт не приносит ДЕНЬГИ?» доскроллился до хедера
     if (hookRef.value.getBoundingClientRect().top <= 100) {
       if (hookScrollHandler) window.removeEventListener('scroll', hookScrollHandler)
       hookScrollHandler = null
       revealTimeout = setTimeout(() => {
         cardVisible.value = true
-        // Вторая карточка появляется через 1.5с после первой
-        setTimeout(() => {
-          card2Visible.value = true
-        }, 1500)
-        // Кнопка появляется через 3с после первой карточки (после solution)
-        pressTimeout = setTimeout(() => {
-          pressVisible.value = true
-        }, 3000)
       }, 400)
     }
   }
@@ -319,12 +289,11 @@ onUnmounted(() => {
   if (timerInterval) clearInterval(timerInterval)
   if (resetTimeout) clearTimeout(resetTimeout)
   if (revealTimeout) clearTimeout(revealTimeout)
-  if (pressTimeout) clearTimeout(pressTimeout)
   if (hookScrollHandler) window.removeEventListener('scroll', hookScrollHandler)
 })
 
 const stats: Stat[] = [
-  { value: '150+', label: 'Проектов' },
+  { value: '50+', label: 'Проектов' },
   { value: '8 лет', label: 'Опыта' },
   { value: '95%', label: 'Клиентов' },
   { value: '365', label: 'Дней поддержки' }
@@ -365,7 +334,7 @@ const servicesPreview: Service[] = [
     description: 'Создаём современные, быстрые и адаптивные веб-сайты',
     link: '/contact',
     features: [
-      'Landing Page',
+      'Сделаем так, чтобы сайт открывался за секунду и красиво выглядел на телефоне',
       'Сайт-визитка компании',
       'Интернет-магазины',
       'Адаптивный дизайн'
@@ -577,55 +546,6 @@ useHead({
 }
 
 
-.hero-hook-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-xl);
-  position: relative;
-  z-index: 1;
-}
-
-.hero-hook-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-normal);
-}
-
-.hero-hook-card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-4px);
-}
-
-.hero-hook-card-text {
-  font-size: clamp(0.875rem, 1.3vw, 1rem);
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  text-align: left;
-  margin-bottom: var(--spacing-md);
-}
-
-.hero-hook-card-text:last-child {
-  margin-bottom: 0;
-}
-
-.hero-hook-card-text--solution {
-  color: var(--color-text);
-  font-weight: 500;
-}
-
-.hero-hook-card-text--solution strong {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
 /* Три отдельные карточки диагностики */
 .hero-diagnosis-cards {
   display: grid;
@@ -708,21 +628,6 @@ useHead({
   background: var(--color-primary);
 }
 
-.hero-diagnosis-card--problem .hero-diagnosis-card-glow {
-  background: var(--color-accent-pink);
-}
-
-.hero-diagnosis-card--solution .hero-diagnosis-card-glow {
-  background: var(--color-accent-cyan);
-}
-
-.hero-diagnosis-icon {
-  font-size: 2rem;
-  margin-bottom: var(--spacing-md);
-  position: relative;
-  z-index: 1;
-}
-
 .hero-diagnosis-card--timer {
   border-color: transparent;
   background: transparent;
@@ -746,24 +651,6 @@ useHead({
   transform: none;
 }
 
-.hero-diagnosis-card--problem {
-  border-color: rgba(236, 72, 153, 0.15);
-}
-
-.hero-diagnosis-card--problem:hover {
-  border-color: rgba(236, 72, 153, 0.3);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(236, 72, 153, 0.1);
-}
-
-.hero-diagnosis-card--solution {
-  border-color: rgba(6, 182, 212, 0.15);
-}
-
-.hero-diagnosis-card--solution:hover {
-  border-color: rgba(6, 182, 212, 0.3);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(6, 182, 212, 0.1);
-}
-
 .hero-hook-title {
   font-size: clamp(1.75rem, 4vw, 3rem);
   font-weight: 800;
@@ -777,46 +664,6 @@ useHead({
 .hero-hook-title .gradient-text {
   display: inline-block;
   text-shadow: 0 0 40px var(--color-primary-glow);
-}
-
-.hero-hook-title .hero-description.gradient-text {
-  font-size: clamp(0.9375rem, 1.8vw, 1.25rem);
-  line-height: 1.55;
-  font-weight: 400;
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text;
-  -webkit-background-clip: text;
-  margin-bottom: 0;
-  max-width: none;
-  letter-spacing: -0.01em;
-}
-
-.hero-hook-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--spacing-lg);
-  position: relative;
-  z-index: 1;
-}
-
-.hero-hook-divider svg {
-  width: 200px;
-  height: 12px;
-  overflow: visible;
-  filter: drop-shadow(0 0 6px var(--color-primary-glow));
-}
-
-.hero-hook-subtitle {
-  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
-  font-style: italic;
-  color: var(--color-text-secondary);
-  line-height: 1.8;
-  max-width: 620px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
 }
 
 /* ── Slide-in card animation (Vue Transition) ── */
@@ -834,286 +681,6 @@ useHead({
   transform: translateX(0);
 }
 
-/* ── Card 2 slide from left ── */
-.card-slide-enter-from {
-  opacity: 0;
-  transform: translateX(-100vw);
-}
-
-.card-slide-enter-active {
-  transition: opacity 2s ease-out, transform 2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-slide-enter-to {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* ── Press button slide-in from left (last) ── */
-.press-slide-enter-from {
-  opacity: 0;
-  transform: translateX(-100vw);
-}
-
-.press-slide-enter-active {
-  transition: opacity 1.4s ease-out, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.press-slide-enter-to {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.press-slide-leave-from {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.press-slide-leave-active {
-  transition: opacity 0.4s ease-in, transform 0.4s ease-in;
-}
-
-.press-slide-leave-to {
-  opacity: 0;
-  transform: translateX(-100vw);
-}
-
-/* ── Solution card styles ── */
-.hero-diagnosis-card--solution {
-  border-color: transparent;
-  background: transparent;
-  overflow: visible;
-  grid-column: 2;
-  align-self: center;
-}
-
-.hero-diagnosis-card--solution::before {
-  display: none;
-}
-
-.hero-diagnosis-card--solution .hero-diagnosis-card-glow {
-  display: none;
-}
-
-.hero-diagnosis-card--solution:hover {
-  border-color: transparent;
-  background: transparent;
-  box-shadow: none;
-  transform: none;
-}
-
-.hero-solution-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-xl) 0;
-}
-
-.hero-solution-icon {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(0, 220, 130, 0.15));
-  border-radius: var(--radius-xl);
-  color: var(--color-accent-cyan);
-  animation: rocket-float 3s ease-in-out infinite;
-}
-
-@keyframes rocket-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(-3deg); }
-}
-
-.hero-solution-icon svg {
-  width: 44px;
-  height: 44px;
-}
-
-.hero-solution-press-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: var(--spacing-lg);
-  width: 100%;
-  grid-column: 3;
-  align-self: center;
-}
-
-.hero-solution-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  font-weight: 800;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.hero-solution-press {
-  --press-size: 220px;
-  position: relative;
-  flex: 0 0 var(--press-size);
-  width: var(--press-size);
-  height: var(--press-size);
-  border: none;
-  border-radius: 50%;
-  padding: 0;
-  cursor: pointer;
-  color: #ffffff;
-  background: radial-gradient(circle at 30% 30%, #ff0000 0%, #dc2626 55%, #b91c1c 100%);
-  box-shadow:
-    0 0 40px rgba(255, 0, 0, 0.7),
-    0 0 80px rgba(255, 0, 0, 0.5),
-    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
-    inset 0 6px 14px rgba(255, 255, 255, 0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-  animation: press-pulse 2.4s ease-in-out infinite;
-  isolation: isolate;
-}
-
-.hero-solution-press-label {
-  position: relative;
-  z-index: 1;
-  font-size: clamp(0.75rem, 1.4vw, 0.9375rem);
-  font-weight: 800;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.88);
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-}
-
-.hero-solution-press:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow:
-    0 0 60px rgba(255, 0, 0, 0.9),
-    0 0 120px rgba(255, 0, 0, 0.7),
-    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
-    inset 0 6px 14px rgba(255, 255, 255, 0.3);
-}
-
-.hero-solution-press:active {
-  transform: translateY(-1px) scale(1.01);
-}
-
-@keyframes press-pulse {
-  0%, 100% {
-    box-shadow:
-      0 0 40px rgba(255, 0, 0, 0.7),
-      0 0 80px rgba(255, 0, 0, 0.5),
-      inset 0 -8px 20px rgba(0, 0, 0, 0.3),
-      inset 0 6px 14px rgba(255, 255, 255, 0.25);
-  }
-  50% {
-    box-shadow:
-      0 0 55px rgba(255, 0, 0, 0.85),
-      0 0 100px rgba(255, 0, 0, 0.65),
-      inset 0 -8px 20px rgba(0, 0, 0, 0.3),
-      inset 0 6px 14px rgba(255, 255, 255, 0.3);
-  }
-}
-
-.gradient-text-solution {
-  background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-solution-accent {
-  color: #ffffff;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  text-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
-}
-
-.hero-solution-stats {
-  display: flex;
-  gap: var(--spacing-xl);
-  margin-top: var(--spacing-md);
-}
-
-.hero-solution-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.hero-solution-stat-value {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 900;
-  color: var(--color-primary);
-  text-shadow: 0 0 20px var(--color-primary-glow);
-  font-variant-numeric: tabular-nums;
-}
-
-.hero-solution-stat-label {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-}
-
-.hero-solution-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-2xl);
-  margin-top: var(--spacing-md);
-  background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-primary) 100%);
-  color: #0a0a0f;
-  font-weight: 800;
-  font-size: clamp(0.9375rem, 1.8vw, 1.125rem);
-  letter-spacing: 0.01em;
-  border-radius: var(--radius-full);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(6, 182, 212, 0.35), 0 0 60px rgba(0, 220, 130, 0.2);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-}
-
-.hero-solution-cta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.6s ease;
-}
-
-.hero-solution-cta:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 0 50px rgba(6, 182, 212, 0.6), 0 0 90px rgba(0, 220, 130, 0.35);
-  color: #0a0a0f;
-}
-
-.hero-solution-cta:hover::before {
-  left: 100%;
-}
-
-.hero-solution-cta svg {
-  transition: transform var(--transition-normal);
-}
-
-.hero-solution-cta:hover svg {
-  transform: translateX(4px);
-}
-
-.hero-solution-cta:active {
-  transform: translateY(-1px) scale(1.01);
-}
-
 /* ── Timer wrapper ── */
 .hero-timer-wrapper {
   display: flex;
@@ -1123,93 +690,6 @@ useHead({
   margin: var(--spacing-xl) auto;
   position: relative;
   z-index: 1;
-}
-
-.hero-timer-heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.hero-timer-question {
-  font-size: 20px;
-  color: #ffffff;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-}
-
-.hero-timer-question-accent {
-  font-size: clamp(0.875rem, 1.6vw, 1.0625rem);
-  color: #ff4040;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 24px rgba(255, 20, 20, 0.5);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.hero-timer-question-accent.is-alarm {
-  color: #ff2020;
-  text-shadow: 0 0 32px rgba(255, 0, 0, 0.8), 0 0 64px rgba(255, 0, 0, 0.4);
-  animation: alarm-pulse 0.6s ease-in-out infinite;
-}
-
-@keyframes alarm-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.04); }
-}
-
-.hero-timer-funfact {
-  position: relative;
-  font-size: clamp(0.8125rem, 1.4vw, 0.9375rem);
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  margin-top: calc(var(--spacing-sm) * -1);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  letter-spacing: 0.02em;
-  overflow: hidden;
-}
-
-.hero-timer-funfact::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-full);
-  padding: 1px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-accent-purple),
-    var(--color-accent-pink),
-    var(--color-accent-cyan),
-    var(--color-primary)
-  );
-  background-size: 300% 300%;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: gradient-rotate 4s linear infinite;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.hero-timer-funfact-num {
-  font-size: 1.25em;
-  font-weight: 800;
-  line-height: 1;
-  text-shadow: 0 0 20px var(--color-primary-glow);
 }
 
 /* ── Color-state CSS variables ── */
@@ -1404,16 +884,6 @@ useHead({
     height: 180px;
   }
 
-  .hero-solution-row {
-    flex-direction: column;
-    gap: var(--spacing-xl);
-  }
-
-  .hero-solution-press {
-    --press-size: 180px;
-    font-size: 1.75rem;
-  }
-
   .hero-timer-digit-main {
     font-size: 3.5rem;
   }
@@ -1426,21 +896,6 @@ useHead({
     transition: opacity 1.6s ease-out, transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .card-slide-enter-from {
-    transform: translateX(-100vw);
-  }
-
-  .card-slide-enter-active {
-    transition: opacity 1.4s ease-out, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .hero-solution-stats {
-    gap: var(--spacing-md);
-  }
-
-  .hero-solution-stat-value {
-    font-size: 1.25rem;
-  }
 }
 
 @media (max-width: 380px) {
@@ -1449,17 +904,8 @@ useHead({
     height: 150px;
   }
 
-  .hero-solution-press {
-    --press-size: 150px;
-    font-size: 1.5rem;
-  }
-
   .hero-timer-digit-main {
     font-size: 2.75rem;
-  }
-
-  .hero-timer-question {
-    font-size: 0.9375rem;
   }
 
   .timer-slide-enter-from {
@@ -1470,38 +916,6 @@ useHead({
     transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .card-slide-enter-from {
-    transform: translateX(-100vw);
-  }
-
-  .card-slide-enter-active {
-    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .hero-solution-title {
-    font-size: 1.125rem;
-  }
-
-  .hero-solution-accent {
-    font-size: 1.375rem;
-  }
-
-  .hero-solution-stats {
-    gap: var(--spacing-sm);
-  }
-
-  .hero-solution-stat-value {
-    font-size: 1rem;
-  }
-
-  .hero-solution-stat-label {
-    font-size: 0.625rem;
-  }
-
-  .hero-solution-cta {
-    padding: var(--spacing-sm) var(--spacing-lg);
-    font-size: 0.875rem;
-  }
 }
 
 @keyframes gradient-rotate {
@@ -1525,23 +939,15 @@ useHead({
     font-size: clamp(1.375rem, 5vw, 2rem);
   }
 
-  .hero-hook-subtitle {
-    font-size: 0.9375rem;
-  }
-
-  .hero-hook-cards,
   .hero-diagnosis-cards {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
 
-  .hero-diagnosis-card--timer,
-  .hero-diagnosis-card--solution,
-  .hero-solution-press-block {
+  .hero-diagnosis-card--timer {
     grid-column: 1;
   }
 
-  .hero-hook-card,
   .hero-diagnosis-card {
     padding: var(--spacing-lg);
   }
@@ -1556,21 +962,8 @@ useHead({
     font-size: 1.25rem;
   }
 
-  .hero-hook-subtitle {
-    font-size: 0.875rem;
-  }
-
-  .hero-hook-card,
   .hero-diagnosis-card {
     padding: var(--spacing-md);
-  }
-
-  .hero-hook-card-text {
-    font-size: 0.8125rem;
-  }
-
-  .hero-diagnosis-icon {
-    font-size: 1.5rem;
   }
 }
 
@@ -1879,31 +1272,6 @@ useHead({
   margin-top: var(--spacing-2xl);
 }
 
-/* CTA Section */
-.cta {
-  padding: var(--spacing-4xl) 0;
-  position: relative;
-}
-
-.cta-content {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.cta h2 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
-  margin-bottom: var(--spacing-md);
-  letter-spacing: -0.02em;
-}
-
-.cta p {
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-xl);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
@@ -1937,10 +1305,6 @@ useHead({
   
   .section-header h2 {
     font-size: 1.75rem;
-  }
-  
-  .cta h2 {
-    font-size: 1.5rem;
   }
 }
 
@@ -1991,8 +1355,7 @@ useHead({
   }
   
   .features,
-  .services-preview,
-  .cta {
+  .services-preview {
     padding: var(--spacing-2xl) 0;
   }
   
@@ -2033,14 +1396,6 @@ useHead({
   .feature-card p,
   .service-card p {
     font-size: 0.875rem;
-  }
-  
-  .cta h2 {
-    font-size: 1.25rem;
-  }
-  
-  .cta p {
-    font-size: 0.9rem;
   }
 }
 </style>

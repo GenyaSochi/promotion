@@ -43,9 +43,7 @@
               <li>
                 <NuxtLink to="/#services">Услуги</NuxtLink>
               </li>
-              <li>
-                <NuxtLink to="/#contact">Контакты</NuxtLink>
-              </li>
+          
             </ul>
           </div>
 
@@ -54,8 +52,7 @@
             <ul>
               <li>
                 <a href="mailto:hello@promotion.ru">promotion.w@yandex.ru</a>
-              </li>           
-              <li>Сочи</li>
+              </li>
             </ul>
           </div>
         </div>
@@ -112,7 +109,7 @@ const currentYear = new Date().getFullYear()
 }
 
 .footer-logo {
-  display: inline-flex;  
+  display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
