@@ -130,14 +130,20 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section ref="featuresSectionRef" class="features">
       <div class="container">
         <div class="section-header">
           <h2>Никакой сложной терминологии</h2>
           <p>Просто настраиваем всё, чтобы клиенты находили вас, доверяли и покупали</p>
         </div>
-        <div class="features-grid">
-          <div class="feature-card" v-for="feature in features" :key="feature.id">
+        <TransitionGroup name="feature" tag="div" class="features-grid">
+          <div
+            v-if="featuresVisible"
+            class="feature-card"
+            :style="{ '--delay': `${(feature.id - 1) * 150}ms` }"
+            v-for="feature in features"
+            :key="feature.id"
+          >
             <div class="gradient-border"></div>
             <div class="feature-icon">
               <svg v-if="feature.iconName === 'zap'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -148,7 +154,7 @@
             <h3>{{ feature.title }}</h3>
             <p>{{ feature.description }}</p>
           </div>
-        </div>
+        </TransitionGroup>
       </div>
     </section>
 
@@ -268,6 +274,10 @@ const startTimer = () => {
 let hookScrollHandler: (() => void) | null = null
 let revealTimeout: ReturnType<typeof setTimeout> | null = null
 
+const featuresSectionRef = ref<HTMLElement | null>(null)
+const featuresVisible = ref(false)
+let featuresScrollHandler: (() => void) | null = null
+
 onMounted(() => {
   const checkHookPosition = () => {
     if (!hookRef.value) return
@@ -283,6 +293,21 @@ onMounted(() => {
   hookScrollHandler = () => checkHookPosition()
   window.addEventListener('scroll', hookScrollHandler, { passive: true })
   checkHookPosition()
+
+  const checkFeaturesVisible = () => {
+    if (!featuresSectionRef.value || featuresVisible.value) return
+    const rect = featuresSectionRef.value.getBoundingClientRect()
+    const windowHeight = window.innerHeight
+    if (rect.top < windowHeight * 0.8) {
+      featuresVisible.value = true
+      window.removeEventListener('scroll', featuresScrollHandler!)
+      featuresScrollHandler = null
+    }
+  }
+
+  featuresScrollHandler = () => checkFeaturesVisible()
+  window.addEventListener('scroll', featuresScrollHandler, { passive: true })
+  checkFeaturesVisible()
 })
 
 onUnmounted(() => {
@@ -290,6 +315,7 @@ onUnmounted(() => {
   if (resetTimeout) clearTimeout(resetTimeout)
   if (revealTimeout) clearTimeout(revealTimeout)
   if (hookScrollHandler) window.removeEventListener('scroll', hookScrollHandler)
+  if (featuresScrollHandler) window.removeEventListener('scroll', featuresScrollHandler)
 })
 
 const stats: Stat[] = [
@@ -1055,9 +1081,25 @@ useHead({
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
+}
+
+/* TransitionGroup enter animation */
+.feature-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.feature-enter-active {
+  transition:
+    opacity 0.7s ease-out var(--delay, 0ms),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms);
+}
+
+.feature-enter-to {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .feature-card .gradient-border {
