@@ -131,22 +131,6 @@
       </div>
     </section>
 
-    <!-- <section class="map-section">
-      <div class="container">
-        <h2>Наш офис</h2>
-        <p class="map-address">г. Сочи</p>
-        <div class="map-wrapper">
-          <iframe 
-            src="https://yandex.ru/map-widget/v1/?text=Сочи%20Аллея%20Челтенхэма%208%2F8&z=17" 
-            width="100%" 
-            height="450" 
-            frameborder="0" 
-            allowfullscreen="true"
-            style="border-radius: var(--radius-lg);"
-          ></iframe>
-        </div>
-      </div>
-    </section> -->
   </div>
 </template>
 
@@ -160,9 +144,7 @@ interface ContactItem {
 }
 
 const contactItems: ContactItem[] = [
-  { id: 1, iconName: 'email', title: 'Email', value: 'promotion.w@yandex.ru', href: 'mailto:promotion.w@yandex.ru' },
-  { id: 2, iconName: 'phone', title: 'Телефон', value: '+7 (928) 454-38-48 ', href: 'tel:+79284543848' },
-  { id: 3, iconName: 'location', title: 'Адрес', value: 'г. Сочи' },
+  { id: 1, iconName: 'email', title: 'Email', value: 'promotion.w@yandex.ru', href: 'mailto:promotion.w@yandex.ru' }, 
   { id: 4, iconName: 'clock', title: 'Режим работы', value: 'Пн-Пт: 9:00 - 18:00' }
 ]
 
