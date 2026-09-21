@@ -59,7 +59,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} AppWeb Все права защищены</p>
+        <p>&copy; {{ currentYear }} AppWeb Все права защищены · <a href="https://gakman.space/" target="_blank" rel="noopener noreferrer">Сделано gakman.space</a></p>
         <div class="footer-legal">
           <NuxtLink to="/privacy">Политика конфиденциальности</NuxtLink>
           <NuxtLink to="/terms">Условия использования</NuxtLink>
@@ -211,6 +211,16 @@ const currentYear = new Date().getFullYear()
 .footer-bottom p {
   color: var(--color-text-muted);
   font-size: 0.875rem;
+}
+
+.footer-bottom p a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom p a:hover {
+  color: var(--color-text-secondary);
 }
 
 .footer-legal {

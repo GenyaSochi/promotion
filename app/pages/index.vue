@@ -166,10 +166,11 @@
           <p>Полный спектр цифровых решений</p>
         </div>
         <div class="services-editorial">
-          <div
+          <NuxtLink
             class="service-row"
             v-for="(service, index) in allServices"
             :key="service.id"
+            :to="getServicePath(service)"
           >
             <div class="service-row-number">
               <span class="gradient-text">{{ String(index + 1).padStart(2, '0') }}</span>
@@ -191,7 +192,7 @@
                 <li v-for="feature in service.features" :key="feature">{{ feature }}</li>
               </ul>
             </div>
-          </div>
+          </NuxtLink>
         </div>
         <div class="section-footer">
           <NuxtLink to="/#contact" class="btn-outline">Заказать услугу</NuxtLink>
@@ -209,21 +210,13 @@
 
 <script setup lang="ts">
 import { directives } from '@vue/language-core/lib/codegen/names'
+import { services as allServices, getServicePath } from '~/data/services'
 
 interface Feature {
   id: number
   iconName: string
   title: string
   description: string
-}
-
-interface Service {
-  id: number
-  iconName: string
-  title: string
-  description: string
-  link: string
-  features: string[]
 }
 
 interface Stat {
@@ -365,87 +358,6 @@ const features: Feature[] = [
 ]
 
 
-
-const allServices: Service[] = [
-  {
-    id: 1,
-    iconName: 'code',
-    title: 'Веб-разработка',
-    description: 'Создаём современные, быстрые и адаптивные веб-сайты',
-    link: '/contact',
-    features: [
-      'Сделаем так, чтобы сайт открывался за секунду и красиво выглядел на телефоне',
-      'Сайт-визитка компании',
-      'Интернет-магазины',
-      'Адаптивный дизайн'
-    ]
-  },
-  {
-    id: 2,
-    iconName: 'smartphone',
-    title: 'Мобильные приложения',
-    description: 'Разрабатываем нативные и кроссплатформенные приложения',
-    link: '/contact',
-    features: [
-      'iOS и Android приложения',
-      'Кроссплатформенная разработка',
-      'Интеграция с API',
-      'Публикация в сторах'
-    ]
-  },
-  {
-    id: 3,
-    iconName: 'palette',
-    title: 'UI/UX Дизайн',
-    description: 'Проектируем удобные и красивые интерфейсы',
-    link: '/contact',
-    features: [
-      'Исследование пользователей',
-      'Прототипирование',
-      'Визуальный дизайн',
-      'Дизайн-системы'
-    ]
-  },
-  {
-    id: 4,
-    iconName: 'trending-up',
-    title: 'SEO и Маркетинг',
-    description: 'Продвигаем ваш бизнес в поисковых системах',
-    link: '/contact',
-    features: [
-      'Техническая оптимизация',
-      'Контент-стратегия',
-      'Контекстная реклама',
-      'Аналитика и отчётность'
-    ]
-  },
-  {
-    id: 5,
-    iconName: 'wrench',
-    title: 'Техническая поддержка',
-    description: 'Обеспечиваем стабильную работу ваших проектов',
-    link: '/contact',
-    features: [
-      'Мониторинг',
-      'Обновления и патчи',
-      'Резервное копирование',
-      'Консультации'
-    ]
-  },
-  {
-    id: 6,
-    iconName: 'lightbulb',
-    title: 'Консалтинг',
-    description: 'Помогаем выбрать оптимальные технологические решения',
-    link: '/contact',
-    features: [
-      'Аудит текущих систем',
-      'Технологический консалтинг',
-      'Оптимизация процессов',
-      'Обучение команды'
-    ]
-  }
-]
 
 definePageMeta({
   title: 'AppWeb - Цифровые решения для вашего бизнеса',
@@ -1228,6 +1140,8 @@ useHead({
   border-bottom: 1px solid var(--color-border);
   transition: background var(--transition-normal);
   position: relative;
+  color: inherit;
+  text-decoration: none;
 }
 
 .service-row:first-child {

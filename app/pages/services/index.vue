@@ -20,13 +20,15 @@
               <svg v-else-if="service.iconName === 'wrench'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
               <svg v-else-if="service.iconName === 'lightbulb'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
             </div>
-            <h2>{{ service.title }}</h2>
+            <h2>
+              <NuxtLink :to="getServicePath(service)">{{ service.title }}</NuxtLink>
+            </h2>
             <p>{{ service.description }}</p>
             <ul class="service-features">
               <li v-for="feature in service.features" :key="feature">{{ feature }}</li>
             </ul>
-            <NuxtLink to="/#contact" class="service-link">
-              Заказать
+            <NuxtLink :to="getServicePath(service)" class="service-link">
+              Подробнее
               <span class="arrow">→</span>
             </NuxtLink>
           </div>
@@ -45,88 +47,7 @@
 </template>
 
 <script setup lang="ts">
-interface Service {
-  id: number
-  title: string
-  description: string
-  iconName: string
-  features: string[]
-}
-
-const services: Service[] = [
-  {
-    id: 1,
-    title: 'Веб-разработка',
-    description: 'Создаём современные, быстрые и адаптивные веб-сайты',
-    iconName: 'code',
-    features: [
-      'Landing Page',
-      'Сайт-визитка компании',
-      'Интернет-магазины',
-      'Адаптивный дизайн'
-    ]
-  },
-  {
-    id: 2,
-    title: 'Мобильные приложения',
-    description: 'Разрабатываем нативные и кроссплатформенные приложения',
-    iconName: 'smartphone',
-    features: [
-      'iOS и Android приложения',
-      'Кроссплатформенная разработка',
-      'Интеграция с API',
-      'Публикация в сторах'
-    ]
-  },
-  {
-    id: 3,
-    title: 'UI/UX Дизайн',
-    description: 'Проектируем удобные и красивые интерфейсы',
-    iconName: 'palette',
-    features: [
-      'Исследование пользователей',
-      'Прототипирование',
-      'Визуальный дизайн',
-      'Дизайн-системы'
-    ]
-  },
-  {
-    id: 4,
-    title: 'SEO и Маркетинг',
-    description: 'Продвигаем ваш бизнес в поисковых системах',
-    iconName: 'trending-up',
-    features: [
-      'Техническая оптимизация',
-      'Контент-стратегия',
-      'Контекстная реклама',
-      'Аналитика и отчётность'
-    ]
-  },
-  {
-    id: 5,
-    title: 'Техническая поддержка',
-    description: 'Обеспечиваем стабильную работу ваших проектов',
-    iconName: 'wrench',
-    features: [
-      'Мониторинг',
-      'Обновления и патчи',
-      'Резервное копирование',
-      'Консультации'
-    ]
-  },
-  {
-    id: 6,
-    title: 'Консалтинг',
-    description: 'Помогаем выбрать оптимальные технологические решения',
-    iconName: 'lightbulb',
-    features: [
-      'Аудит текущих систем',
-      'Технологический консалтинг',
-      'Оптимизация процессов',
-      'Обучение команды'
-    ]
-  }
-]
+import { services, getServicePath } from '~/data/services'
 
 definePageMeta({
   title: 'Услуги - AppWeb'
@@ -266,6 +187,16 @@ useHead({
   color: var(--color-text);
 }
 
+.service-card h2 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.service-card h2 a:hover {
+  color: var(--color-primary);
+}
+
 .service-card > p {
   color: var(--color-text-secondary);
   margin-bottom: var(--spacing-lg);
@@ -303,6 +234,7 @@ useHead({
   cursor: pointer;
   transition: gap var(--transition-fast);
   font-size: inherit;
+  text-decoration: none;
 }
 
 .service-link:hover {
@@ -345,6 +277,7 @@ useHead({
   padding: var(--spacing-md) var(--spacing-xl);
   border-radius: var(--radius-full);
   font-weight: 600;
+  text-decoration: none;
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 

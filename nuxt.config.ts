@@ -13,7 +13,17 @@ export default defineNuxtConfig({
   nitro: {
     static: true,
     prerender: {
-      failOnError: false
+      failOnError: false,
+      routes: [
+        '/web',
+        '/services',
+        '/services/web-development',
+        '/services/mobile-apps',
+        '/services/ui-ux-design',
+        '/services/seo-marketing',
+        '/services/technical-support',
+        '/services/consulting'
+      ]
     }
   },
   app: {
