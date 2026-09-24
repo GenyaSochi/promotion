@@ -165,34 +165,22 @@
           <h2>Наши услуги</h2>
           <p>Полный спектр цифровых решений</p>
         </div>
-        <div class="services-editorial">
-          <NuxtLink
-            class="service-row"
+        <div class="services-hooks">
+          <div
+            class="service-hook"
             v-for="(service, index) in allServices"
             :key="service.id"
-            :to="getServicePath(service)"
           >
-            <div class="service-row-number">
-              <span class="gradient-text">{{ String(index + 1).padStart(2, '0') }}</span>
-            </div>
-            <div class="service-row-content">
-              <div class="service-row-head">
-                <div class="service-row-icon">
-                  <svg v-if="service.iconName === 'code'" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                  <svg v-else-if="service.iconName === 'smartphone'" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-                  <svg v-else-if="service.iconName === 'palette'" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
-                  <svg v-else-if="service.iconName === 'trending-up'" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-                  <svg v-else-if="service.iconName === 'wrench'" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                  <svg v-else-if="service.iconName === 'lightbulb'" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                </div>
-                <h3 class="service-row-title">{{ service.title }}</h3>
+            <NuxtLink :to="getServicePath(service)" class="service-hook-link">
+              <div class="service-hook-number">
+                <span class="gradient-text">{{ String(index + 1).padStart(2, '0') }}</span>
               </div>
-              <p class="service-row-description">{{ service.description }}</p>
-              <ul class="service-row-features">
-                <li v-for="feature in service.features" :key="feature">{{ feature }}</li>
-              </ul>
-            </div>
-          </NuxtLink>
+              <h3 class="service-hook-title">
+                <span class="gradient-text">{{ service.title }}</span>
+              </h3>
+              <p class="service-hook-description">{{ service.description }}</p>
+            </NuxtLink>
+          </div>
         </div>
         <div class="section-footer">
           <NuxtLink to="/#contact" class="btn-outline">Заказать услугу</NuxtLink>
@@ -1116,223 +1104,92 @@ useHead({
 }
 
 /* Services Preview */
-.services-preview {
+/* .services-preview {
   padding: var(--spacing-4xl) 0;
   background: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-}
+} */
 
-/* Services Editorial (big numbers + split) */
-.services-editorial {
-  max-width: 1000px;
-  margin: 0 auto;
+/* Services Hooks (hero-style blocks) */
+.services-hooks {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-4xl);
 }
 
-.service-row {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: var(--spacing-2xl);
-  align-items: start;
-  padding: var(--spacing-2xl) 0;
-  border-bottom: 1px solid var(--color-border);
-  transition: background var(--transition-normal);
-  position: relative;
-  color: inherit;
+.service-hook {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.service-hook-link {
+  display: block;
   text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition-normal);
 }
 
-.service-row:first-child {
-  padding-top: 0;
+.service-hook-link:hover {
+  transform: translateY(-4px);
 }
 
-.service-row:last-child {
-  border-bottom: none;
+.service-hook-number {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: var(--spacing-sm);
+  display: block;
 }
 
-.service-row::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(0, 220, 130, 0.04), transparent 60%);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  pointer-events: none;
-  border-radius: var(--radius-lg);
+.service-hook-number .gradient-text {
+  display: inline-block;
 }
 
-.service-row:hover::before {
-  opacity: 1;
+.service-hook-title {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--spacing-md);
 }
 
-.service-row-number {
-  font-size: clamp(4rem, 8vw, 6rem);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.05em;
-  opacity: 0.85;
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
-  user-select: none;
-}
-
-.service-row-number .gradient-text {
+.service-hook-title .gradient-text {
   display: inline-block;
   text-shadow: 0 0 40px var(--color-primary-glow);
 }
 
-.service-row:hover .service-row-number {
-  opacity: 1;
-  transform: translateX(-4px);
-}
-
-.service-row-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.service-row-head {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.service-row-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
-  background: linear-gradient(135deg, rgba(0, 220, 130, 0.1), rgba(139, 92, 246, 0.1));
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-lg);
-  color: var(--color-primary);
-  transition: all var(--transition-normal);
-}
-
-.service-row:hover .service-row-icon {
-  background: linear-gradient(135deg, rgba(0, 220, 130, 0.2), rgba(139, 92, 246, 0.2));
-  color: var(--color-primary-light);
-  transform: scale(1.05);
-  box-shadow: 0 0 24px var(--color-primary-glow);
-}
-
-.service-row-icon svg {
-  width: 28px;
-  height: 28px;
-}
-
-.service-row-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
-  color: var(--color-text);
-  margin: 0;
-  letter-spacing: -0.02em;
-}
-
-.service-row-description {
-  font-size: 1.0625rem;
+.service-hook-description {
+  font-size: 1.125rem;
   color: var(--color-text-secondary);
   line-height: 1.7;
-  margin: 0;
+  margin-bottom: 0;
 }
 
-.service-row-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.service-row-features li {
-  position: relative;
-  padding-left: 1.75rem;
-  color: var(--color-text-secondary);
-  font-size: 0.9375rem;
-  line-height: 1.6;
-}
-
-.service-row-features li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  box-shadow: 0 0 10px var(--color-primary-glow);
-}
-
+/* Media queries for services hooks */
 @media (max-width: 768px) {
-  .service-row {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
-    padding: var(--spacing-xl) 0;
+  .services-hooks {
+    gap: var(--spacing-3xl);
   }
 
-  .service-row-number {
-    font-size: 3rem;
-    opacity: 0.5;
+  .service-hook-title {
+    font-size: 1.5rem;
   }
 
-  .service-row:hover .service-row-number {
-    transform: none;
-  }
-
-  .service-row-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .service-row-icon svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .service-row-title {
-    font-size: 1.375rem;
+  .service-hook-description {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 380px) {
-  .service-row {
-    padding: var(--spacing-lg) 0;
+  .service-hook-title {
+    font-size: 1.25rem;
   }
 
-  .service-row-number {
-    font-size: 2.25rem;
-  }
-
-  .service-row-head {
-    gap: var(--spacing-sm);
-  }
-
-  .service-row-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .service-row-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .service-row-title {
-    font-size: 1.125rem;
-  }
-
-  .service-row-description {
+  .service-hook-description {
     font-size: 0.9375rem;
-  }
-
-  .service-row-features li {
-    font-size: 0.875rem;
   }
 }
 
