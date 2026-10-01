@@ -38,9 +38,6 @@
                 <NuxtLink to="/">Главная</NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/#about">О нас</NuxtLink>
-              </li>
-              <li>
                 <NuxtLink to="/#services">Услуги</NuxtLink>
               </li>
           

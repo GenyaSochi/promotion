@@ -11,7 +11,6 @@
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
         <NuxtLink to="/#hero" class="nav-link" @click="closeMenu">Главная</NuxtLink>
-        <NuxtLink to="/#about" class="nav-link" @click="closeMenu">О нас</NuxtLink>
         <NuxtLink to="/#services" class="nav-link" @click="closeMenu">Услуги</NuxtLink>
         <NuxtLink to="/#contact" class="nav-link" @click="closeMenu">Контакты</NuxtLink>
       </nav>
@@ -120,7 +119,7 @@ onUnmounted(() => {
 
 .nav {
   display: flex;
-  gap: 0.25rem;
+  gap: 1.25rem;
 }
 
 .nav-link {

@@ -172,23 +172,54 @@
             :key="service.id"
           >
             <NuxtLink :to="getServicePath(service)" class="service-hook-link">
-              <div class="service-hook-number">
-                <span class="gradient-text">{{ String(index + 1).padStart(2, '0') }}</span>
-              </div>
               <h3 class="service-hook-title">
                 <span class="gradient-text">{{ service.title }}</span>
               </h3>
               <p class="service-hook-description">{{ service.description }}</p>
+              <p
+                v-if="service.slug === 'web-development'"
+                class="service-hook-extra"
+              >
+                Разрабатываем сайты, которые превращают посетителей в клиентов. Мы знаем, как важна скорость работы и удобство интерфейса, поэтому создаем адаптивные решения, идеально отображающиеся на смартфонах, планшетах и ПК. Ваш сайт будет работать быстро, безопасно и стабильно, отражая статус вашего бренда.
+              </p>
+              <p
+                v-if="service.slug === 'mobile-apps'"
+                class="service-hook-extra"
+              >
+                Создаем мобильные приложения, которые помогают бизнесу расти и удерживать клиентов. Мы продумываем каждую деталь: от удобной навигации до push-уведомлений, возвращающих пользователей. Ваше приложение станет мощным инструментом продаж и повысит лояльность аудитории.
+              </p>
+              <p
+                v-if="service.slug === 'ui-ux-design'"
+                class="service-hook-extra"
+              >
+                Разрабатываем интерфейсы, которые увеличивают конверсию и удерживают внимание. Мы знаем, как цвет, типографика и расположение элементов влияют на решения пользователей. Создаем визуально привлекательный дизайн, который направляет клиента к целевому действию и повышает ценность вашего продукта.
+              </p>
+              <p
+                v-if="service.slug === 'seo-marketing'"
+                class="service-hook-extra"
+              >
+                Разрабатываем комплексные стратегии, которые приводят целевой трафик и увеличивают продажи. Мы не просто настраиваем рекламу - мы анализируем рынок, изучаем конкурентов и находим точки роста именно для вашего проекта.
+              </p>
+              <p
+                v-if="service.slug === 'technical-support'"
+                class="service-hook-extra"
+              >
+                Оперативно устраняем неполадки, обновляем системы и следим за безопасностью. Вы можете заниматься бизнесом, а мы позаботимся о том, чтобы ваш сайт или приложение всегда были доступны для пользователей.
+              </p>
+              <p
+                v-if="service.slug === 'consulting'"
+                class="service-hook-extra"
+              >
+                 Проводим аудит текущих процессов, выявляем узкие места и предлагаем стратегию развития. Вы получаете независимую экспертизу и четкий план действий без лишних затрат на пробные проекты.
+              </p>
             </NuxtLink>
           </div>
         </div>
         <div class="section-footer">
-          <NuxtLink to="/#contact" class="btn-outline">Заказать услугу</NuxtLink>
+          <NuxtLink to="/#contact" class="btn-outline">обсудить проект</NuxtLink>
         </div>
       </div>
     </section>
-
-    <AboutBlock/>
 
     <ContactBlock/>
   </div>
@@ -446,7 +477,7 @@ useHead({
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-full);
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--color-text-secondary);
   margin-bottom: var(--spacing-xl);
   backdrop-filter: blur(10px);
@@ -470,11 +501,11 @@ useHead({
 }
 
 .hero-description {
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   color: #cccccc !important;
   line-height: 1.8;
   margin-bottom: var(--spacing-2xl);
-  max-width: 650px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -929,7 +960,7 @@ useHead({
 }
 
 .stat-value {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 800;
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent-cyan));
   -webkit-background-clip: text;
@@ -938,7 +969,7 @@ useHead({
 }
 
 .stat-label {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
 }
 
@@ -1092,7 +1123,7 @@ useHead({
 }
 
 .feature-card h3 {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: var(--spacing-sm);
@@ -1100,6 +1131,7 @@ useHead({
 
 .feature-card p {
   color: var(--color-text-secondary);
+  font-size: 1.125rem;
   line-height: 1.7;
 }
 
@@ -1162,10 +1194,17 @@ useHead({
 }
 
 .service-hook-description {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: var(--color-text-secondary);
   line-height: 1.7;
   margin-bottom: 0;
+}
+
+.service-hook-extra {
+  color: var(--color-text-secondary);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin: var(--spacing-sm) 0 0;
 }
 
 /* Media queries for services hooks */
@@ -1207,11 +1246,11 @@ useHead({
   }
 
   .hero h1 {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
   }
 
   .hero-description {
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
   
   .hero-stats {
@@ -1219,9 +1258,9 @@ useHead({
   }
   
   .stat-value {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
-  
+
   .scroll-indicator {
     display: none;
   }
@@ -1232,7 +1271,15 @@ useHead({
   }
   
   .section-header h2 {
-    font-size: 1.75rem;
+    font-size: 2rem;
+  }
+
+  .section-header p {
+    font-size: 1.125rem;
+  }
+
+  .service-hook-extra {
+    font-size: 1rem;
   }
 }
 
@@ -1247,13 +1294,13 @@ useHead({
   }
   
   .hero-description {
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: var(--spacing-xl);
   }
-  
+
   .hero-badge {
     padding: 8px 14px;
-    font-size: 0.75rem;
+    font-size: 0.9375rem;
   }
   
   .hero-buttons {
@@ -1275,11 +1322,11 @@ useHead({
   }
   
   .stat-value {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
-  
+
   .stat-label {
-    font-size: 0.75rem;
+    font-size: 0.9375rem;
   }
   
   .features,
@@ -1292,11 +1339,11 @@ useHead({
   }
   
   .section-header h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
-  
+
   .section-header p {
-    font-size: 0.9rem;
+    font-size: 1.0625rem;
   }
   
   .feature-card,
@@ -1318,12 +1365,16 @@ useHead({
   
   .feature-card h3,
   .service-card h3 {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
-  
+
   .feature-card p,
   .service-card p {
-    font-size: 0.875rem;
+    font-size: 1rem;
+  }
+
+  .service-hook-extra {
+    font-size: 0.9375rem;
   }
 }
 </style>

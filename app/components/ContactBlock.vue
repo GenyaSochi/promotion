@@ -224,9 +224,8 @@ useHead({
 }
 
 .hero {
-  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
   color: var(--color-text);
-  padding: 5rem 0;
+  padding: 5rem 0 3rem;
   text-align: center;
 }
 
@@ -248,7 +247,7 @@ useHead({
 }
 
 .contact-content {
-  padding: 5rem 0;
+  padding: 0 0 5rem;
 }
 
 .contact-grid {

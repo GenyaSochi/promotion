@@ -12,6 +12,9 @@
         </div>
         <h1>{{ service.title }}</h1>
         <p class="subtitle">{{ service.description }}</p>
+        <p v-if="service.slug === 'mobile-apps'" class="hero-extra">
+          Создаем мобильные приложения, которые помогают бизнесу расти и удерживать клиентов. Мы продумываем каждую деталь: от удобной навигации до push-уведомлений, возвращающих пользователей. Ваше приложение станет мощным инструментом продаж и повысит лояльность аудитории.
+        </p>
       </div>
     </section>
 
@@ -108,6 +111,14 @@ useHead(() => ({
   color: var(--color-text-secondary);
   max-width: 600px;
   margin: 0 auto;
+}
+
+.hero-extra {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  max-width: 700px;
+  margin: var(--spacing-md) auto 0;
 }
 
 .service-content {

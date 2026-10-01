@@ -17,6 +17,9 @@
             <span class="gradient-text">Веб-разработка</span>
           </h1>
           <p class="web-description">{{ service.description }}</p>
+          <p class="web-hero-text">
+            Разрабатываем сайты, которые превращают посетителей в клиентов. Мы знаем, как важна скорость работы и удобство интерфейса, поэтому создаем адаптивные решения, идеально отображающиеся на смартфонах, планшетах и ПК. Ваш сайт будет работать быстро, безопасно и стабильно, отражая статус вашего бренда.
+          </p>
           <div class="web-back-link">
             <NuxtLink to="/services">← Все услуги</NuxtLink>
           </div>
@@ -207,6 +210,14 @@ useHead({
   color: #cccccc;
   line-height: 1.8;
   max-width: 600px;
+  margin: 0 auto var(--spacing-lg);
+}
+
+.web-hero-text {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  max-width: 700px;
   margin: 0 auto var(--spacing-lg);
 }
 
