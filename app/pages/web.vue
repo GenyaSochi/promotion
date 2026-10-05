@@ -207,7 +207,7 @@ useHead({
 
 .web-description {
   font-size: 1.25rem;
-  color: #cccccc;
+  color: #06b6d4;
   line-height: 1.8;
   max-width: 600px;
   margin: 0 auto var(--spacing-lg);

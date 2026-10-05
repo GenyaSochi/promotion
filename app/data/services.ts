@@ -39,7 +39,7 @@ export const services: Service[] = [
     slug: 'ui-ux-design',
     iconName: 'palette',
     title: 'UI/UX Дизайн',
-    description: 'Проектируем удобные и красивые интерфейсы',
+    description: 'Проектируем удобные и красивые интерфейсы',   
     features: [
       'Исследование пользователей',
       'Прототипирование',
@@ -65,7 +65,7 @@ export const services: Service[] = [
     slug: 'technical-support',
     iconName: 'wrench',
     title: 'Техническая поддержка',
-    description: 'Обеспечиваем стабильную работу ваших проектов',
+    description: 'Обеспечиваем стабильную работу ваших проектов',   
     features: [
       'Мониторинг',
       'Обновления и патчи',

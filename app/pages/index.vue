@@ -22,98 +22,80 @@
             Создаём современные веб-сайты, мобильные приложения и цифровые продукты,
             которые помогают компаниям расти и привлекать клиентов
           </p>
-         <div ref="hookRef" class="hero-hook">
+          <div ref="hookRef" class="hero-hook">
             <h2 class="hero-hook-title">
               <span class="gradient-text">Мы делаем не просто "сайты мечты"</span>
-            </h2>           
-              <div class="hero-description">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют круглосуточного присмотра</div>            
+            </h2>
+            <div class="hero-description">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют
+              круглосуточного присмотра</div>
             <Transition name="timer-slide" appear @after-enter="startTimer">
-            <div
-              v-if="cardVisible"
-              ref="cardRef"
-              class="hero-diagnosis-card hero-diagnosis-card--timer"
-            >
-              <div class="hero-diagnosis-card-glow"></div>
-              <div ref="timerRef" class="hero-timer-wrapper">            
+              <div v-if="cardVisible" ref="cardRef" class="hero-diagnosis-card hero-diagnosis-card--timer">
+                <div class="hero-diagnosis-card-glow"></div>
+                <div ref="timerRef" class="hero-timer-wrapper">
 
-                <div
-                  class="hero-timer-ring"
-                  :class="[timerColorClass, { 'is-boom': timerValue === 0 }]"
-                >
-                  <div class="hero-timer-glow"></div>
+                  <div class="hero-timer-ring" :class="[timerColorClass, { 'is-boom': timerValue === 0 }]">
+                    <div class="hero-timer-glow"></div>
 
-                  <!-- Внешнее орбитальное кольцо с тиками -->
-                  <svg class="hero-timer-orbit" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="hero-timer-orbit-track" cx="120" cy="120" r="115" />
-                    <g class="hero-timer-ticks">
-                      <line
-                        v-for="i in 24"
-                        :key="i"
-                        :class="{ 'is-major': i % 3 === 0 }"
-                        x1="120" y1="10" x2="120" y2="20"
-                        :transform="`rotate(${(i - 1) * 15} 120 120)`"
-                      />
-                    </g>
-                    <g class="hero-timer-satellite">
-                      <circle cx="120" cy="8" r="4" />
-                    </g>
-                  </svg>
+                    <!-- Внешнее орбитальное кольцо с тиками -->
+                    <svg class="hero-timer-orbit" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="hero-timer-orbit-track" cx="120" cy="120" r="115" />
+                      <g class="hero-timer-ticks">
+                        <line v-for="i in 24" :key="i" :class="{ 'is-major': i % 3 === 0 }" x1="120" y1="10" x2="120"
+                          y2="20" :transform="`rotate(${(i - 1) * 15} 120 120)`" />
+                      </g>
+                      <g class="hero-timer-satellite">
+                        <circle cx="120" cy="8" r="4" />
+                      </g>
+                    </svg>
 
-                  <!-- Внутренний progress -->
-                  <svg class="hero-timer-core" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--timer-c1)" />
-                        <stop offset="100%" stop-color="var(--timer-c2)" />
-                      </linearGradient>
-                      <filter id="timerGlow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="4" result="blur" />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-                    <circle class="hero-timer-track" cx="100" cy="100" r="88" />
-                    <circle
-                      class="hero-timer-progress"
-                      cx="100" cy="100" r="88"
-                      :stroke-dasharray="circumference"
-                      :stroke-dashoffset="dashOffset"
-                      stroke="url(#timerGrad)"
-                      filter="url(#timerGlow)"
-                    />
-                    <circle
-                      class="hero-timer-dot"
-                      cx="188"
-                      cy="100"
-                      r="7"
-                      :transform="`rotate(${progressAngle} 100 100)`"
-                    />
-                  </svg>
+                    <!-- Внутренний progress -->
+                    <svg class="hero-timer-core" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="var(--timer-c1)" />
+                          <stop offset="100%" stop-color="var(--timer-c2)" />
+                        </linearGradient>
+                        <filter id="timerGlow" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="4" result="blur" />
+                          <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                          </feMerge>
+                        </filter>
+                      </defs>
+                      <circle class="hero-timer-track" cx="100" cy="100" r="88" />
+                      <circle class="hero-timer-progress" cx="100" cy="100" r="88" :stroke-dasharray="circumference"
+                        :stroke-dashoffset="dashOffset" stroke="url(#timerGrad)" filter="url(#timerGlow)" />
+                      <circle class="hero-timer-dot" cx="188" cy="100" r="7"
+                        :transform="`rotate(${progressAngle} 100 100)`" />
+                    </svg>
 
-                  <div class="hero-timer-digit" :class="{ shake: timerValue === 0 }" @click="openContactModal">
-                    <span class="hero-timer-digit-main">{{ timerValue }}</span>
-                    <button type="button" class="hero-timer-digit-sub">жми</button>
+                    <div class="hero-timer-digit" :class="{ shake: timerValue === 0 }" @click="openContactModal">
+                      <span class="hero-timer-digit-main">{{ timerValue }}</span>
+                      <button type="button" class="hero-timer-digit-sub">жми</button>
+                    </div>
+
+                    <div class="hero-timer-shockwave"></div>
+                    <div class="hero-timer-shockwave hero-timer-shockwave--delay"></div>
                   </div>
-
-                  <div class="hero-timer-shockwave"></div>
-                  <div class="hero-timer-shockwave hero-timer-shockwave--delay"></div>
                 </div>
               </div>
-            </div>
-            </Transition>           
+            </Transition>
           </div>
 
-          <div class="hero-diagnosis-cards">   
-           </div>
-            
-           
+          <div class="hero-diagnosis-cards">
+          </div>
+
+
           <div class="hero-buttons">
             <NuxtLink to="/#contact" class="btn-primary">
               обсудить проект
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </NuxtLink>          
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </NuxtLink>
           </div>
           <div class="hero-stats">
             <div class="stat-item" v-for="(stat, index) in stats" :key="index">
@@ -137,19 +119,38 @@
           <p>Просто настраиваем всё, чтобы клиенты находили вас, доверяли и покупали</p>
         </div>
         <TransitionGroup name="feature" tag="div" class="features-grid">
-          <div
-            v-if="featuresVisible"
-            class="feature-card"
-            :style="{ '--delay': `${(feature.id - 1) * 150}ms` }"
-            v-for="feature in features"
-            :key="feature.id"
-          >
+          <div v-if="featuresVisible" class="feature-card" :style="{ '--delay': `${(feature.id - 1) * 150}ms` }"
+            v-for="feature in features" :key="feature.id">
             <div class="gradient-border"></div>
             <div class="feature-icon">
-              <svg v-if="feature.iconName === 'zap'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              <svg v-else-if="feature.iconName === 'target'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-              <svg v-else-if="feature.iconName === 'users'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a1 1 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <svg v-else-if="feature.iconName === 'lightbulb'" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+              <svg v-if="feature.iconName === 'zap'" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+              <svg v-else-if="feature.iconName === 'target'" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+              </svg>
+              <svg v-else-if="feature.iconName === 'users'" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a1 1 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              <svg v-else-if="feature.iconName === 'lightbulb'" xmlns="http://www.w3.org/2000/svg" width="48"
+                height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                <path d="M9 18h6" />
+                <path d="M10 22h4" />
+              </svg>
             </div>
             <h3>{{ feature.title }}</h3>
             <p>{{ feature.description }}</p>
@@ -166,51 +167,72 @@
           <p>Полный спектр цифровых решений</p>
         </div>
         <div class="services-hooks">
-          <div
-            class="service-hook"
-            v-for="(service, index) in allServices"
-            :key="service.id"
-          >
+          <div class="service-hook" v-for="(service, index) in allServices" :key="service.id">
             <NuxtLink :to="getServicePath(service)" class="service-hook-link">
               <h3 class="service-hook-title">
                 <span class="gradient-text">{{ service.title }}</span>
               </h3>
               <p class="service-hook-description">{{ service.description }}</p>
-              <p
-                v-if="service.slug === 'web-development'"
-                class="service-hook-extra"
-              >
-                Разрабатываем сайты, которые превращают посетителей в клиентов. Мы знаем, как важна скорость работы и удобство интерфейса, поэтому создаем адаптивные решения, идеально отображающиеся на смартфонах, планшетах и ПК. Ваш сайт будет работать быстро, безопасно и стабильно, отражая статус вашего бренда.
+              <p v-if="service.slug === 'web-development'" class="service-hook-extra">
+              <p>Сайт выглядит как сайт из 2007-го и конвертит как дырявое ведро?</p>              
+              <p>Ваш сайт грузится дольше, чем вы выбираете сериал на Netflix?</p>            
+              <p>Дизайн делал племянник на коленке, кнопка «Купить» спрятана лучше, чем клад пиратов, а на телефоне все съезжает так, будто сайт в автобусе трясет. Трафик льете, а заявок - ноль. Сайт есть, а толку нет?</p>
+              <span class="stars"></span>
+              <p>Мы перестаем играть в прятки с клиентами. Проектируем структуру, где каждый пиксель работает на продажу. На телефонах - идеально. На планшетах - идеально. Даже на холодильнике с экраном - будет летать.</p>             
+              <p>Сделаем сайт, который грузится быстрее, чем вы говорите: «ну блин, опять эта реклама». Конверсия - в плюс, нервы - в ноль.</p>
+              <span>
+                <p class="service-color">Знакомая ситуация?</p><button class="press"
+                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+              </span>
               </p>
-              <p
-                v-if="service.slug === 'mobile-apps'"
-                class="service-hook-extra"
-              >
-                Создаем мобильные приложения, которые помогают бизнесу расти и удерживать клиентов. Мы продумываем каждую деталь: от удобной навигации до push-уведомлений, возвращающих пользователей. Ваше приложение станет мощным инструментом продаж и повысит лояльность аудитории.
+              <p v-if="service.slug === 'mobile-apps'" class="service-hook-extra">
+              <p>У конкурентов есть удобное приложение, а у вас только сайт?</p>
+              <span class="stars"></span>
+              <p>Продажи через мобильный сайт низкие, потому что неудобно оформлять заказ?</p>
+              <span class="stars"></span>
+              <p>Клиенты совершают покупку один раз и больше не возвращаются?</p>
+              <span class="stars"></span>
+              <p>Нет системы бонусов и баллов, которая мотивирует покупать чаще?</p>
+              <span class="stars"></span>
+              <p>Нет прямой связи с аудиторией для анонсов акций и новостей?</p>
+              <span class="stars"></span>
+              <p>Пользователи скачали приложение, но забыли про него через неделю?</p>
+              <span class="stars"></span>
+              <p>Вы не можете напомнить о себе клиенту, кроме как через СМС?</p>
+              <span class="stars"></span>
+              <p>Интерфейс настолько сложный, что клиенты бросают корзину на полпути?</p>
+               <span>
+                <p class="service-color">Знакомая ситуация?</p><button class="press"
+                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+              </span>
               </p>
-              <p
-                v-if="service.slug === 'ui-ux-design'"
-                class="service-hook-extra"
-              >
-                Разрабатываем интерфейсы, которые увеличивают конверсию и удерживают внимание. Мы знаем, как цвет, типографика и расположение элементов влияют на решения пользователей. Создаем визуально привлекательный дизайн, который направляет клиента к целевому действию и повышает ценность вашего продукта.
+              <p v-if="service.slug === 'ui-ux-design'" class="service-hook-extra">
+               <p>будет текст</p>
+                  <span>
+                <p class="service-color">Знакомая ситуация?</p><button class="press"
+                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+              </span>
               </p>
-              <p
-                v-if="service.slug === 'seo-marketing'"
-                class="service-hook-extra"
-              >
-                Разрабатываем комплексные стратегии, которые приводят целевой трафик и увеличивают продажи. Мы не просто настраиваем рекламу - мы анализируем рынок, изучаем конкурентов и находим точки роста именно для вашего проекта.
+              <p v-if="service.slug === 'seo-marketing'" class="service-hook-extra">
+               <p>будет текст</p>
+                  <span>
+                <p class="service-color">Знакомая ситуация?</p><button class="press"
+                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+              </span>
               </p>
-              <p
-                v-if="service.slug === 'technical-support'"
-                class="service-hook-extra"
-              >
-                Оперативно устраняем неполадки, обновляем системы и следим за безопасностью. Вы можете заниматься бизнесом, а мы позаботимся о том, чтобы ваш сайт или приложение всегда были доступны для пользователей.
+              <p v-if="service.slug === 'technical-support'" class="service-hook-extra">
+                  <p>будет текст</p>
+                  <span>
+                <p class="service-color">Знакомая ситуация?</p><button class="press"
+                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+              </span>
               </p>
-              <p
-                v-if="service.slug === 'consulting'"
-                class="service-hook-extra"
-              >
-                 Проводим аудит текущих процессов, выявляем узкие места и предлагаем стратегию развития. Вы получаете независимую экспертизу и четкий план действий без лишних затрат на пробные проекты.
+              <p v-if="service.slug === 'consulting'" class="service-hook-extra">
+                <p>будет текст</p>
+                  <span>
+                <p class="service-color">Знакомая ситуация?</p><button class="press"
+                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+              </span>
               </p>
             </NuxtLink>
           </div>
@@ -221,7 +243,7 @@
       </div>
     </section>
 
-    <ContactBlock/>
+    <ContactBlock />
   </div>
 
   <ContactModal v-model:model-value="isContactModalOpen" />
@@ -402,6 +424,69 @@ useHead({
 </script>
 
 <style scoped>
+.stars {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  margin: 14px auto;
+  max-width: 60%;
+  opacity: 0.3;
+  animation: stars-glow 4s ease-in-out infinite;
+}
+
+@keyframes stars-glow {
+  0%, 100% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 12px var(--color-primary-glow);
+  }
+}
+.press {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #06b6d4 0%, #00dc82 100%);
+  color: #0a0a0f;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(6, 182, 212, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.press::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.press:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 24px rgba(6, 182, 212, 0.5), 0 0 40px rgba(0, 220, 130, 0.2);
+}
+
+.press:hover::before {
+  left: 100%;
+}
+
+.press:active {
+  transform: translateY(0);
+}
+
 .home-page {
   min-height: 100vh;
   position: relative;
@@ -550,14 +635,12 @@ useHead({
   inset: 0;
   border-radius: var(--radius-xl);
   padding: 1px;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent-purple),
-    var(--color-accent-pink),
-    var(--color-accent-cyan),
-    var(--color-primary)
-  );
+  background: linear-gradient(135deg,
+      var(--color-primary),
+      var(--color-accent-purple),
+      var(--color-accent-pink),
+      var(--color-accent-cyan),
+      var(--color-primary));
   background-size: 300% 300%;
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -740,8 +823,13 @@ useHead({
 }
 
 @keyframes orbit-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ── Core SVG (progress arc + dot) ── */
@@ -810,12 +898,33 @@ useHead({
   animation: timer-shake 0.5s ease-in-out;
 }
 
+.service-color {
+  color: #06b6d4;
+  font-size: 2.0rem;
+}
+
 @keyframes timer-shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-8px) rotate(-3deg); }
-  40% { transform: translateX(8px) rotate(3deg); }
-  60% { transform: translateX(-6px) rotate(-2deg); }
-  80% { transform: translateX(6px) rotate(2deg); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-8px) rotate(-3deg);
+  }
+
+  40% {
+    transform: translateX(8px) rotate(3deg);
+  }
+
+  60% {
+    transform: translateX(-6px) rotate(-2deg);
+  }
+
+  80% {
+    transform: translateX(6px) rotate(2deg);
+  }
 }
 
 /* ── Shockwave on zero ── */
@@ -842,6 +951,7 @@ useHead({
     transform: scale(1);
     opacity: 0.7;
   }
+
   100% {
     transform: scale(2.2);
     opacity: 0;
@@ -890,14 +1000,31 @@ useHead({
 }
 
 @keyframes gradient-rotate {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-  50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(1.1);
+  }
 }
 
 @media (max-width: 768px) {
@@ -997,10 +1124,13 @@ useHead({
 
 
 @keyframes scrollPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.3;
     transform: scaleY(0.5);
   }
+
   50% {
     opacity: 1;
     transform: scaleY(1);
@@ -1052,20 +1182,18 @@ useHead({
   inset: 0;
   border-radius: var(--radius-xl);
   padding: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-accent-purple),
-    var(--color-accent-pink),
-    var(--color-accent-cyan),
-    var(--color-primary)
-  );
+  background: linear-gradient(90deg,
+      var(--color-primary),
+      var(--color-accent-purple),
+      var(--color-accent-pink),
+      var(--color-accent-cyan),
+      var(--color-primary));
   background-size: 300% 300%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
-  mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -1090,9 +1218,11 @@ useHead({
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -1195,14 +1325,14 @@ useHead({
 
 .service-hook-description {
   font-size: 1.25rem;
-  color: var(--color-text-secondary);
+  color: #06b6d4;
   line-height: 1.7;
   margin-bottom: 0;
 }
 
 .service-hook-extra {
   color: var(--color-text-secondary);
-  font-size: 1.0625rem;
+  font-size: 1.5rem;
   line-height: 1.8;
   margin: var(--spacing-sm) 0 0;
 }
@@ -1252,11 +1382,11 @@ useHead({
   .hero-description {
     font-size: 1.125rem;
   }
-  
+
   .hero-stats {
     gap: var(--spacing-xl);
   }
-  
+
   .stat-value {
     font-size: 1.75rem;
   }
@@ -1264,12 +1394,12 @@ useHead({
   .scroll-indicator {
     display: none;
   }
-  
+
   .features-grid,
   .services-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .section-header h2 {
     font-size: 2rem;
   }
@@ -1288,11 +1418,11 @@ useHead({
   .hero {
     padding: 80px 1rem 40px;
   }
-  
+
   .hero h1 {
     font-size: 1.75rem;
   }
-  
+
   .hero-description {
     font-size: 1rem;
     margin-bottom: var(--spacing-xl);
@@ -1302,25 +1432,25 @@ useHead({
     padding: 8px 14px;
     font-size: 0.9375rem;
   }
-  
+
   .hero-buttons {
     flex-direction: column;
     gap: var(--spacing-sm);
   }
-  
+
   .hero-buttons a {
     width: 100%;
     justify-content: center;
   }
-  
+
   .hero-stats {
     gap: var(--spacing-lg);
   }
-  
+
   .stat-item {
     min-width: 70px;
   }
-  
+
   .stat-value {
     font-size: 1.5rem;
   }
@@ -1328,16 +1458,16 @@ useHead({
   .stat-label {
     font-size: 0.9375rem;
   }
-  
+
   .features,
   .services-preview {
     padding: var(--spacing-2xl) 0;
   }
-  
+
   .section-header {
     margin-bottom: var(--spacing-2xl);
   }
-  
+
   .section-header h2 {
     font-size: 1.75rem;
   }
@@ -1345,24 +1475,24 @@ useHead({
   .section-header p {
     font-size: 1.0625rem;
   }
-  
+
   .feature-card,
   .service-card {
     padding: var(--spacing-lg);
   }
-  
+
   .feature-icon,
   .service-icon {
     width: 60px;
     height: 60px;
   }
-  
+
   .feature-icon svg,
   .service-icon svg {
     width: 30px;
     height: 30px;
   }
-  
+
   .feature-card h3,
   .service-card h3 {
     font-size: 1.25rem;
