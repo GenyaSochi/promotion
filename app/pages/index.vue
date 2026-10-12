@@ -173,70 +173,210 @@
                 <span class="gradient-text">{{ service.title }}</span>
               </h3>
               <p class="service-hook-description">{{ service.description }}</p>
-              <p v-if="service.slug === 'web-development'" class="service-hook-extra">
-              <p>Сайт выглядит как сайт из 2007-го и конвертит как дырявое ведро?</p>              
-              <p>Ваш сайт грузится дольше, чем вы выбираете сериал на Netflix?</p>            
-              <p>Дизайн делал племянник на коленке, кнопка «Купить» спрятана лучше, чем клад пиратов, а на телефоне все съезжает так, будто сайт в автобусе трясет. Трафик льете, а заявок - ноль. Сайт есть, а толку нет?</p>
-              <span class="stars"></span>
-              <p>Мы перестаем играть в прятки с клиентами. Проектируем структуру, где каждый пиксель работает на продажу. На телефонах - идеально. На планшетах - идеально. Даже на холодильнике с экраном - будет летать.</p>             
-              <p>Сделаем сайт, который грузится быстрее, чем вы говорите: «ну блин, опять эта реклама». Конверсия - в плюс, нервы - в ноль.</p>
-              <span>
-                <p class="service-color">Знакомая ситуация?</p><button class="press"
-                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
-              </span>
-              </p>
-              <p v-if="service.slug === 'mobile-apps'" class="service-hook-extra">
-              <p>У конкурентов есть удобное приложение, а у вас только сайт?</p>
-              <span class="stars"></span>
-              <p>Продажи через мобильный сайт низкие, потому что неудобно оформлять заказ?</p>
-              <span class="stars"></span>
-              <p>Клиенты совершают покупку один раз и больше не возвращаются?</p>
-              <span class="stars"></span>
-              <p>Нет системы бонусов и баллов, которая мотивирует покупать чаще?</p>
-              <span class="stars"></span>
-              <p>Нет прямой связи с аудиторией для анонсов акций и новостей?</p>
-              <span class="stars"></span>
-              <p>Пользователи скачали приложение, но забыли про него через неделю?</p>
-              <span class="stars"></span>
-              <p>Вы не можете напомнить о себе клиенту, кроме как через СМС?</p>
-              <span class="stars"></span>
-              <p>Интерфейс настолько сложный, что клиенты бросают корзину на полпути?</p>
-               <span>
-                <p class="service-color">Знакомая ситуация?</p><button class="press"
-                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
-              </span>
-              </p>
-              <p v-if="service.slug === 'ui-ux-design'" class="service-hook-extra">
-               <p>будет текст</p>
-                  <span>
-                <p class="service-color">Знакомая ситуация?</p><button class="press"
-                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
-              </span>
-              </p>
-              <p v-if="service.slug === 'seo-marketing'" class="service-hook-extra">
-               <p>будет текст</p>
-                  <span>
-                <p class="service-color">Знакомая ситуация?</p><button class="press"
-                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
-              </span>
-              </p>
-              <p v-if="service.slug === 'technical-support'" class="service-hook-extra">
-                  <p>будет текст</p>
-                  <span>
-                <p class="service-color">Знакомая ситуация?</p><button class="press"
-                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
-              </span>
-              </p>
-              <p v-if="service.slug === 'consulting'" class="service-hook-extra">
-                <p>будет текст</p>
-                  <span>
-                <p class="service-color">Знакомая ситуация?</p><button class="press"
-                  @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
-              </span>
-              </p>
+              <div v-if="service.slug === 'web-development'" class="web-dev-block">
+                <span class="web-dev-chip web-dev-chip--pain"><span class="web-dev-chip-icon">!</span>Знакомая ситуация?</span>
+                <p class="web-dev-text">Сайт выглядит как <span class="web-dev-pain">привет из 2007-го</span> и конвертит как <strong>дырявое ведро</strong>?</p>
+                <p class="web-dev-text">Грузится дольше, чем вы выбираете <mark class="web-dev-mark">сериал на Netflix</mark>?</p>
+                <p class="web-dev-text">Дизайн делал племянник на коленке, кнопка «Купить» спрятана <strong>лучше клада пиратов</strong>. На телефоне всё съезжает. <span class="web-dev-pain">Трафик льёте – заявок ноль</span>. Сайт есть, а толку нет?</p>
+
+                <div class="web-dev-divider">
+                  <svg viewBox="0 0 280 20" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="waveGradWd" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10"/>
+                  </svg>
+                </div>
+
+                <span class="web-dev-chip web-dev-chip--solve"><span class="web-dev-chip-icon">✓</span>Как мы делаем</span>
+                <p class="web-dev-text">Перестаём играть в прятки с клиентами. Проектируем структуру, где <strong class="web-dev-accent">каждый пиксель работает на продажу</strong>.</p>
+                <p class="web-dev-text"><mark class="web-dev-mark">Идеально на телефонах</mark>, планшетах, даже на холодильнике с экраном – <strong>будет летать</strong>.</p>
+                <p class="web-dev-text">Сайт грузится <strong class="web-dev-accent">быстрее</strong>, чем вы говорите «ну блин, опять эта реклама». <strong>Конверсия – в плюс</strong>, нервы – в ноль.</p>
+
+                <div class="web-dev-cta-row">
+                  <span class="web-dev-cta-text">Узнали свою ситуацию?</span>
+                  <button class="press" @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+                </div>
+              </div>
+              <div v-if="service.slug === 'mobile-apps'" class="web-dev-block">
+                <span class="web-dev-chip web-dev-chip--pain"><span class="web-dev-chip-icon">!</span>Знакомая ситуация?</span>
+                <p class="web-dev-text">У конкурентов <span class="web-dev-pain">удобное приложение</span>, а у вас только сайт?</p>
+                <p class="web-dev-text">Продажи через мобильный сайт низкие – <strong>оформлять заказ неудобно</strong>, клиенты уходят?</p>
+                <p class="web-dev-text">Покупатель заходит <mark class="web-dev-mark">один раз – и пропадает</mark>. Нет бонусов, нет причин вернуться.</p>
+                <p class="web-dev-text">Напомнить о себе можете только <span class="web-dev-pain">через СМС</span>? А приложение скачали и <strong>забыли через неделю</strong>?</p>
+                <p class="web-dev-text">Интерфейс настолько сложный, что клиенты <span class="web-dev-pain">бросают корзину на полпути</span>?</p>
+
+                <div class="web-dev-divider">
+                  <svg viewBox="0 0 280 20" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="waveGradMa" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10"/>
+                  </svg>
+                </div>
+
+                <span class="web-dev-chip web-dev-chip--solve"><span class="web-dev-chip-icon">✓</span>Как мы делаем</span>
+                <p class="web-dev-text">Создаём приложение – <strong class="web-dev-accent">карманную витрину бизнеса</strong>. Клиент в двух тапах от покупки.</p>
+                <p class="web-dev-text"><mark class="web-dev-mark">Push-уведомления</mark> вместо навязчивых СМС – клиент сам просит включиться. Напоминаем о себе <strong>без раздражения</strong>.</p>
+                <p class="web-dev-text">Программа лояльности с бонусами и баллами – <strong class="web-dev-accent">мотивирует возвращаться</strong> и покупать чаще.</p>
+                <p class="web-dev-text">Интуитивный интерфейс – <strong>от открытия до покупки за 3 тапа</strong>. Аналитика покажет, где теряем клиентов.</p>
+
+                <div class="web-dev-cta-row">
+                  <span class="web-dev-cta-text">Узнали свою ситуацию?</span>
+                  <button class="press" @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+                </div>
+              </div>
+              <div v-if="service.slug === 'ui-ux-design'" class="web-dev-block">
+                <span class="web-dev-chip web-dev-chip--pain"><span class="web-dev-chip-icon">!</span>Знакомая ситуация?</span>
+                <p class="web-dev-text">Клиенты заходят на сайт и <span class="web-dev-pain">не понимают, куда нажать</span>? Уходят, так и не оформив заказ?</p>
+                <p class="web-dev-text">Дизайн делали «для красоты», а <strong>конверсия ниже плинтуса</strong> – посетители просто не находят кнопку «Купить»?</p>
+                <p class="web-dev-text">Пользователь открывает сайт на телефоне, а там <span class="web-dev-pain">всё съезжает</span>, кнопки крошечные, и приходится <mark class="web-dev-mark">зумить, как карту метро</mark>?</p>
+                <p class="web-dev-text">Люди бросают корзину на последнем шаге – потому что форма заказа длинная, <strong>как анкета на визу</strong>?</p>
+                <p class="web-dev-text">Вы сами не знаете, где именно клиенты <span class="web-dev-pain">спотыкаются и уходят к конкурентам</span>?</p>
+
+                <div class="web-dev-divider">
+                  <svg viewBox="0 0 280 20" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="waveGradUi" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10"/>
+                  </svg>
+                </div>
+
+                <span class="web-dev-chip web-dev-chip--solve"><span class="web-dev-chip-icon">✓</span>Как мы делаем</span>
+                <p class="web-dev-text">Проектируем интерфейс – как навигацию для клиента. Он не думает, куда нажать – <strong class="web-dev-accent">рука сама ведёт к цели</strong>.</p>
+                <p class="web-dev-text">Сначала <mark class="web-dev-mark">исследуем поведение пользователей</mark>: смотрим, куда они смотрят, где зависают и что их раздражает. <strong>Потом рисуем – а не наоборот.</strong></p>
+                <p class="web-dev-text"><strong class="web-dev-accent">Прототип до дизайна</strong> – тестируем на живых людях. Если что-то не работает, ловим это <strong>до того, как вы потратили бюджет</strong> на финальный макет.</p>
+                <p class="web-dev-text"><mark class="web-dev-mark">Дизайн-система вместо хаоса</mark>: единые кнопки, шрифты, цвета. Ваш сайт выглядит цельно, а <strong>разработка идёт быстрее</strong>.</p>
+                <p class="web-dev-text"><strong class="web-dev-accent">Аналитика после запуска</strong> – показываем, где именно теряются клиенты, и дорабатываем интерфейс, <strong>пока конверсия не начнёт расти</strong>.</p>
+
+                <div class="web-dev-cta-row">
+                  <span class="web-dev-cta-text">Узнали свою ситуацию?</span>
+                  <button class="press" @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+                </div>
+              </div>
+              <div v-if="service.slug === 'seo-marketing'" class="web-dev-block">
+                <span class="web-dev-chip web-dev-chip--pain"><span class="web-dev-chip-icon">!</span>Знакомая ситуация?</span>
+                <p class="web-dev-text">Вы платите за каждый клик в рекламе, а <span class="web-dev-pain">органика стоит на месте</span> – как будто её и нет?</p>
+                <p class="web-dev-text">Конкуренты в ТОПе и получают трафик бесплатно, а ваш сайт <strong>прячется на 5-й странице выдачи</strong>, где его не найдёт даже ваша мама?</p>
+                <p class="web-dev-text">Клиенты ищут ваш товар напрямую, но находят не вас, а <mark class="web-dev-mark">соседа по рынку</mark> – и уходят к нему?</p>
+                <p class="web-dev-text">Вы вложились в контент, статьи, блог – а <span class="web-dev-pain">посещаемость не выросла</span>, потому что статьи никто не видит?</p>
+                <p class="web-dev-text">Реклама <strong>съедает бюджет</strong>, а заявок всё равно мало? Клики есть, а <span class="web-dev-pain">толку – ноль</span>?</p>
+
+                <div class="web-dev-divider">
+                  <svg viewBox="0 0 280 20" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="waveGradSeo" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10"/>
+                  </svg>
+                </div>
+
+                <span class="web-dev-chip web-dev-chip--solve"><span class="web-dev-chip-icon">✓</span>Как мы делаем</span>
+                <p class="web-dev-text">Начинаем с <strong class="web-dev-accent">технического аудита</strong> – находим, что мешает поисковикам вас любить: дубли, битые ссылки, медленные страницы, кривые заголовки.</p>
+                <p class="web-dev-text">Собираем <mark class="web-dev-mark">семантическое ядро</mark> – не «вода» из общих слов, а <strong>конкретные коммерческие запросы</strong>, по которым люди реально покупают.</p>
+                <p class="web-dev-text">Выстраиваем <strong class="web-dev-accent">структуру сайта</strong> так, чтобы Яндекс и Google поняли: это не свалка, а <strong>чёткий магазин с понятными категориями</strong>.</p>
+                <p class="web-dev-text">Пишем контент, который <mark class="web-dev-mark">решает проблему клиента</mark>, а не просто «заполняет страницу текстом». Поисковики такое любят, люди – читают.</p>
+                <p class="web-dev-text">Настраиваем <strong class="web-dev-accent">аналитику и отчётность</strong> – вы видите, откуда пришли клиенты, что они искали и <strong>на каком этапе решили купить</strong>.</p>
+
+                <div class="web-dev-cta-row">
+                  <span class="web-dev-cta-text">Узнали свою ситуацию?</span>
+                  <button class="press" @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+                </div>
+              </div>
+              <div v-if="service.slug === 'technical-support'" class="web-dev-block">
+                <span class="web-dev-chip web-dev-chip--pain"><span class="web-dev-chip-icon">!</span>Знакомая ситуация?</span>
+                <p class="web-dev-text">Сайт падает именно в <span class="web-dev-pain">час пик</span> – когда вы запустили рекламу и клиенты готовы покупать?</p>
+                <p class="web-dev-text">Вы узнаёте о проблеме от клиентов, а не от своей команды? «Ваш сайт не работает» – сообщение, которое <strong>бьёт по репутации</strong>.</p>
+                <p class="web-dev-text">Разработчик, который делал сайт, отвечает через сутки – или вообще <mark class="web-dev-mark">пропал</mark>, и вы не знаете, кому звонить?</p>
+                <p class="web-dev-text">Формы заявок отправляются с ошибкой, корзина сбоит, а вы <span class="web-dev-pain">теряете деньги прямо сейчас</span> – и не понимаете, почему?</p>
+                <p class="web-dev-text">Обновления и патчи безопасности никто не ставит. Сайт живёт <strong>с дырами</strong>, через которые может зайти кто угодно?</p>
+
+                <div class="web-dev-divider">
+                  <svg viewBox="0 0 280 20" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="waveGradTs" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10"/>
+                  </svg>
+                </div>
+
+                <span class="web-dev-chip web-dev-chip--solve"><span class="web-dev-chip-icon">✓</span>Как мы делаем</span>
+                <p class="web-dev-text">Ставим <strong class="web-dev-accent">круглосуточный мониторинг</strong> – <mark class="web-dev-mark">узнаём о проблеме раньше вас</mark>. Часто чиним до того, как клиент успел заметить.</p>
+                <p class="web-dev-text">Делаем <strong class="web-dev-accent">ежедневные бэкапы</strong> – если что-то пойдёт не так, <strong>откатимся за минуты</strong>, а не будем восстанавливать всё вручную.</p>
+                <p class="web-dev-text">Устанавливаем <strong class="web-dev-accent">обновления и патчи безопасности</strong> по расписанию – сайт <mark class="web-dev-mark">закрыт от угроз</mark>, а не «наверное, всё нормально».</p>
+                <p class="web-dev-text">Держим <strong class="web-dev-accent">SLA-договор</strong> с фиксированным временем реакции – <mark class="web-dev-mark">15 минут</mark>. Даже в 3 часа ночи, даже в Новый год.</p>
+                <p class="web-dev-text">Ведём <strong class="web-dev-accent">прозрачную отчётность</strong> – вы видите, <strong>что мы делали, когда и какой результат это дало</strong>. Без «мы что-то там поправили».</p>
+
+                <div class="web-dev-cta-row">
+                  <span class="web-dev-cta-text">Узнали свою ситуацию?</span>
+                  <button class="press" @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+                </div>
+              </div>
+              <div v-if="service.slug === 'consulting'" class="web-dev-block">
+                <span class="web-dev-chip web-dev-chip--pain"><span class="web-dev-chip-icon">!</span>Знакомая ситуация?</span>
+                <p class="web-dev-text">Вы <span class="web-dev-pain">тратите на разработку</span> в несколько раз больше, чем планировали – а результат не оправдывает вложений?</p>
+                <p class="web-dev-text">Нанимаете подрядчиков, но каждый тянет в свою сторону, и вы <strong>не понимаете, кто за что отвечает</strong>?</p>
+                <p class="web-dev-text">Сайт <mark class="web-dev-mark">переделывали уже дважды</mark>, но до сих пор не уверены, что это работает как надо?</p>
+                <p class="web-dev-text">Хотите запустить проект, но <span class="web-dev-pain">не знаете, с чего начать</span> – технологии, подрядчики, сроки, бюджет?</p>
+                <p class="web-dev-text">Каждый месяц – <strong>новый совет</strong>: «вам нужен React», «переходите на облако», «запустите мобильное приложение» – а <span class="web-dev-pain">выбор делаете вы сами</span>, без опоры на данные?</p>
+
+                <div class="web-dev-divider">
+                  <svg viewBox="0 0 280 20" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="waveGradCo" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10"/>
+                  </svg>
+                </div>
+
+                <span class="web-dev-chip web-dev-chip--solve"><span class="web-dev-chip-icon">✓</span>Как мы делаем</span>
+                <p class="web-dev-text">Начинаем с <strong class="web-dev-accent">бизнес-целей</strong>, а не с технологий. Сначала понимаем, <strong>зачем вам проект</strong>, и только потом подбираем инструменты.</p>
+                <p class="web-dev-text">Проводим <mark class="web-dev-mark">технологический аудит</mark> – смотрим на текущую систему, находим узкие места и показываем, <strong>где теряете деньги</strong>.</p>
+                <p class="web-dev-text">Составляем <strong class="web-dev-accent">дорожную карту</strong> – конкретный план: что делаем, когда и <strong>какой результат получаем на каждом шаге</strong>.</p>
+                <p class="web-dev-text">Советуем <mark class="web-dev-mark">одно решение вместо пяти</mark> – то, которое работает под ваши задачи и бюджет, а не «потому что модно».</p>
+                <p class="web-dev-text">Сопровождаем проект до результата – <strong class="web-dev-accent">через год не придётся всё переделывать заново</strong>, потому что решения заложены с запасом.</p>
+
+                <div class="web-dev-cta-row">
+                  <span class="web-dev-cta-text">Узнали свою ситуацию?</span>
+                  <button class="press" @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
+                </div>
+              </div>
             </NuxtLink>
           </div>
         </div>
+        <div class="services-for-whom">
+          <div class="services-for-whom-badge">Для кого?</div>
+          <h3 class="services-for-whom-title">
+            <span class="gradient-text">Для всех!</span>
+          </h3>
+          <p class="services-for-whom-text">Для стартапов, среднего бизнеса и крупных компаний – работаем с любыми задачами и бюджетами</p>
+        </div>
+
         <div class="section-footer">
           <NuxtLink to="/#contact" class="btn-outline">обсудить проект</NuxtLink>
         </div>
@@ -1505,6 +1645,246 @@ useHead({
 
   .service-hook-extra {
     font-size: 0.9375rem;
+  }
+
+  .web-dev-block {
+    padding: 16px 0 8px;
+  }
+
+  .web-dev-text {
+    font-size: 0.9375rem;
+  }
+
+  .web-dev-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+  }
+
+  .web-dev-cta-text {
+    font-size: 1.125rem;
+  }
+}
+
+/* ===== Блок «Веб-разработка» (Вариант 2 – лента с чипами, без рамки) ===== */
+.web-dev-block {
+  position: relative;
+  padding: 24px 0 12px;
+  text-align: left;
+}
+
+.web-dev-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.web-dev-chip--pain {
+  background: linear-gradient(135deg, rgba(255, 80, 80, 0.22), rgba(255, 80, 80, 0.06));
+  color: #ffa0a0;
+  border: 1px solid rgba(255, 80, 80, 0.35);
+  box-shadow: 0 0 20px rgba(255, 80, 80, 0.08);
+}
+
+.web-dev-chip--solve {
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.22), rgba(6, 182, 212, 0.1));
+  color: #00dc82;
+  border: 1px solid rgba(0, 220, 130, 0.35);
+  box-shadow: 0 0 20px rgba(0, 220, 130, 0.08);
+}
+
+.web-dev-chip-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.web-dev-chip--pain .web-dev-chip-icon {
+  background: rgba(255, 80, 80, 0.35);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 80, 80, 0.6);
+}
+
+.web-dev-chip--solve .web-dev-chip-icon {
+  background: rgba(0, 220, 130, 0.35);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 220, 130, 0.6);
+}
+
+.web-dev-text {
+  color: #d0d0dd;
+  font-size: 1.125rem;
+  margin: 0 0 12px;
+  line-height: 1.7;
+}
+
+.web-dev-text strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.web-dev-accent {
+  background: linear-gradient(135deg, #06b6d4, #00dc82);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  padding: 0 2px;
+}
+
+.web-dev-pain {
+  color: #ff9090;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(255, 80, 80, 0.25);
+}
+
+.web-dev-mark {
+  background: rgba(6, 182, 212, 0.15);
+  border-bottom: 1px solid rgba(6, 182, 212, 0.5);
+  padding: 1px 4px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.web-dev-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32px 0;
+}
+
+.web-dev-divider svg {
+  width: 100%;
+  max-width: 280px;
+  height: 20px;
+  overflow: visible;
+}
+
+.web-dev-divider path {
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.5));
+}
+
+.web-dev-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(0, 220, 130, 0.08));
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 16px;
+}
+
+.web-dev-cta-text {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ===== Блок «Для кого? Для всех!» ===== */
+.services-for-whom {
+  text-align: center;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+  margin-top: var(--spacing-3xl);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.04), rgba(139, 92, 246, 0.03), rgba(0, 220, 130, 0.04));
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.services-for-whom::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.12), transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.services-for-whom-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #06b6d4;
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.services-for-whom-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 var(--spacing-md);
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.services-for-whom-title .gradient-text {
+  background: linear-gradient(135deg, #06b6d4, #00dc82);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(6, 182, 212, 0.4);
+}
+
+.services-for-whom-text {
+  font-size: 1.125rem;
+  color: #a8a8b5;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .services-for-whom {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+  }
+
+  .services-for-whom-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  .services-for-whom-text {
+    font-size: 1rem;
   }
 }
 </style>

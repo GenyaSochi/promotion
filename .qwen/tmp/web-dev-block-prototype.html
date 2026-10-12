@@ -1,0 +1,649 @@
+<style>
+  * { box-sizing: border-box; }
+  body, .proto-root {
+    background: #0a0a0f;
+    color: #e8e8ef;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, system-ui, sans-serif;
+    margin: 0;
+    padding: 24px;
+    line-height: 1.6;
+  }
+  .proto-root {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .variant-label {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #06b6d4 0%, #00dc82 100%);
+    color: #0a0a0f;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  .variant-title {
+    font-size: 1.25rem;
+    color: #fff;
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+  .variant-desc {
+    color: #8a8a98;
+    font-size: 0.9rem;
+    margin: 0 0 20px;
+  }
+  .demo {
+    padding: 32px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+  }
+  .service-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #06b6d4 0%, #00dc82 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+  .service-sub {
+    color: #a8a8b5;
+    margin: 0 0 24px;
+    font-size: 1.05rem;
+  }
+
+  /* ===== ВАРИАНТ 1: Две колонки ===== */
+  .v1-card {
+    position: relative;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899, #06b6d4);
+    background-size: 300% 300%;
+    animation: grad 8s linear infinite;
+  }
+  .v1-inner {
+    background: rgba(15, 15, 25, 0.95);
+    border-radius: 22px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  @media (max-width: 680px) {
+    .v1-inner { grid-template-columns: 1fr; }
+  }
+  .v1-col h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+  .v1-col.pain h4 { color: #ff8080; }
+  .v1-col.solve h4 { color: #00dc82; }
+  .v1-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    display: inline-block;
+  }
+  .v1-col.pain .v1-dot { background: #ff4040; box-shadow: 0 0 12px rgba(255,64,64,0.6); }
+  .v1-col.solve .v1-dot { background: #00dc82; box-shadow: 0 0 12px rgba(0,220,130,0.6); }
+  .v1-item {
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: #d0d0dd;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .v1-item:hover { transform: translateX(4px); }
+  .v1-col.pain .v1-item { border-left-color: rgba(255,80,80,0.5); }
+  .v1-col.solve .v1-item { border-left-color: rgba(0,220,130,0.5); }
+  .v1-cta {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .v1-cta-text {
+    color: #06b6d4;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  @keyframes grad {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ===== ВАРИАНТ 2: Лента с чипами ===== */
+  .v2-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .v2-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .v2-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  .v2-chip.pain {
+    background: rgba(255, 64, 64, 0.12);
+    color: #ff8080;
+    border: 1px solid rgba(255, 80, 80, 0.3);
+  }
+  .v2-chip.solve {
+    background: rgba(0, 220, 130, 0.12);
+    color: #00dc82;
+    border: 1px solid rgba(0, 220, 130, 0.3);
+  }
+  .v2-chip-icon {
+    width: 18px; height: 18px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    font-size: 0.75rem;
+  }
+  .v2-chip.pain .v2-chip-icon { background: rgba(255,64,64,0.25); }
+  .v2-chip.solve .v2-chip-icon { background: rgba(0,220,130,0.25); }
+  .v2-block {
+    position: relative;
+    z-index: 1;
+  }
+  .v2-text {
+    color: #d0d0dd;
+    font-size: 1rem;
+    margin: 0 0 10px;
+    line-height: 1.7;
+  }
+  .v2-text strong {
+    color: #fff;
+    font-weight: 700;
+  }
+  .v2-text .accent {
+    background: linear-gradient(135deg, #06b6d4, #00dc82);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    padding: 0 2px;
+  }
+  .v2-text .pain-word {
+    color: #ff9090;
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(255, 80, 80, 0.25);
+  }
+  .v2-text .mark {
+    background: rgba(6, 182, 212, 0.15);
+    border-bottom: 1px solid rgba(6, 182, 212, 0.5);
+    padding: 1px 4px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .v2-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 28px 0;
+    gap: 12px;
+  }
+  .v2-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6,182,212,0.5), transparent);
+  }
+  .v2-divider-dot {
+    width: 6px; height: 6px;
+    background: #06b6d4;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #06b6d4;
+  }
+  .v2-cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(0,220,130,0.08));
+    border: 1px solid rgba(6,182,212,0.2);
+    border-radius: 16px;
+  }
+  .v2-cta-text {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  /* ===== ВАРИАНТ 3: Минимализм ===== */
+  .v3-card {
+    background: rgba(15, 15, 25, 0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 40px 32px;
+  }
+  .v3-section {
+    margin-bottom: 28px;
+  }
+  .v3-section:last-child { margin-bottom: 0; }
+  .v3-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #8a8a98;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .v3-label .num {
+    color: #06b6d4;
+    margin-right: 8px;
+  }
+  .v3-hr {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin: 28px 0;
+    border: none;
+  }
+  .v3-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .v3-list li {
+    padding-left: 28px;
+    position: relative;
+    color: #d0d0dd;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .v3-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 16px; height: 2px;
+    background: #06b6d4;
+  }
+  .v3-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ===== ВАРИАНТ 4: Hero-style ===== */
+  .v4-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(6,182,212,0.06), rgba(139,92,246,0.04), rgba(0,220,130,0.06));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 28px;
+    padding: 40px 32px;
+    overflow: hidden;
+  }
+  .v4-card::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,220,130,0.2), transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .v4-hero-title {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+  .v4-hero-title .accent {
+    background: linear-gradient(135deg, #06b6d4, #00dc82);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .v4-hero-sub {
+    color: #a8a8b5;
+    margin: 0 0 32px;
+    font-size: 1.05rem;
+  }
+  .v4-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 680px) {
+    .v4-grid { grid-template-columns: 1fr; }
+  }
+  .v4-col {
+    background: rgba(10, 10, 20, 0.5);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+  }
+  .v4-col-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .v4-icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .v4-col.pain .v4-icon {
+    background: linear-gradient(135deg, rgba(255,80,80,0.2), rgba(255,80,80,0.05));
+    color: #ff8080;
+  }
+  .v4-col.solve .v4-icon {
+    background: linear-gradient(135deg, rgba(0,220,130,0.2), rgba(6,182,212,0.1));
+    color: #00dc82;
+  }
+  .v4-col-head h4 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .v4-col-head p {
+    margin: 2px 0 0;
+    font-size: 0.82rem;
+    color: #8a8a98;
+  }
+  .v4-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .v4-points li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.92rem;
+    color: #d0d0dd;
+    line-height: 1.55;
+  }
+  .v4-points li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-top: 8px;
+  }
+  .v4-col.pain .v4-points li::before {
+    background: #ff6060;
+    box-shadow: 0 0 6px rgba(255,80,80,0.6);
+  }
+  .v4-col.solve .v4-points li::before {
+    background: #00dc82;
+    box-shadow: 0 0 6px rgba(0,220,130,0.6);
+  }
+  .v4-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== Общие кнопки ===== */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
+    background: linear-gradient(135deg, #06b6d4 0%, #00dc82 100%);
+    color: #0a0a0f;
+    border-radius: 999px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: none;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(6,182,212,0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(6,182,212,0.55), 0 0 40px rgba(0,220,130,0.25);
+  }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    background: transparent;
+    color: #e8e8ef;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: none;
+    text-decoration: none;
+    transition: border-color 0.25s ease, background 0.25s ease;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(6,182,212,0.6);
+    background: rgba(6,182,212,0.06);
+  }
+</style>
+
+<div class="proto-root">
+
+  <!-- ========== ВАРИАНТ 1 ========== -->
+  <section>
+    <span class="variant-label">Вариант 1</span>
+    <h3 class="variant-title">Две колонки: «Знакомо?» ↔ «Что мы делаем»</h3>
+    <p class="variant-desc">Карточка с анимированной градиентной рамкой. Боли слева (красный маркер), решения справа (зелёный маркер). CTA внизу.</p>
+    <div class="demo">
+      <h3 class="service-title">Веб-разработка</h3>
+      <p class="service-sub">Сайты, которые работают как часы и приносят деньги</p>
+
+      <div class="v1-card">
+        <div class="v1-inner">
+          <div class="v1-col pain">
+            <h4><span class="v1-dot"></span> Знакомая ситуация?</h4>
+            <div class="v1-item">Сайт выглядит как привет из 2007-го и конвертит как дырявое ведро</div>
+            <div class="v1-item">Грузится дольше, чем вы выбираете сериал на Netflix</div>
+            <div class="v1-item">Дизайн делал племянник, кнопка «Купить» спрятана лучше клада пиратов</div>
+            <div class="v1-item">На телефоне всё съезжает. Трафик льёте — заявок ноль</div>
+          </div>
+          <div class="v1-col solve">
+            <h4><span class="v1-dot"></span> Что мы делаем</h4>
+            <div class="v1-item">Проектируем структуру, где каждый пиксель работает на продажу</div>
+            <div class="v1-item">Идеально на телефонах, планшетах, даже на холодильнике с экраном</div>
+            <div class="v1-item">Сайт грузится быстрее, чем вы говорите «ну блин, опять реклама»</div>
+            <div class="v1-item">Конверсия — в плюс, нервы — в ноль</div>
+          </div>
+          <div class="v1-cta">
+            <span class="v1-cta-text">Узнали себя?</span>
+            <a href="#" class="btn-pill">обсудить проект →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ВАРИАНТ 2 ========== -->
+  <section>
+    <span class="variant-label">Вариант 2</span>
+    <h3 class="variant-title">Вертикальная лента с чипами-разделителями</h3>
+    <p class="variant-desc">Последовательное повествование: сначала боли (красный чип), затем решения (зелёный чип). Декоративный разделитель с точкой. CTA в подсветкой-плашке.</p>
+    <div class="demo">
+      <h3 class="service-title">Веб-разработка</h3>
+      <p class="service-sub">Сайты, которые работают как часы и приносят деньги</p>
+
+      <div class="v2-card">
+        <div class="v2-block">
+          <span class="v2-chip pain"><span class="v2-chip-icon">!</span> Знакомо?</span>
+          <p class="v2-text">Сайт выглядит как <span class="pain-word">привет из 2007-го</span> и конвертит как <strong>дырявое ведро</strong>.</p>
+          <p class="v2-text">Грузится дольше, чем вы выбираете <mark class="mark">сериал на Netflix</mark>.</p>
+          <p class="v2-text">Дизайн делал племянник на коленке, кнопка «Купить» спрятана <strong>лучше клада пиратов</strong>. На телефоне всё съезжает. <span class="pain-word">Трафик льёте — заявок ноль</span>.</p>
+        </div>
+
+        <div class="v2-divider">
+          <span class="v2-divider-line"></span>
+          <span class="v2-divider-dot"></span>
+          <span class="v2-divider-line"></span>
+        </div>
+
+        <div class="v2-block">
+          <span class="v2-chip solve"><span class="v2-chip-icon">✓</span> Решение</span>
+          <p class="v2-text">Перестаём играть в прятки с клиентами. Проектируем структуру, где <strong class="accent">каждый пиксель работает на продажу</strong>.</p>
+          <p class="v2-text"><mark class="mark">Идеально на телефонах</mark>, планшетах, даже на холодильнике с экраном — <strong>будет летать</strong>.</p>
+          <p class="v2-text">Сайт грузится <strong class="accent">быстрее</strong>, чем вы говорите «ну блин, опять реклама». <strong>Конверсия — в плюс</strong>, нервы — в ноль.</p>
+        </div>
+
+        <div class="v2-cta-row">
+          <span class="v2-cta-text">Узнали свою ситуацию?</span>
+          <a href="#" class="btn-pill">обсудить проект →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ВАРИАНТ 3 ========== -->
+  <section>
+    <span class="variant-label">Вариант 3</span>
+    <h3 class="variant-title">Минимализм: нумерованные секции</h3>
+    <p class="variant-desc">Чистая типографика, тонкие линии-разделители, пронумерованные лейблы «01 / Знакомо» и «02 / Решение». Спокойный, «взрослый» вид.</p>
+    <div class="demo">
+      <h3 class="service-title">Веб-разработка</h3>
+      <p class="service-sub">Сайты, которые работают как часы и приносят деньги</p>
+
+      <div class="v3-card">
+        <div class="v3-section">
+          <div class="v3-label"><span class="num">01</span>Знакомая ситуация?</div>
+          <ul class="v3-list">
+            <li>Сайт выглядит как привет из 2007-го и конвертит как дырявое ведро</li>
+            <li>Грузится дольше, чем вы выбираете сериал на Netflix</li>
+            <li>Дизайн делал племянник на коленке, кнопка «Купить» спрятана лучше клада</li>
+            <li>На телефоне всё съезжает — трафик льёте, заявок ноль</li>
+          </ul>
+        </div>
+
+        <hr class="v3-hr" />
+
+        <div class="v3-section">
+          <div class="v3-label"><span class="num">02</span>Что мы делаем</div>
+          <ul class="v3-list">
+            <li>Проектируем структуру, где каждый пиксель работает на продажу</li>
+            <li>Идеально на телефонах, планшетах, даже на холодильнике с экраном</li>
+            <li>Сайт грузится быстрее, чем вы говорите «ну блин, опять реклама»</li>
+            <li>Конверсия — в плюс, нервы — в ноль</li>
+          </ul>
+        </div>
+
+        <div class="v3-cta">
+          <a href="#" class="btn-ghost">посмотреть кейсы</a>
+          <a href="#" class="btn-pill">обсудить проект →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ВАРИАНТ 4 ========== -->
+  <section>
+    <span class="variant-label">Вариант 4</span>
+    <h3 class="variant-title">Hero-style: крупные карточки-колонки с иконками</h3>
+    <p class="variant-desc">Фон с радиальной подсветкой, две стеклянные карточки с иконкой-бейджем и маркированными списками. Крупный акцентный заголовок сверху.</p>
+    <div class="demo">
+      <h3 class="service-title">Веб-разработка</h3>
+      <p class="service-sub">Сайты, которые работают как часы и приносят деньги</p>
+
+      <div class="v4-card">
+        <h4 class="v4-hero-title">Хватит терять клиентов из-за <span class="accent">устаревшего сайта</span></h4>
+        <p class="v4-hero-sub">Разбираем типичные проблемы и показываем, как мы их решаем.</p>
+
+        <div class="v4-grid">
+          <div class="v4-col pain">
+            <div class="v4-col-head">
+              <div class="v4-icon">⚠</div>
+              <div>
+                <h4>Знакомая ситуация?</h4>
+                <p>4 признака, что сайт не работает</p>
+              </div>
+            </div>
+            <ul class="v4-points">
+              <li>Сайт из 2007-го и конверсия как у дырявого ведра</li>
+              <li>Грузится дольше, чем выбор сериала на Netflix</li>
+              <li>Дизайн от племянника, кнопку «Купить» не найти</li>
+              <li>На телефоне всё съезжает, трафик уходит в никуда</li>
+            </ul>
+          </div>
+
+          <div class="v4-col solve">
+            <div class="v4-col-head">
+              <div class="v4-icon">✓</div>
+              <div>
+                <h4>Что мы делаем</h4>
+                <p>4 результата, которые получаете</p>
+              </div>
+            </div>
+            <ul class="v4-points">
+              <li>Структура, где каждый пиксель работает на продажу</li>
+              <li>Идеально на любом устройстве — даже на холодильнике</li>
+              <li>Моментальная загрузка, никаких «подождите»</li>
+              <li>Конверсия в плюс, нервы в ноль</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="v4-cta">
+          <a href="#" class="btn-pill">обсудить проект →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
