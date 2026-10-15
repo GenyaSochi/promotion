@@ -4,9 +4,9 @@
       <NuxtLink to="/" class="logo">
         <div style="display: flex; gap: .5rem">
           <span class="logo-icon">✦</span>
-          <span class="logo-text">AppWeb</span> 
+          <span class="logo-text">AppWeb</span>
         </div>
-        <span style="font-size: 12px;">разработка сайтов и мобильных приложений</span>
+        <span class="logo-sub">разработка сайтов и мобильных приложений</span>
       </NuxtLink>
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
@@ -106,62 +106,76 @@ onUnmounted(() => {
 
 .logo-icon {
   font-size: 1.5rem;
-  color: var(--color-primary);
-  text-shadow: 0 0 20px var(--color-primary-glow);
+  color: #06b6d4;
+  text-shadow: 0 0 25px rgba(6, 182, 212, 0.7);
 }
 
 .logo-text {
-  background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+  background: linear-gradient(135deg, #fff 40%, #00dc82);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+.logo-sub {
+  font-size: 0.75rem;
+  background: linear-gradient(90deg, #06b6d4, #00dc82);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
 .nav {
   display: flex;
-  gap: 1.25rem;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px;
+  border-radius: 999px;
 }
 
 .nav-link {
-  padding: 0.625rem 1.25rem;
-  color: #fff;
-  border-radius: var(--radius-full);
-  transition: all 0.25s ease;
+  padding: 0.5rem 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  transition: all 0.3s ease;
   font-weight: 600;
-  font-size: 1.0rem;
+  font-size: 0.95rem;
   text-decoration: none;
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-link.router-link-active,
 .nav-link.router-link-exact-active {
-  color: var(--color-primary);
-  background: rgba(0, 220, 130, 0.1);
+  color: #0a0a0f;
+  background: linear-gradient(135deg, #00dc82, #00b36b);
+  font-weight: 700;
 }
 
 .header-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.625rem 1.25rem;
-  background: linear-gradient(135deg, var(--color-primary), #00b36b);
+  padding: 0.625rem 1.5rem;
+  background: linear-gradient(135deg, #00dc82, #00b36b);
   color: #0a0a0f;
   border: none;
-  border-radius: var(--radius-full);
+  border-radius: 999px;
   font-weight: 700;
   font-size: 0.9375rem;
-  cursor: pointer;
+  cursor: none;
   transition: all 0.3s ease;
   box-shadow: 0 0 20px rgba(0, 220, 130, 0.3);
 }
 
 .header-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(0, 220, 130, 0.5);
+  box-shadow: 0 0 35px rgba(0, 220, 130, 0.5);
 }
 
 .menu-toggle {

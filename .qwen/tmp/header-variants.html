@@ -1,0 +1,111 @@
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#fff;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+.section-label{text-align:center;padding:40px 20px 12px;font-size:.85rem;color:#555;text-transform:uppercase;letter-spacing:.15em}
+.header-demo{position:relative;max-width:1280px;margin:0 auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.06)}
+
+/* === VARIANT A: Glow + Underline animation === */
+.va{border-bottom:none}
+.va .logo{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none}
+.va .logo-row{display:flex;gap:.5rem;align-items:center}
+.va .logo-icon{font-size:1.5rem;color:#00dc82;text-shadow:0 0 20px rgba(0,220,130,.6);animation:va-pulse 2.5s ease-in-out infinite}
+@keyframes va-pulse{0%,100%{text-shadow:0 0 20px rgba(0,220,130,.4)}50%{text-shadow:0 0 35px rgba(0,220,130,.8),0 0 60px rgba(6,182,212,.3)}}
+.va .logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#fff,#a1a1aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.va .logo-sub{font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.05em}
+.va .nav{display:flex;gap:.5rem}
+.va .nav-link{position:relative;padding:.625rem 1.25rem;color:rgba(255,255,255,.7);text-decoration:none;font-weight:600;font-size:1rem;border-radius:999px;transition:all .3s}
+.va .nav-link::after{content:'';position:absolute;bottom:4px;left:50%;width:0;height:2px;background:linear-gradient(90deg,#06b6d4,#00dc82);border-radius:2px;transition:all .3s;transform:translateX(-50%)}
+.va .nav-link:hover{color:#fff;background:rgba(255,255,255,.05)}
+.va .nav-link:hover::after{width:60%}
+.va .nav-link.active{color:#00dc82}
+.va .nav-link.active::after{width:60%}
+.va .accent-line{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,220,130,.3) 30%,rgba(6,182,212,.5) 50%,rgba(0,220,130,.3) 70%,transparent)}
+.va .cta{padding:.625rem 1.5rem;background:linear-gradient(135deg,#00dc82,#00b36b);color:#0a0a0f;border:none;border-radius:999px;font-weight:700;font-size:.9375rem;cursor:none;box-shadow:0 0 20px rgba(0,220,130,.3);transition:all .3s}
+.va .cta:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(0,220,130,.5)}
+
+/* === VARIANT B: Pill nav + gradient sub + icon CTA === */
+.vb .logo{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none}
+.vb .logo-row{display:flex;gap:.5rem;align-items:center}
+.vb .logo-icon{font-size:1.5rem;color:#06b6d4;text-shadow:0 0 25px rgba(6,182,212,.7)}
+.vb .logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#fff 40%,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.vb .logo-sub{font-size:.75rem;background:linear-gradient(90deg,#06b6d4,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;letter-spacing:.03em}
+.vb .nav{display:flex;gap:4px;background:rgba(255,255,255,.04);padding:4px;border-radius:999px}
+.vb .nav-link{padding:.5rem 1.1rem;color:rgba(255,255,255,.6);text-decoration:none;font-weight:600;font-size:.95rem;border-radius:999px;transition:all .3s}
+.vb .nav-link:hover{color:#fff;background:rgba(255,255,255,.08)}
+.vb .nav-link.active{color:#0a0a0f;background:linear-gradient(135deg,#00dc82,#00b36b);font-weight:700}
+.vb .cta{display:inline-flex;align-items:center;gap:.5rem;padding:.625rem 1.5rem;background:linear-gradient(135deg,#00dc82,#00b36b);color:#0a0a0f;border:none;border-radius:999px;font-weight:700;font-size:.9375rem;cursor:none;box-shadow:0 0 20px rgba(0,220,130,.3);transition:all .3s}
+.vb .cta:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(0,220,130,.5)}
+.vb .cta svg{width:16px;height:16px}
+
+/* === VARIANT C: Glass + particles + gradient border === */
+.vc{border-bottom:none;background:rgba(10,10,15,.6);backdrop-filter:blur(20px);overflow:hidden}
+.vc::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(6,182,212,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 50%,rgba(0,220,130,.06) 0%,transparent 50%);pointer-events:none}
+.vc .accent-border{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#06b6d4,#00dc82,#06b6d4,transparent);opacity:.5;animation:vc-shift 4s ease-in-out infinite}
+@keyframes vc-shift{0%,100%{opacity:.4}50%{opacity:.8}}
+.vc .logo{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;position:relative;z-index:1}
+.vc .logo-row{display:flex;gap:.5rem;align-items:center}
+.vc .logo-icon{font-size:1.5rem;background:linear-gradient(135deg,#06b6d4,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(0,220,130,.5));animation:vc-icon-glow 3s ease-in-out infinite}
+@keyframes vc-icon-glow{0%,100%{filter:drop-shadow(0 0 8px rgba(0,220,130,.4))}50%{filter:drop-shadow(0 0 18px rgba(6,182,212,.7))}}
+.vc .logo-text{font-size:1.5rem;font-weight:800;color:#fff}
+.vc .logo-sub{font-size:.75rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.vc .nav{display:flex;gap:1rem;position:relative;z-index:1}
+.vc .nav-link{position:relative;padding:.625rem 1.25rem;color:rgba(255,255,255,.7);text-decoration:none;font-weight:600;font-size:1rem;transition:all .3s}
+.vc .nav-link:hover{color:#00dc82}
+.vc .nav-link.active{color:#00dc82}
+.vc .nav-link.active::before{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#00dc82;border-radius:50%;box-shadow:0 0 8px rgba(0,220,130,.8)}
+.vc .cta{position:relative;z-index:1;padding:.625rem 1.5rem;background:transparent;color:#00dc82;border:1px solid rgba(0,220,130,.4);border-radius:999px;font-weight:700;font-size:.9375rem;cursor:none;transition:all .3s}
+.vc .cta:hover{background:rgba(0,220,130,.1);box-shadow:0 0 25px rgba(0,220,130,.2);transform:translateY(-2px)}
+.vc .dot{position:absolute;width:2px;height:2px;background:rgba(0,220,130,.4);border-radius:50%;animation:vc-float 6s ease-in-out infinite}
+.vc .dot:nth-child(1){left:15%;top:30%;animation-delay:0s}
+.vc .dot:nth-child(2){left:45%;top:60%;animation-delay:1.5s}
+.vc .dot:nth-child(3){left:70%;top:25%;animation-delay:3s}
+.vc .dot:nth-child(4){left:85%;top:55%;animation-delay:4.5s}
+@keyframes vc-float{0%,100%{opacity:.2;transform:translateY(0)}50%{opacity:.8;transform:translateY(-6px)}}
+</style>
+
+<p class="section-label">Вариант A – Пульсирующая иконка + анимация подчёркивания + акцентная линия</p>
+<div class="header-demo va">
+  <div class="logo">
+    <div class="logo-row"><span class="logo-icon">✦</span><span class="logo-text">AppWeb</span></div>
+    <span class="logo-sub">разработка сайтов и мобильных приложений</span>
+  </div>
+  <div class="nav">
+    <a class="nav-link active" href="#">Главная</a>
+    <a class="nav-link" href="#">Услуги</a>
+    <a class="nav-link" href="#">Контакты</a>
+  </div>
+  <button class="cta">Связаться</button>
+  <div class="accent-line"></div>
+</div>
+
+<p class="section-label">Вариант B – Pill-навигация + градиентный подзаголовок + иконка в кнопке</p>
+<div class="header-demo vb">
+  <div class="logo">
+    <div class="logo-row"><span class="logo-icon">✦</span><span class="logo-text">AppWeb</span></div>
+    <span class="logo-sub">разработка сайтов и мобильных приложений</span>
+  </div>
+  <div class="nav">
+    <a class="nav-link active" href="#">Главная</a>
+    <a class="nav-link" href="#">Услуги</a>
+    <a class="nav-link" href="#">Контакты</a>
+  </div>
+  <button class="cta"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>Связаться</button>
+</div>
+
+<p class="section-label">Вариант C – Glass-эффект + частицы + градиентная рамка + точка-индикатор</p>
+<div class="header-demo vc">
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="logo">
+    <div class="logo-row"><span class="logo-icon">✦</span><span class="logo-text">AppWeb</span></div>
+    <span class="logo-sub">разработка сайтов и мобильных приложений</span>
+  </div>
+  <div class="nav">
+    <a class="nav-link active" href="#">Главная</a>
+    <a class="nav-link" href="#">Услуги</a>
+    <a class="nav-link" href="#">Контакты</a>
+  </div>
+  <button class="cta">Связаться</button>
+  <div class="accent-border"></div>
+</div>
+
+<div style="padding:60px 20px;text-align:center;color:#333;font-size:.85rem">Наведите на ссылки в вариантах A и B для демонстрации анимаций</div>
