@@ -3,6 +3,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxt/fonts', '@nuxt/image'],
+  fonts: {
+    provider: 'google',
+    families: [
+      { name: 'Inter', weights: [400, 500, 700, 800] }
+    ]
+  },
   
   css: [
     '~/assets/reset.css',

@@ -12,7 +12,7 @@ export const services: Service[] = [
     id: 1,
     slug: 'web-development',
     iconName: 'code',
-    title: 'Веб-разработка',
+    title: '',
     description: 'Создаём современные, быстрые и адаптивные веб-сайты',
     features: [
       'Сделаем так, чтобы сайт открывался за секунду и красиво выглядел на телефоне',

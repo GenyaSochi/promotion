@@ -10,7 +10,7 @@
       </NuxtLink>
 
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <NuxtLink to="/#hero" class="nav-link" @click="closeMenu">Главная</NuxtLink>
+        <NuxtLink to="/#hero" class="nav-link active" @click="closeMenu">Главная</NuxtLink>
         <NuxtLink to="/#services" class="nav-link" @click="closeMenu">Услуги</NuxtLink>
         <NuxtLink to="/#contact" class="nav-link" @click="closeMenu">Контакты</NuxtLink>
       </nav>
@@ -129,32 +129,48 @@ onUnmounted(() => {
 
 .nav {
   display: flex;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 4px;
-  border-radius: 999px;
+  gap: 0.5rem;
 }
 
 .nav-link {
-  padding: 0.5rem 1.1rem;
-  color: rgba(255, 255, 255, 0.6);
+  position: relative;
+  padding: 0.625rem 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
   border-radius: 999px;
   transition: all 0.3s ease;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   text-decoration: none;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #06b6d4, #00dc82);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 .nav-link:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.nav-link.router-link-active,
-.nav-link.router-link-exact-active {
-  color: #0a0a0f;
-  background: linear-gradient(135deg, #00dc82, #00b36b);
-  font-weight: 700;
+.nav-link:hover::after {
+  width: 60%;
+}
+
+.nav-link.active {
+  color: #00dc82;
+}
+
+.nav-link.active::after {
+  width: 60%;
 }
 
 .header-cta {

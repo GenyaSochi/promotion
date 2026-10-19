@@ -173,33 +173,19 @@
                 <span class="gradient-text">{{ service.title }}</span>
               </h3>
               <p class="service-hook-description">{{ service.description }}</p>
-              <div v-if="service.slug === 'web-development'" class="web-dev-block">
-                <p class="web-dev-text">Сайт выглядит как привет из 2007-го и конвертит как дырявое ведро?</p>
-                <p class="web-dev-text">Грузится дольше, чем вы выбираете сериал на Netflix?</p>
-                <p class="web-dev-text">Дизайн делал племянник на коленке, кнопка «Купить» спрятана лучше клада пиратов. На телефоне всё съезжает. Трафик льёте – заявок ноль.</p>
-                <span class="web-dev-key">Сайт есть, а толку нет?</span>
-
-                <div class="web-dev-divider">
-                  <svg viewBox="0 0 280 20" preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id="waveGradWd" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
-                        <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
-                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
-                      </linearGradient>
-                    </defs>
-                    <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10"/>
-                  </svg>
-                </div>
-
-                <span class="web-dev-key">Каждый пиксель работает на продажу</span>
-                <p class="web-dev-text">Проектируем структуру, где нет случайных элементов. Идеально на телефонах, планшетах, даже на холодильнике с экраном – будет летать.</p>
-                <p class="web-dev-text">Сайт грузится быстрее, чем вы говорите «ну блин, опять эта реклама». Конверсия – в плюс, нервы – в ноль.</p>
-
-                <div class="web-dev-cta-row">
-                  <span class="web-dev-cta-text">Узнали свою ситуацию?</span>
-                  <button class="press" @click.stop.prevent="navigateTo('/#contact')">обсудить проект</button>
-                </div>
+              <div v-if="service.slug === 'web-development'" class="web-dev-block web-dev-hero">
+                <p class="web-dev-hero-title">
+                  <span class="web-dev-accent">Веб-разработка</span> —<br/>
+                  сайты, которые <span class="web-dev-accent">продают</span>.<br/>
+                  Точка.
+                </p>
+                <p class="web-dev-hero-subtitle">
+                  Проектируем структуру, где нет случайных элементов.<br/>
+                  Идеально на телефонах, планшетах, даже на холодильнике с экраном – будет летать.
+                </p>
+                <p class="web-dev-hero-micro">
+                  Конверсия в плюс. Скорость загрузки меньше секунды. Заявки идут.
+                </p>
               </div>
               <div v-if="service.slug === 'mobile-apps'" class="web-dev-block">
                 <p class="web-dev-text">У конкурентов удобное приложение, а у вас только сайт?</p>
@@ -1401,6 +1387,10 @@ useHead({
   border-bottom: 1px solid var(--color-border);
 } */
 
+.services-preview .section-header {
+  margin-bottom: var(--spacing-xl);
+}
+
 /* Services Hooks (hero-style blocks) */
 .services-hooks {
   display: flex;
@@ -1654,18 +1644,51 @@ useHead({
   }
 }
 
-/* ===== Блок «Веб-разработка» (Вариант 2 – лента с чипами, без рамки) ===== */
-.web-dev-block {
+/* ===== Блок «Веб-разработка» — новая типографика ===== */
+.web-dev-hero {
   position: relative;
-  padding: 24px 0 12px;
+  padding: 40px 0 24px;
   text-align: left;
+}
+
+.web-dev-hero-title {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+.web-dev-hero-title .web-dev-accent {
+  color: #06b6d4;
+}
+
+.web-dev-hero-subtitle {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 16px;
+}
+
+.web-dev-hero-micro {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
 }
 
 .web-dev-text {
   color: #fff;
   font-size: 1.125rem;
   margin: 0 0 12px;
-  line-height: 1.7;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .web-dev-key {

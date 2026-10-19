@@ -1,0 +1,132 @@
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#fff;font-family:'Segoe UI',system-ui,sans-serif;padding:40px 20px;cursor:none}
+.label{text-align:center;padding:60px 20px 20px;font-size:.85rem;color:#666;text-transform:uppercase;letter-spacing:.2em}
+.note{text-align:center;color:#555;font-size:.85rem;margin-bottom:20px}
+.demo{position:relative;max-width:900px;margin:0 auto;min-height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 32px;border:1px solid rgba(255,255,255,.06);border-radius:20px;background:#0a0a0f;overflow:hidden}
+.demo::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(6,182,212,.04),transparent 70%);pointer-events:none}
+.hero-mock{position:relative;z-index:2;text-align:center;max-width:700px}
+.hero-mock h1{font-size:2.5rem;font-weight:800;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff 40%,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-mock p{color:#aaa;font-size:1.1rem;line-height:1.6}
+
+.blob-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
+
+/* === ВАРИАНТ A: Морфинг-blob с conic-градиентом === */
+.va-blob{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(2px);animation:va-morph 14s ease-in-out infinite;background:conic-gradient(from 0deg,#06b6d4,#00dc82,#8b5cf6,#ec4899,#06b6d4);opacity:.55}
+@keyframes va-morph{0%,100%{border-radius:42% 58% 63% 37%/45% 52% 48% 55%;transform:rotate(0deg) scale(1)}33%{border-radius:58% 42% 35% 65%/55% 38% 62% 45%;transform:rotate(120deg) scale(1.05)}66%{border-radius:38% 62% 55% 45%/62% 45% 55% 38%;transform:rotate(240deg) scale(.97)}}
+.va-blob::after{content:'';position:absolute;inset:-40px;border-radius:inherit;background:inherit;filter:blur(80px);opacity:.5;animation:inherit}
+
+/* === ВАРИАНТ B: Mesh из 4-х blob'ов с blur === */
+.vb-wrap{position:absolute;inset:0;filter:blur(60px);opacity:.8}
+.vb-b{position:absolute;border-radius:50%;mix-blend-mode:screen}
+.vb-1{width:360px;height:360px;background:#06b6d4;top:15%;left:20%;animation:vb-float1 12s ease-in-out infinite}
+.vb-2{width:320px;height:320px;background:#00dc82;top:40%;right:15%;animation:vb-float2 14s ease-in-out infinite}
+.vb-3{width:280px;height:280px;background:#8b5cf6;bottom:15%;left:30%;animation:vb-float3 16s ease-in-out infinite}
+.vb-4{width:240px;height:240px;background:#ec4899;top:25%;right:35%;animation:vb-float4 18s ease-in-out infinite}
+@keyframes vb-float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(80px,40px) scale(1.15)}}
+@keyframes vb-float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,60px) scale(.9)}}
+@keyframes vb-float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-50px) scale(1.1)}}
+@keyframes vb-float4{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,30px) scale(1.2)}}
+
+/* === ВАРИАНТ C: SVG turbulence — «живая жидкость» === */
+.vc-svg{position:absolute;inset:0;width:100%;height:100%}
+.vc-blob{width:100%;height:100%}
+
+/* === ВАРИАНТ D: Орбитальная система === */
+.vd-core{position:relative;width:280px;height:280px}
+.vd-center{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 30%,#00dc82,#06b6d4 60%,#8b5cf6);filter:blur(1px);animation:vd-pulse 4s ease-in-out infinite;box-shadow:0 0 80px rgba(0,220,130,.5),0 0 160px rgba(6,182,212,.3)}
+@keyframes vd-pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
+.vd-ring{position:absolute;inset:-60px;border:1px solid rgba(0,220,130,.2);border-radius:50%;animation:vd-spin 20s linear infinite}
+.vd-ring::before{content:'';position:absolute;top:-6px;left:50%;width:12px;height:12px;background:#00dc82;border-radius:50%;box-shadow:0 0 20px #00dc82;transform:translateX(-50%)}
+.vd-ring-2{position:absolute;inset:-120px;border:1px solid rgba(6,182,212,.15);border-radius:50%;animation:vd-spin 30s linear infinite reverse}
+.vd-ring-2::before{content:'';position:absolute;top:-5px;left:50%;width:10px;height:10px;background:#06b6d4;border-radius:50%;box-shadow:0 0 16px #06b6d4;transform:translateX(-50%)}
+@keyframes vd-spin{to{transform:rotate(360deg)}}
+.vd-glow{position:absolute;inset:-100px;border-radius:50%;background:radial-gradient(circle,rgba(0,220,130,.3),transparent 60%);filter:blur(40px);animation:vd-pulse 4s ease-in-out infinite}
+</style>
+
+<div class="label">Вариант A — Морфинг-blob с conic-градиентом</div>
+<div class="note">Одна живая форма, плавно меняет контур + вращается. Радуга cyan→green→violet→pink.</div>
+<div class="demo">
+  <div class="blob-stage"><div class="va-blob"></div></div>
+  <div class="hero-mock">
+    <h1>Цифровые решения для вашего бизнеса</h1>
+    <p>Создаём современные веб-сайты, мобильные приложения и цифровые продукты, которые помогают компаниям расти</p>
+  </div>
+</div>
+
+<div class="label">Вариант B — Mesh из 4-х цветных blob'ов</div>
+<div class="note">Четыре独立ных «облака» плавают и дышат. Ощущение живого пространства за текстом.</div>
+<div class="demo">
+  <div class="blob-stage">
+    <div class="vb-wrap">
+      <div class="vb-b vb-1"></div>
+      <div class="vb-b vb-2"></div>
+      <div class="vb-b vb-3"></div>
+      <div class="vb-b vb-4"></div>
+    </div>
+  </div>
+  <div class="hero-mock">
+    <h1>Цифровые решения для вашего бизнеса</h1>
+    <p>Создаём современные веб-сайты, мобильные приложения и цифровые продукты, которые помогают компаниям расти</p>
+  </div>
+</div>
+
+<div class="label">Вариант C — SVG-жидкость (turbulence + displacement)</div>
+<div class="note">Градиентный blob деформируется через SVG-фильтр — эффект ртути / живой плазмы.</div>
+<div class="demo">
+  <div class="blob-stage">
+    <svg class="vc-svg" viewBox="0 0 900 560" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur"/>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" result="goo"/>
+          <feBlend in="SourceGraphic" in2="goo"/>
+        </filter>
+        <linearGradient id="gc" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#06b6d4"/>
+          <stop offset="50%" stop-color="#00dc82"/>
+          <stop offset="100%" stop-color="#8b5cf6"/>
+        </linearGradient>
+      </defs>
+      <g filter="url(#goo)">
+        <circle cx="450" cy="280" r="120" fill="url(#gc)">
+          <animate attributeName="cx" values="450;520;380;450" dur="14s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="280;220;340;280" dur="18s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="350" cy="200" r="80" fill="#06b6d4">
+          <animate attributeName="cx" values="350;500;300;350" dur="16s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="200;350;250;200" dur="12s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="550" cy="350" r="90" fill="#00dc82">
+          <animate attributeName="cx" values="550;400;600;550" dur="18s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="350;200;300;350" dur="14s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="450" cy="280" r="70" fill="#8b5cf6">
+          <animate attributeName="cx" values="450;380;520;450" dur="20s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="280;380;180;280" dur="16s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-mock">
+    <h1>Цифровые решения для вашего бизнеса</h1>
+    <p>Создаём современные веб-сайты, мобильные приложения и цифровые продукты, которые помогают компаниям расти</p>
+  </div>
+</div>
+
+<div class="label">Вариант D — Орбитальная система (ядро + спутники)</div>
+<div class="note">Центральный светящийся шар с вращающимися кольцами и спутниками. Ассоциация с атомом / планетой.</div>
+<div class="demo">
+  <div class="blob-stage">
+    <div class="vd-core">
+      <div class="vd-glow"></div>
+      <div class="vd-ring-2"></div>
+      <div class="vd-ring"></div>
+      <div class="vd-center"></div>
+    </div>
+  </div>
+  <div class="hero-mock">
+    <h1>Цифровые решения для вашего бизнеса</h1>
+    <p>Создаём современные веб-сайты, мобильные приложения и цифровые продукты, которые помогают компаниям расти</p>
+  </div>
+</div>

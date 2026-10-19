@@ -1,0 +1,149 @@
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#fff;font-family:'Segoe UI',system-ui,sans-serif;padding:40px 20px;cursor:none}
+.label{text-align:center;padding:60px 20px 20px;font-size:.85rem;color:#666;text-transform:uppercase;letter-spacing:.2em}
+.demo{max-width:900px;margin:0 auto;padding:40px 32px;border:1px solid rgba(255,255,255,.06);border-radius:20px;background:rgba(255,255,255,.02);position:relative;overflow:hidden}
+.demo::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(0,220,130,.08),transparent 70%);filter:blur(60px);pointer-events:none}
+
+/* Базовые стили текста для всех вариантов */
+.wd-text{color:#fff;font-size:1.125rem;margin:0 0 12px;line-height:1.6;font-weight:500}
+.wd-key{display:block;font-size:24px;line-height:1.2;font-weight:700;color:#fff;margin:20px 0}
+.wd-divider{display:flex;justify-content:center;margin:32px 0}
+.wd-cta-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:24px;padding:20px 24px;background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(0,220,130,.08));border:1px solid rgba(6,182,212,.2);border-radius:16px}
+.wd-cta-text{color:#fff;font-size:1.25rem;font-weight:700}
+.btn-press{padding:.625rem 1.5rem;background:linear-gradient(135deg,#00dc82,#00b36b);color:#0a0a0f;border:none;border-radius:999px;font-weight:700;cursor:none;box-shadow:0 0 20px rgba(0,220,130,.3);transition:all .3s}
+.btn-press:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(0,220,130,.5)}
+
+/* === ВАРИАНТ 1: Большой хук-заголовок с градиентной ключевой фразой === */
+.v1 .hook{font-size:2rem;font-weight:800;line-height:1.2;margin-bottom:24px;background:linear-gradient(135deg,#fff 30%,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.v1 .wd-key{background:linear-gradient(90deg,#06b6d4,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:28px;padding-left:16px;border-left:3px solid #00dc82}
+
+/* === ВАРИАНТ 2: Карточки с номерами-акцентами === */
+.v2-cards{display:grid;gap:12px;margin-bottom:24px}
+.v2-card{display:flex;gap:16px;padding:16px 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;transition:all .3s}
+.v2-card:hover{background:rgba(6,182,212,.06);border-color:rgba(6,182,212,.3);transform:translateX(4px)}
+.v2-num{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#06b6d4,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;min-width:48px}
+.v2-card-text{color:#fff;font-size:1.05rem;line-height:1.5;font-weight:500;align-self:center}
+.v2 .wd-key{font-size:26px;color:#fff;position:relative;padding-left:24px}
+.v2 .wd-key::before{content:'→';position:absolute;left:0;color:#00dc82;font-size:1.5rem}
+
+/* === ВАРИАНТ 3: Вертикальная timeline-лента === */
+.v3-timeline{position:relative;padding-left:32px}
+.v3-timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,#06b6d4,#00dc82,#06b6d4);opacity:.5;border-radius:2px}
+.v3-item{position:relative;margin-bottom:20px;padding:14px 20px;background:rgba(255,255,255,.02);border-radius:12px;transition:all .3s}
+.v3-item:hover{background:rgba(0,220,130,.06)}
+.v3-item::before{content:'';position:absolute;left:-28px;top:20px;width:12px;height:12px;border-radius:50%;background:#0a0a0f;border:2px solid #00dc82;box-shadow:0 0 12px rgba(0,220,130,.6)}
+.v3-item-text{color:#fff;font-size:1.1rem;line-height:1.6;font-weight:500}
+.v3 .wd-key{font-size:28px;text-align:center;padding:20px;background:linear-gradient(135deg,rgba(6,182,212,.1),rgba(0,220,130,.1));border-radius:16px;border:1px solid rgba(0,220,130,.2)}
+
+/* === ВАРИАНТ 4: Типографика с маркерными подсветками === */
+.v4 .wd-text{font-size:1.2rem;line-height:1.7}
+.v4 mark{background:linear-gradient(120deg,rgba(0,220,130,.25),rgba(6,182,212,.25));color:#fff;padding:2px 8px;border-radius:4px;font-weight:700}
+.v4 .wd-key{font-size:32px;font-weight:800;text-align:left;line-height:1.1;letter-spacing:-.02em}
+.v4 .wd-key span{background:linear-gradient(135deg,#06b6d4,#00dc82);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+</style>
+
+<div class="label">Вариант 1 — Большой хук-заголовок + градиентные ключевые фразы</div>
+<div class="demo v1">
+  <h2 class="hook">Сайт есть, а заявок нет? Знакомая боль.</h2>
+  <p class="wd-text">Сайт выглядит как привет из 2007-го и конвертит как дырявое ведро?</p>
+  <p class="wd-text">Грузится дольше, чем вы выбираете сериал на Netflix?</p>
+  <p class="wd-text">Дизайн делал племянник на коленке, кнопка «Купить» спрятана лучше клада пиратов. На телефоне всё съезжает. Трафик льёте – заявок ноль.</p>
+  <span class="wd-key">Сайт есть, а толку нет?</span>
+
+  <div class="wd-divider">
+    <svg viewBox="0 0 280 20" preserveAspectRatio="none" style="width:280px;height:20px">
+      <defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/><stop offset="50%" stop-color="#00dc82" stop-opacity="1"/><stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10" stroke="url(#g1)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+
+  <span class="wd-key">Каждый пиксель работает на продажу</span>
+  <p class="wd-text">Проектируем структуру, где нет случайных элементов. Идеально на телефонах, планшетах, даже на холодильнике с экраном – будет летать.</p>
+  <p class="wd-text">Сайт грузится быстрее, чем вы говорите «ну блин, опять эта реклама». Конверсия – в плюс, нервы – в ноль.</p>
+
+  <div class="wd-cta-row">
+    <span class="wd-cta-text">Узнали свою ситуацию?</span>
+    <button class="btn-press">обсудить проект</button>
+  </div>
+</div>
+
+<div class="label">Вариант 2 — Карточки с номерами-акцентами</div>
+<div class="demo v2">
+  <div class="v2-cards">
+    <div class="v2-card"><span class="v2-num">01</span><span class="v2-card-text">Сайт выглядит как привет из 2007-го и конвертит как дырявое ведро?</span></div>
+    <div class="v2-card"><span class="v2-num">02</span><span class="v2-card-text">Грузится дольше, чем вы выбираете сериал на Netflix?</span></div>
+    <div class="v2-card"><span class="v2-num">03</span><span class="v2-card-text">Дизайн делал племянник на коленке, кнопка «Купить» спрятана лучше клада пиратов.</span></div>
+  </div>
+  <span class="wd-key">Сайт есть, а толку нет?</span>
+
+  <div class="wd-divider">
+    <svg viewBox="0 0 280 20" preserveAspectRatio="none" style="width:280px;height:20px">
+      <defs><linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/><stop offset="50%" stop-color="#00dc82" stop-opacity="1"/><stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10" stroke="url(#g2)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+
+  <span class="wd-key">Каждый пиксель работает на продажу</span>
+  <div class="v2-cards">
+    <div class="v2-card"><span class="v2-num">✓</span><span class="v2-card-text">Проектируем структуру, где нет случайных элементов. Идеально на всех устройствах.</span></div>
+    <div class="v2-card"><span class="v2-num">✓</span><span class="v2-card-text">Сайт грузится быстрее, чем вы говорите «ну блин». Конверсия – в плюс.</span></div>
+  </div>
+
+  <div class="wd-cta-row">
+    <span class="wd-cta-text">Узнали свою ситуацию?</span>
+    <button class="btn-press">обсудить проект</button>
+  </div>
+</div>
+
+<div class="label">Вариант 3 — Вертикальная timeline-лента с точками</div>
+<div class="demo v3">
+  <div class="v3-timeline">
+    <div class="v3-item"><p class="v3-item-text">Сайт выглядит как привет из 2007-го и конвертит как дырявое ведро?</p></div>
+    <div class="v3-item"><p class="v3-item-text">Грузится дольше, чем вы выбираете сериал на Netflix?</p></div>
+    <div class="v3-item"><p class="v3-item-text">Дизайн делал племянник на коленке, кнопка «Купить» спрятана лучше клада пиратов.</p></div>
+  </div>
+  <span class="wd-key">Сайт есть, а толку нет?</span>
+
+  <div class="wd-divider">
+    <svg viewBox="0 0 280 20" preserveAspectRatio="none" style="width:280px;height:20px">
+      <defs><linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/><stop offset="50%" stop-color="#00dc82" stop-opacity="1"/><stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10" stroke="url(#g3)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+
+  <span class="wd-key">Каждый пиксель работает на продажу</span>
+  <div class="v3-timeline">
+    <div class="v3-item"><p class="v3-item-text">Проектируем структуру, где нет случайных элементов. Идеально на всех устройствах – будет летать.</p></div>
+    <div class="v3-item"><p class="v3-item-text">Сайт грузится быстрее, чем вы говорите «ну блин, опять эта реклама». Конверсия – в плюс.</p></div>
+  </div>
+
+  <div class="wd-cta-row">
+    <span class="wd-cta-text">Узнали свою ситуацию?</span>
+    <button class="btn-press">обсудить проект</button>
+  </div>
+</div>
+
+<div class="label">Вариант 4 — Крупная типографика + маркерные подсветки</div>
+<div class="demo v4">
+  <p class="wd-text">Сайт выглядит как <mark>привет из 2007-го</mark> и конвертит как дырявое ведро?</p>
+  <p class="wd-text">Грузится <mark>дольше, чем вы выбираете сериал</mark> на Netflix?</p>
+  <p class="wd-text">Дизайн делал племянник на коленке, кнопка «Купить» <mark>спрятана лучше клада пиратов</mark>. На телефоне всё съезжает. Трафик льёте – заявок ноль.</p>
+  <span class="wd-key"><span>Сайт есть,</span> а толку нет?</span>
+
+  <div class="wd-divider">
+    <svg viewBox="0 0 280 20" preserveAspectRatio="none" style="width:280px;height:20px">
+      <defs><linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/><stop offset="50%" stop-color="#00dc82" stop-opacity="1"/><stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10" stroke="url(#g4)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+
+  <span class="wd-key"><span>Каждый пиксель</span> работает на продажу</span>
+  <p class="wd-text">Проектируем структуру, где <mark>нет случайных элементов</mark>. Идеально на телефонах, планшетах, даже на холодильнике с экраном – будет летать.</p>
+  <p class="wd-text">Сайт грузится <mark>быстрее, чем вы говорите «ну блин»</mark>. Конверсия – в плюс, нервы – в ноль.</p>
+
+  <div class="wd-cta-row">
+    <span class="wd-cta-text">Узнали свою ситуацию?</span>
+    <button class="btn-press">обсудить проект</button>
+  </div>
+</div>
