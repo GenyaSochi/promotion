@@ -181,11 +181,10 @@
                 </p>
                 <p class="web-dev-hero-subtitle">
                   Проектируем структуру, где нет случайных элементов.<br/>
-                  Идеально на телефонах, планшетах, даже на холодильнике с экраном – будет летать.
-                </p>
-                <p class="web-dev-hero-micro">
+                  Идеально на телефонах, планшетах, даже на холодильнике с экраном - будет летать.
+                  <br>
                   Конверсия в плюс. Скорость загрузки меньше секунды. Заявки идут.
-                </p>
+                </p>             
               </div>
               <div v-if="service.slug === 'mobile-apps'" class="web-dev-block">
                 <p class="web-dev-text">У конкурентов удобное приложение, а у вас только сайт?</p>
@@ -1670,17 +1669,8 @@ useHead({
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
+  color: white;
   margin: 0 0 16px;
-}
-
-.web-dev-hero-micro {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0;
 }
 
 .web-dev-text {
