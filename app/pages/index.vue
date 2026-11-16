@@ -28,16 +28,16 @@
             </h2>
             <div class="hero-description">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют
               круглосуточного присмотра</div>
-            <Transition name="timer-slide" appear @after-enter="startTimer">
+            <!-- <Transition name="timer-slide" appear @after-enter="startTimer">
               <div v-if="cardVisible" ref="cardRef" class="hero-diagnosis-card hero-diagnosis-card--timer">
                 <div class="hero-diagnosis-card-glow"></div>
                 <div ref="timerRef" class="hero-timer-wrapper">
 
                   <div class="hero-timer-ring" :class="[timerColorClass, { 'is-boom': timerValue === 0 }]">
-                    <div class="hero-timer-glow"></div>
+                    <div class="hero-timer-glow"></div> -->
 
                     <!-- Внешнее орбитальное кольцо с тиками -->
-                    <svg class="hero-timer-orbit" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                    <!-- <svg class="hero-timer-orbit" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
                       <circle class="hero-timer-orbit-track" cx="120" cy="120" r="115" />
                       <g class="hero-timer-ticks">
                         <line v-for="i in 24" :key="i" :class="{ 'is-major': i % 3 === 0 }" x1="120" y1="10" x2="120"
@@ -46,10 +46,10 @@
                       <g class="hero-timer-satellite">
                         <circle cx="120" cy="8" r="4" />
                       </g>
-                    </svg>
+                    </svg> -->
 
                     <!-- Внутренний progress -->
-                    <svg class="hero-timer-core" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- <svg class="hero-timer-core" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                       <defs>
                         <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stop-color="var(--timer-c1)" />
@@ -79,8 +79,8 @@
                     <div class="hero-timer-shockwave hero-timer-shockwave--delay"></div>
                   </div>
                 </div>
-              </div>
-            </Transition>
+              </div> -->
+            <!-- </Transition> -->
           </div>
 
           <div class="hero-diagnosis-cards">
@@ -97,18 +97,18 @@
               </svg>
             </NuxtLink>
           </div>
-          <div class="hero-stats">
+          <d  iv class="hero-stats">
             <div class="stat-item" v-for="(stat, index) in stats" :key="index">
               <span class="stat-value">{{ stat.value }}</span>
               <span class="stat-label">{{ stat.label }}</span>
             </div>
-          </div>
+          </d>
         </div>
       </div>
-      <div class="scroll-indicator">
+      <!-- <div class="scroll-indicator">
         <span>Листай вниз</span>
         <div class="scroll-line"></div>
-      </div>
+      </div> -->
     </section>
 
     <!-- Features Section -->
@@ -169,7 +169,7 @@
         <div class="services-hooks">
           <div class="service-hook" v-for="(service, index) in allServices" :key="service.id">
             <NuxtLink :to="getServicePath(service)" class="service-hook-link">
-              <h3 class="service-hook-title">
+              <h3 class="service-hook-title" :class="{ 'service-hook-title--mobile-apps': service.slug === 'mobile-apps' }">
                 <span class="gradient-text">{{ service.title }}</span>
               </h3>
               <p class="service-hook-description">{{ service.description }}</p>
@@ -184,9 +184,20 @@
                   Идеально на телефонах, планшетах, даже на холодильнике с экраном - будет летать.
                   <br>
                   Конверсия в плюс. Скорость загрузки меньше секунды. Заявки идут.
-                </p>             
+                </p>
               </div>
               <div v-if="service.slug === 'mobile-apps'" class="web-dev-block">
+                <div class="web-dev-hero">
+                  <p class="web-dev-hero-title">
+                    Мобильные приложения –<br/>
+                    клиенты, которые <span class="web-dev-accent">возвращаются</span>.<br/>
+                    Сами.
+                  </p>
+                  <p class="web-dev-hero-subtitle">
+                    Push вместо СМС, бонусы вместо разовых скидок – приложение само напоминает о вас.<br/>
+                    iOS и Android из одной кодовой базы. Заказ в два тапа – от иконки до оплаты.
+                  </p>
+                </div>
                 <p class="web-dev-text">У конкурентов удобное приложение, а у вас только сайт?</p>
                 <p class="web-dev-text">Продажи через мобильный сайт низкие – оформлять заказ неудобно, клиенты уходят?</p>
                 <p class="web-dev-text">Покупатель заходит один раз – и пропадает. Нет бонусов, нет причин вернуться.</p>
@@ -1252,7 +1263,7 @@ useHead({
 
 /* Features Section */
 .features {
-  padding: var(--spacing-4xl) 0;
+  padding: var(--spacing-4xl) 20;
   position: relative;
 }
 
@@ -1386,6 +1397,10 @@ useHead({
   border-bottom: 1px solid var(--color-border);
 } */
 
+.services-preview {
+  padding-top: var(--spacing-4xl);
+}
+
 .services-preview .section-header {
   margin-bottom: var(--spacing-xl);
 }
@@ -1439,6 +1454,22 @@ useHead({
   text-shadow: 0 0 40px var(--color-primary-glow);
 }
 
+.service-hook-title.service-hook-title--mobile-apps {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: normal;
+  color: #06b6d4;
+  margin-bottom: 0;
+}
+
+.service-hook-title.service-hook-title--mobile-apps .gradient-text {
+  background: none;
+  -webkit-text-fill-color: #06b6d4;
+  color: #06b6d4;
+  text-shadow: none;
+}
+
 .service-hook-description {
   font-size: 1.25rem;
   color: #06b6d4;
@@ -1463,6 +1494,10 @@ useHead({
     font-size: 1.5rem;
   }
 
+  .service-hook-title.service-hook-title--mobile-apps {
+    font-size: 1rem;
+  }
+
   .service-hook-description {
     font-size: 1rem;
   }
@@ -1471,6 +1506,10 @@ useHead({
 @media (max-width: 380px) {
   .service-hook-title {
     font-size: 1.25rem;
+  }
+
+  .service-hook-title.service-hook-title--mobile-apps {
+    font-size: 0.9375rem;
   }
 
   .service-hook-description {
@@ -1517,7 +1556,7 @@ useHead({
   }
 
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 2rem;    
   }
 
   .section-header p {
@@ -1581,7 +1620,7 @@ useHead({
   }
 
   .section-header {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);    
   }
 
   .section-header h2 {

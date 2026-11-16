@@ -1,0 +1,163 @@
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--cyan:#06b6d4;--green:#00dc82;--text:#e4e4e7;--muted:#a1a1aa;--border:rgba(255,255,255,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:48px 20px 80px}
+.page-head h1{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;letter-spacing:-.02em;color:#fff;margin:0 0 10px}
+.page-head p{color:var(--muted);font-size:1rem;line-height:1.6;margin:0 0 40px;max-width:760px}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(6,182,212,.3);background:rgba(6,182,212,.06);padding:6px 14px;border-radius:999px;margin:0 0 24px}
+.sep{border:none;border-top:1px solid var(--border);margin:48px 0}
+.hook-name{font-size:1.25rem;font-weight:400;color:var(--cyan);line-height:1.7;text-align:center;margin:0}
+.hook-slogan{font-size:1.25rem;color:var(--cyan);line-height:1.7;text-align:center;margin:0}
+.hero{position:relative;padding:40px 0 24px;text-align:left}
+.hero-title{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:#fff;margin:0 0 24px}
+.hero-title .acc{color:var(--cyan)}
+.hero-sub{font-size:1.125rem;font-weight:400;line-height:1.6;color:#fff;margin:0 0 16px}
+.switcher{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 32px}
+.switch-btn{font-family:inherit;background:transparent;border:1px solid var(--border);color:var(--text);padding:10px 22px;border-radius:999px;font-weight:600;font-size:.95rem;transition:all .3s ease}
+.switch-btn:hover{border-color:rgba(6,182,212,.5);transform:translateY(-2px)}
+.switch-btn.is-active{background:linear-gradient(135deg,var(--cyan),var(--green));color:#0a0a0f;border-color:transparent;box-shadow:0 2px 12px rgba(6,182,212,.3)}
+.variant{display:none}
+.variant.is-active{display:block}
+.tape-toggle{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.95rem;margin:32px 0 24px;user-select:none}
+.tape-toggle input{width:18px;height:18px;accent-color:var(--cyan)}
+.t{color:#fff;font-size:1.125rem;font-weight:500;line-height:1.6;margin:0 0 12px}
+.key{display:block;font-size:24px;line-height:1.2;font-weight:700;color:#fff;margin:20px 0}
+.divider{display:flex;align-items:center;justify-content:center;margin:32px 0}
+.divider svg{width:100%;max-width:280px;height:20px;overflow:visible}
+.divider path{stroke-width:1.5;fill:none;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(6,182,212,.5))}
+.cta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:24px;padding:20px 24px;background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(0,220,130,.08));border:1px solid rgba(6,182,212,.2);border-radius:16px}
+.cta-text{color:#fff;font-size:1.25rem;font-weight:700}
+.press{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#06b6d4 0%,#00dc82 100%);color:#0a0a0f;padding:8px 20px;border-radius:999px;border:none;font-family:inherit;font-weight:700;font-size:.9rem;transition:all .3s ease;box-shadow:0 2px 12px rgba(6,182,212,.3);position:relative;overflow:hidden}
+.press::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s ease}
+.press:hover{transform:translateY(-2px);box-shadow:0 4px 24px rgba(6,182,212,.5),0 0 40px rgba(0,220,130,.2)}
+.press:hover::before{left:100%}
+.foot{color:var(--muted);font-size:.95rem;line-height:1.6;margin:48px 0 0}
+.cursor-dot,.cursor-halo{position:fixed;top:0;left:0;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor-dot{width:8px;height:8px;background:var(--cyan);box-shadow:0 0 12px rgba(6,182,212,.8);z-index:9999}
+.cursor-halo{width:36px;height:36px;border:1px solid rgba(6,182,212,.5);z-index:9998;transition:width .2s ease,height .2s ease}
+.cursor-halo.is-hover{width:56px;height:56px}
+@media (pointer:fine){body,button,a,label,input{cursor:none}}
+@media (pointer:coarse){.cursor-dot,.cursor-halo{display:none}}
+@media (max-width:768px){
+.hook-name,.hook-slogan{font-size:1rem}
+.hero{padding:24px 0 16px}
+.hero-sub{font-size:1rem}
+.t{font-size:.9375rem}
+.cta{flex-direction:column;align-items:flex-start;gap:14px;padding:18px 20px}
+.cta-text{font-size:1.125rem}
+}
+</style>
+
+<div class="wrap">
+  <header class="page-head">
+    <h1>«Мобильные приложения» – hero в стиле «Веб-разработки»</h1>
+    <p>Три варианта крупной шапки. Строки «Мобильные приложения» и слоган остаются мелкими голубыми, как сейчас. Лента «боль → решение» ниже общая для всех вариантов – её можно отключить чекбоксом, чтобы увидеть блок «только hero», как у веб-разработки.</p>
+  </header>
+
+  <section>
+    <span class="tag">Эталон – блок «Веб-разработка»</span>
+    <p class="hook-slogan">Создаём современные, быстрые и адаптивные веб-сайты</p>
+    <div class="hero">
+      <p class="hero-title"><span class="acc">Веб-разработка</span> –<br/>сайты, которые <span class="acc">продают</span>.<br/>Точка.</p>
+      <p class="hero-sub">Проектируем структуру, где нет случайных элементов.<br/>Идеально на телефонах, планшетах, даже на холодильнике с экраном - будет летать.<br/>Конверсия в плюс. Скорость загрузки меньше секунды. Заявки идут.</p>
+    </div>
+  </section>
+
+  <hr class="sep"/>
+
+  <section>
+    <span class="tag">Варианты шапки – «Мобильные приложения»</span>
+    <div class="switcher">
+      <button type="button" class="switch-btn is-active" data-target="v-a">A – Возвращаются</button>
+      <button type="button" class="switch-btn" data-target="v-b">B – В кармане</button>
+      <button type="button" class="switch-btn" data-target="v-c">C – Без рекламы</button>
+    </div>
+
+    <div class="variant is-active" id="v-a">
+      <p class="hook-name">Мобильные приложения</p>
+      <p class="hook-slogan">Разрабатываем нативные и кроссплатформенные приложения</p>
+      <div class="hero">
+        <p class="hero-title">Мобильные приложения –<br/>клиенты, которые <span class="acc">возвращаются</span>.<br/>Сами.</p>
+        <p class="hero-sub">Push вместо СМС, бонусы вместо разовых скидок – приложение само напоминает о вас.<br/>iOS и Android из одной кодовой базы. Заказ в два тапа – от иконки до оплаты.</p>
+      </div>
+    </div>
+
+    <div class="variant" id="v-b">
+      <p class="hook-name">Мобильные приложения</p>
+      <p class="hook-slogan">Разрабатываем нативные и кроссплатформенные приложения</p>
+      <div class="hero">
+        <p class="hero-title">Бизнес в <span class="acc">кармане</span><br/>у каждого клиента.<br/>Ближе, чем сайт.</p>
+        <p class="hero-sub">Иконку на экране телефона видно каждый день – закладку в браузере не открывают месяцами.<br/>Лояльность с бонусами и баллами возвращает покупателей без нового рекламного бюджета.</p>
+      </div>
+    </div>
+
+    <div class="variant" id="v-c">
+      <p class="hook-name">Мобильные приложения</p>
+      <p class="hook-slogan">Разрабатываем нативные и кроссплатформенные приложения</p>
+      <div class="hero">
+        <p class="hero-title">Приложение, которое<br/><span class="acc">продаёт</span> без рекламы.<br/>Каждый день.</p>
+        <p class="hero-sub">Каталог, корзина и оплата работают на нативной скорости – клиент не ждёт загрузку.<br/>Push-уведомления приводят к повторной покупке бесплатно, а аналитика показывает, где теряются тапы.</p>
+      </div>
+    </div>
+
+    <label class="tape-toggle"><input type="checkbox" id="tapeToggle" checked/> Показывать ленту «боль → решение» (общая для всех вариантов)</label>
+
+    <div id="sharedTape">
+      <span class="tag">Лента – без изменений</span>
+      <p class="t">У конкурентов удобное приложение, а у вас только сайт?</p>
+      <p class="t">Продажи через мобильный сайт низкие – оформлять заказ неудобно, клиенты уходят?</p>
+      <p class="t">Покупатель заходит один раз – и пропадает. Нет бонусов, нет причин вернуться.</p>
+      <p class="t">Напомнить о себе можете только через СМС? А приложение скачали и забыли через неделю?</p>
+      <span class="key">Клиенты бросают корзину на полпути</span>
+
+      <div class="divider">
+        <svg viewBox="0 0 280 20" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="waveGradProto" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#00dc82" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,10 Q35,0 70,10 T140,10 T210,10 T280,10" stroke="url(#waveGradProto)"/>
+        </svg>
+      </div>
+
+      <span class="key">Карманная витрина бизнеса</span>
+      <p class="t">Клиент в двух тапах от покупки. Push-уведомления вместо навязчивых СМС – клиент сам просит включиться.</p>
+      <p class="t">Программа лояльности с бонусами и баллами – мотивирует возвращаться и покупать чаще.</p>
+      <p class="t">Интуитивный интерфейс – от открытия до покупки за 3 тапа. Аналитика покажет, где теряем клиентов.</p>
+
+      <div class="cta">
+        <span class="cta-text">Узнали свою ситуацию?</span>
+        <button type="button" class="press">обсудить проект</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">Данные services.ts не меняются – оформление переносится только в index.vue. Выбери вариант шапки и реши, оставлять ли ленту.</p>
+</div>
+
+<div class="cursor-halo"></div>
+<div class="cursor-dot"></div>
+
+<script>
+(function(){
+  var dot=document.querySelector('.cursor-dot'),halo=document.querySelector('.cursor-halo');
+  var mx=window.innerWidth/2,my=window.innerHeight/2,hx=mx,hy=my;
+  window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  (function loop(){hx+=(mx-hx)*0.18;hy+=(my-hy)*0.18;halo.style.left=hx+'px';halo.style.top=hy+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('button,a,label,input').forEach(function(el){
+    el.addEventListener('mouseenter',function(){halo.classList.add('is-hover');});
+    el.addEventListener('mouseleave',function(){halo.classList.remove('is-hover');});
+  });
+  var btns=document.querySelectorAll('.switch-btn'),panels=document.querySelectorAll('.variant');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    btns.forEach(function(x){x.classList.toggle('is-active',x===b);});
+    panels.forEach(function(p){p.classList.toggle('is-active',p.id===b.getAttribute('data-target'));});
+  });});
+  var tg=document.getElementById('tapeToggle'),tape=document.getElementById('sharedTape');
+  tg.addEventListener('change',function(){tape.style.display=tg.checked?'':'none';});
+})();
+</script>
