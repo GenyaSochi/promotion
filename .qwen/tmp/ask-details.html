@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пояснение к вариантам оформления сайта</title>
+<style>
+:root {
+  --фон: #0a0a0f;
+  --панель: #111119;
+  --текст: #f5f5f7;
+  --тихий: #a8a8b5;
+  --голубой: #06b6d4;
+  --зелёный: #00dc82;
+  --линия: rgba(255,255,255,.09);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--фон);
+  color: var(--текст);
+  font-family: Arial, system-ui, sans-serif;
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+main {
+  max-width: 920px;
+  margin: 0 auto;
+  background: var(--панель);
+  border: 1px solid var(--линия);
+  border-radius: 20px;
+  padding: 36px 40px 44px;
+}
+h1 {
+  font-size: 2rem;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--линия);
+  padding-bottom: 18px;
+}
+h2 {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin-top: 34px;
+  margin-bottom: 12px;
+  color: var(--зелёный);
+}
+p { margin-bottom: 12px; }
+ul, ol { margin: 10px 0 16px 22px; }
+li { margin-bottom: 8px; }
+code {
+  font-family: Consolas, monospace;
+  color: var(--голубой);
+  font-size: .95em;
+}
+.введение {
+  border-left: 3px solid var(--голубой);
+  padding-left: 16px;
+  color: var(--тихий);
+}
+.заметка {
+  margin-top: 26px;
+  padding: 16px 18px;
+  border: 1px solid rgba(6,182,212,.25);
+  border-radius: 12px;
+  background: rgba(6,182,212,.05);
+}
+@media (max-width: 640px) {
+  body { padding: 18px 12px; }
+  main { padding: 26px 20px 32px; }
+  h1 { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>Пояснение к вариантам оформления сайта</h1>
+
+  <p class="введение">Я проверил файлы проекта. Я не менял файлы проекта. Я не выбираю вариант за вас.</p>
+
+  <h2>Основа вопроса</h2>
+  <p>Вы попросили оформить весь проект в стиле блоков «Наши услуги».</p>
+  <p>Этот стиль есть в шести блоках на главной странице.</p>
+  <p>Другие страницы используют иной вид. Там есть центрированные заголовки и блоки с рамками.</p>
+  <p>Перед правкой нужно выбрать направление. Для этого подготовлен статический прототип.</p>
+  <p>В прототипе четыре варианта. Ниже они названы по порядку.</p>
+
+  <h2>Проверенные сведения</h2>
+  <ol>
+    <li><code>nuxt.config.ts</code> подключает шрифт <code>Inter</code>. Веса: 400, 500, 700, 800.</li>
+    <li><code>nuxt.config.ts</code> подключает стили в таком порядке: <code>reset.css</code>, <code>style.css</code>, <code>css/main.css</code>.</li>
+    <li><code>app/assets/style.css</code> задаёт шрифт <code>Plus Jakarta Sans</code> для <code>body</code>.</li>
+    <li><code>app/assets/style.css</code> задаёт <code>Inter</code> для классов <code>.web-dev-hero-title</code> и <code>.web-dev-hero-subtitle</code>.</li>
+    <li><code>app/pages/index.vue</code> содержит шесть блоков услуг. Они используют классы <code>.web-dev-hero</code>, <code>.web-dev-hero-title</code>, <code>.web-dev-hero-subtitle</code> и <code>.web-dev-divider</code>.</li>
+    <li><code>app/pages/services/index.vue</code> использует заголовок <code>.hero</code>, сетку <code>.services-grid</code> и блоки <code>.service-card</code>.</li>
+    <li><code>app/pages/services/[slug].vue</code> использует <code>.hero</code>, <code>.service-detail-grid</code>, <code>.service-features-list</code> и <code>.cta-card</code>.</li>
+    <li><code>app/pages/web.vue</code> использует <code>.web-hero</code>, <code>.web-features-grid</code>, <code>.web-feature-card</code> и <code>.web-cta-card</code>.</li>
+    <li><code>app/pages/privacy.vue</code> и <code>app/pages/terms.vue</code> содержат документы с разделами и списками.</li>
+    <li><code>app/layouts/default.vue</code> добавляет шапку, подвал и кнопку на каждой странице.</li>
+    <li><code>app/assets/css/main.css</code> содержит общие классы <code>.section-header</code>, <code>.card</code>, <code>.feature-card</code> и <code>.service-card</code>.</li>
+  </ol>
+
+  <p class="заметка">Проверка шла по коду. Я не открывал страницы в браузере. Я не проверял вид на всех ширинах экрана.</p>
+
+  <h2>Смысл первого варианта</h2>
+  <p>Название: чистая типографика.</p>
+  <p>Условие: цель — полное совпадение с блоками «Наши услуги».</p>
+  <p>Действие: убрать центрированные заголовки и блоки с рамками.</p>
+  <p>Оставить крупный заголовок, подзаголовок и волну.</p>
+  <p>Каждая страница станет последовательностью текстовых блоков.</p>
+
+  <h2>Смысл второго варианта</h2>
+  <p>Название: пронумерованная последовательность блоков.</p>
+  <p>Условие: нужен заметный ритм на всех страницах.</p>
+  <p>Действие: поставить номер перед каждым блоком.</p>
+  <p>Сохранить волны между блоками.</p>
+
+  <h2>Смысл третьего варианта</h2>
+  <p>Название: крупный заголовок и колонки без рамок.</p>
+  <p>Условие: нужно сохранить сетки.</p>
+  <p>Действие: убрать рамки и фон карточек.</p>
+  <p>Оставить колонки и акцентные линии.</p>
+
+  <h2>Смысл четвёртого варианта</h2>
+  <p>Название: общие параметры оформления.</p>
+  <p>Условие: нужно минимальное изменение.</p>
+  <p>Действие: заменить шрифт на <code>Inter</code>.</p>
+  <p>Привести кнопки к овальной форме.</p>
+  <p>Убрать жёсткие рамки.</p>
+
+  <h2>Различия</h2>
+  <ul>
+    <li>Первый вариант меняет разметку сильнее всего.</li>
+    <li>Четвёртый вариант меняет разметку меньше всего.</li>
+    <li>Первый и второй варианты убирают карточки.</li>
+    <li>Третий вариант сохраняет колонки.</li>
+    <li>Четвёртый вариант сохраняет структуру страниц.</li>
+    <li>Первый вариант даёт один вид для всех страниц.</li>
+    <li>Четвёртый вариант оставляет различия между страницами.</li>
+  </ul>
+
+  <h2>Влияние и риски</h2>
+  <ul>
+    <li>Правки затронут страницы и компоненты.</li>
+    <li>При первом варианте длинные документы могут стать труднее для чтения.</li>
+    <li>При втором варианте номера нужны на всех страницах.</li>
+    <li>При третьем варианте часть карточек останется.</li>
+    <li>При четвёртом варианте сходство с блоками услуг будет частичным.</li>
+    <li>После правок запустите <code>npm run build</code>.</li>
+    <li>После сборки проверьте страницы на узком экране.</li>
+  </ul>
+
+  <h2>Рекомендация</h2>
+  <p>Если цель — полное совпадение со стилем «Наши услуги», выберите первый вариант.</p>
+  <p>Причины:</p>
+  <ol>
+    <li>Он повторяет классы <code>.web-dev-hero-title</code> и <code>.web-dev-hero-subtitle</code>.</li>
+    <li>Он убирает блоки с рамками, которые отличают страницы от услуг.</li>
+    <li>Он даёт единый ритм для главной, услуг и других страниц.</li>
+  </ol>
+  <p>Документы <code>privacy.vue</code> и <code>terms.vue</code> оставьте в обычном виде.</p>
+  <p>Это действие сохранит удобство чтения.</p>
+</main>
+</body>
+</html>

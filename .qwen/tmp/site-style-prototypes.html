@@ -1,0 +1,98 @@
+<style>
+:root{
+  --bg:#07070b;--panel:#0d0d14;--cyan:#06b6d4;--green:#00dc82;
+  --text:#fff;--muted:rgba(255,255,255,.62);--micro:rgba(255,255,255,.45);
+  --line:rgba(255,255,255,.08);--glow:0 0 40px rgba(6,182,212,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;padding:36px 18px}
+a,button{cursor:none}
+.proto{max-width:1180px;margin:0 auto 56px;padding:30px 34px 38px;background:var(--panel);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.proto-label{display:flex;align-items:baseline;gap:14px;margin-bottom:26px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.proto-label b{font-size:1.25rem;letter-spacing:-.02em}
+.proto-label span{font-size:.875rem;color:var(--micro)}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:24px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em}
+.logo i{color:var(--cyan);text-shadow:0 0 18px var(--cyan);font-style:normal;font-size:1.4rem}
+.logo small{display:block;font-size:.7rem;font-weight:400;color:var(--micro);letter-spacing:.02em}
+nav{display:flex;gap:22px;font-size:.9rem;color:var(--muted)}
+nav a{color:var(--muted);text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 24px;border:0;border-radius:999px;background:linear-gradient(135deg,var(--cyan),var(--green));color:#07110d;font-weight:800;box-shadow:var(--glow);white-space:nowrap}
+.hero-title{font-size:clamp(2.2rem,5vw,4.2rem);font-weight:800;line-height:1.08;letter-spacing:-.04em}
+.hero-title .accent{color:var(--cyan)}
+.hero-sub{margin-top:18px;max-width:760px;font-size:1.125rem;line-height:1.6;color:var(--muted)}
+.divider{height:1px;width:100%;max-width:280px;margin:30px auto;background:linear-gradient(90deg,transparent,var(--cyan) 35%,var(--green) 65%,transparent);box-shadow:0 0 12px rgba(6,182,212,.45)}
+.eyebrow{font-size:.8rem;text-transform:uppercase;letter-spacing:.2em;color:var(--cyan);font-weight:700;margin-bottom:18px}
+.block{padding:22px 0}
+.block-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-.03em}
+.block-sub{margin-top:12px;font-size:1.125rem;line-height:1.6;color:var(--muted)}
+.cta-row{margin-top:34px;padding:20px 24px;border:1px solid rgba(6,182,212,.22);border-radius:18px;background:linear-gradient(135deg,rgba(6,182,212,.07),rgba(0,220,130,.07));display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.cta-row strong{font-size:1.125rem}
+@media(max-width:720px){.hdr{flex-wrap:wrap}nav{order:3;width:100%;justify-content:space-between}.proto{padding:24px 20px}.cta-row{flex-direction:column;align-items:flex-start}}
+</style>
+
+<section class="proto v1">
+  <div class="divider"></div>
+  <div class="proto-label"><b>A. Чистая типографика</b><span>Весь сайт как один непрерывный текст: крупные заголовки, подзаголовки, прямые линии, без карточек</span></div>
+  <header class="hdr"><div class="logo"><i>✦</i><div>СТУДИЯ<small>цифровых продуктов</small></div></div><nav><a href="#">Главная</a><a href="#">Услуги</a><a href="#">Контакты</a></nav><button class="btn">Связаться</button></header>
+  <div class="hero"><h1 class="hero-title">Сайты, которые <span class="accent">продают</span>.<br/>Не просто красивые.</h1><p class="hero-sub">Проектируем структуру, где нет случайных элементов. Конверсия в плюс, скорость загрузки меньше секунды, заявки идут.</p></div>
+  <div class="divider"></div>
+  <p class="eyebrow">Наши услуги</p>
+  <div class="block"><h2 class="block-title">Веб-разработка —<br/>сайты, которые <span class="accent">продают</span>. Точка.</h2><p class="block-sub">Проектируем структуру, где нет случайных элементов. Идеально на телефонах, планшетах, даже на холодильнике с экраном – будет летать.</p></div>
+  <div class="divider"></div>
+  <div class="block"><h2 class="block-title">SEO-маркетинг — трафик, который приходит <span class="accent">бесплатно</span>.<br/>И остаётся.</h2><p class="block-sub">Вы платите за каждый клик, а органика стоит на месте? Конкуренты в ТОПе получают трафик бесплатно – ваш сайт пока прячется глубоко в выдаче.</p></div>
+  <div class="cta-row"><strong>Готовы обсудить проект?</strong><button class="btn">Оставить заявку</button></div>
+</section>
+
+<section class="proto v2">
+  <div class="proto-label"><b>B. Лента услуг</b><span>Сплошная вертикальная лента: номер, заголовок, подзаголовок, прямая линия. Максимум ритма «Наших услуг»</span></div>
+  <header class="hdr"><div class="logo"><i>✦</i><div>СТУДИЯ<small>цифровых продуктов</small></div></div><nav><a href="#">Главная</a><a href="#">Услуги</a><a href="#">Контакты</a></nav><button class="btn">Связаться</button></header>
+  <div class="hero"><p class="eyebrow">01 / Главное направление</p><h1 class="hero-title">Мобильные приложения —<br/>клиенты, которые <span class="accent">возвращаются</span>.<br/>Сами.</h1><p class="hero-sub">Push вместо СМС, бонусы вместо разовых скидок – приложение само напоминает о вас. Заказ в два тапа – от иконки до оплаты.</p></div>
+  <div class="divider"></div>
+  <div class="block"><p class="eyebrow">02 / Дизайн</p><h2 class="block-title">UI/UX-дизайн —<br/>интерфейсы, где <span class="accent">всё понятно</span>.<br/>С первого экрана.</h2><p class="block-sub">Клиенты заходят и не понимают, куда нажать – и уходят. На телефоне всё съезжает, кнопки крошечные, а корзину бросают на последнем шаге.</p></div>
+  <div class="divider"></div>
+  <div class="block"><p class="eyebrow">03 / Поддержка</p><h2 class="block-title">Техподдержка —<br/>сайт работает, когда <span class="accent">важно</span>.<br/>Без паники.</h2><p class="block-sub">Сайт падает в час пик, вы узнаёте о проблеме от клиентов, а разработчик отвечает через сутки. Формы с ошибкой – деньги теряются прямо сейчас.</p></div>
+  <div class="cta-row"><strong>Нужна поддержка или новый проект?</strong><button class="btn">Написать нам</button></div>
+</section>
+
+<section class="proto v3">
+  <style>
+    .v3 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:26px}
+    .v3 .cell{padding:0;border:0;background:none}
+    .v3 .cell .num{display:block;font-size:.8rem;font-weight:800;color:var(--cyan);letter-spacing:.2em;margin-bottom:10px}
+    .v3 .cell h3{font-size:1.4rem;line-height:1.25;letter-spacing:-.02em;margin-bottom:8px}
+    .v3 .cell p{font-size:1.0625rem;color:var(--muted)}
+    .v3 .cell .rule{height:1px;background:linear-gradient(90deg,var(--cyan),var(--green),transparent);margin-top:18px;box-shadow:0 0 14px rgba(0,220,130,.35)}
+    @media(max-width:720px){.v3 .grid{grid-template-columns:1fr}}
+  </style>
+  <div class="proto-label"><b>C. Hero + сетка без рамок</b><span>Компромисс: крупный hero сверху, ниже – колонки без карточек, но с теми же акцентами и линиями</span></div>
+  <header class="hdr"><div class="logo"><i>✦</i><div>СТУДИЯ<small>цифровых продуктов</small></div></div><nav><a href="#">Главная</a><a href="#">Услуги</a><a href="#">Контакты</a></nav><button class="btn">Связаться</button></header>
+  <div class="hero"><h1 class="hero-title">Веб-разработка —<br/><span class="accent">результат</span>, а не процесс.</h1><p class="hero-sub">Скорость, структура, понятные сценарии. Каждый элемент работает на заявку.</p></div>
+  <div class="divider"></div>
+  <p class="eyebrow">Что входит</p>
+  <div class="grid">
+    <div class="cell"><span class="num">01</span><h3>Структура</h3><p>Проектируем логику, где нет случайных элементов. Каждый экран ведёт к цели.</p><div class="rule"></div></div>
+    <div class="cell"><span class="num">02</span><h3>Скорость</h3><p>Загрузка меньше секунды даже на мобильном. Техническая оптимизация с первого дня.</p><div class="rule"></div></div>
+    <div class="cell"><span class="num">03</span><h3>Конверсия</h3><p>Формы, кнопки и сценарии, которые доводят пользователя до заявки без лишних шагов.</p><div class="rule"></div></div>
+  </div>
+  <div class="cta-row"><strong>Обсудим ваш проект?</strong><button class="btn">Оставить заявку</button></div>
+</section>
+
+<section class="proto v4">
+  <style>
+    .v4 .hdr{justify-content:center;flex-wrap:wrap}
+    .v4 .hero{text-align:center;padding:20px 0 8px}
+    .v4 .hero-sub{margin-left:auto;margin-right:auto}
+    .v4 .soft{border:1px solid var(--line);border-radius:20px;padding:24px;margin-bottom:18px;background:linear-gradient(135deg,rgba(6,182,212,.05),rgba(0,220,130,.04))}
+    .v4 .soft h3{font-size:1.25rem;margin-bottom:8px}
+    .v4 .soft p{color:var(--muted);font-size:1.0625rem}
+    .v4 .btn{border-radius:14px}
+  </style>
+  <div class="proto-label"><b>D. Глобальные токены, минимум риска</b><span>Сохраняем структуру страниц, но меняем шрифт на Inter, кнопки на pill/glow и снимаем жёсткие рамки карточек</span></div>
+  <header class="hdr"><div class="logo"><i>✦</i><div>СТУДИЯ<small>цифровых продуктов</small></div></div><nav><a href="#">Главная</a><a href="#">Услуги</a><a href="#">Контакты</a></nav><button class="btn">Связаться</button></header>
+  <div class="hero"><h1 class="hero-title">Консалтинг —<br/>решения на <span class="accent">цифрах</span>, не на догадках.</h1><p class="hero-sub">Выбираем технологии, подрядчиков и сроки так, чтобы бюджет не уходил в пробные проекты.</p></div>
+  <div class="divider"></div>
+  <div class="soft"><h3>Аудит текущих систем</h3><p>Смотрим, что работает, что тормозит и где теряются деньги. Без общих слов – только наблюдения и цифры.</p></div>
+  <div class="soft"><h3>План действий</h3><p>Чёткая последовательность шагов, ответственные и сроки. Вы понимаете, за что платите и зачем.</p></div>
+  <div class="cta-row"><strong>Хотите независимую экспертизу?</strong><button class="btn">Заказать консультацию</button></div>
+</section>
