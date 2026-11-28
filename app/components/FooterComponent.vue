@@ -25,7 +25,7 @@
             </a>
             <a href="https://max.ru/u/f9LHodD0cOI-TPMMpsfZv29lGZ9rHyGWIOQKmB4uCt1OOJsBt-3rhVcvLjA" target="_blank"
               rel="noopener noreferrer" class="social-btn" aria-label="Max">
-              <span style="font-weight: 800; font-size: 13px; font-family: sans-serif;">M</span>
+              <span style="font-weight: 800; font-size: 13px;">M</span>
             </a>
           </div>
         </div>

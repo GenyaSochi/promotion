@@ -2,8 +2,8 @@
   <div class="contact-page">
     <section id="contact" class="hero">
       <div class="container">
-        <h1>Заказать проект</h1>
-        <p class="subtitle">Свяжитесь с нами — мы всегда рады помочь</p>
+        <h1 class="contact-hero-title">Заказать <span class="contact-accent">проект</span></h1>
+        <p class="contact-hero-subtitle">Свяжитесь с нами — мы всегда рады помочь</p>
       </div>
     </section>
 
@@ -44,7 +44,6 @@
           </div>
 
           <div class="contact-form-wrapper">
-            <div class="gradient-border"></div>
             <form class="contact-form" @submit.prevent="submitForm">
               <h2>Напишите нам</h2>
 
@@ -224,26 +223,32 @@ useHead({
 }
 
 .hero {
-  color: var(--color-text);
   padding: 5rem 0 3rem;
-  text-align: center;
+  text-align: left;
 }
 
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: var(--color-primary);
+.contact-hero-title {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 24px;
 }
 
-.hero .subtitle {
-  font-size: 1.25rem;
-  color: var(--color-text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
+.contact-accent {
+  color: #06b6d4;
+}
+
+.contact-hero-subtitle {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #fff;
+  max-width: 760px;
+  margin: 0;
 }
 
 .contact-content {
@@ -258,82 +263,48 @@ useHead({
 
 .contact-info h2,
 .contact-form-wrapper h2 {
-  font-size: 1.75rem;
-  margin-bottom: var(--spacing-lg);
-  color: var(--color-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 var(--spacing-lg);
 }
 
 .info-text {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
   color: var(--color-text-secondary);
   margin-bottom: var(--spacing-xl);
-  line-height: 1.6;
 }
 
 .contact-item {
   display: flex;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  position: relative;
-  overflow: hidden;
-}
-
-.contact-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-md);
-  padding: 2px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-accent-purple),
-    var(--color-accent-pink),
-    var(--color-accent-cyan),
-    var(--color-primary)
-  );
-  background-size: 300% 300%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  animation: gradient-rotate 4s linear infinite;
-  pointer-events: none;
-}
-
-.contact-item:hover::before {
-  opacity: 1;
+  padding: 0 0 var(--spacing-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform var(--transition-fast);
 }
 
 .contact-item:hover {
-  transform: translateX(8px);
-  background: var(--color-bg-card-hover);
-  box-shadow: var(--shadow-md), var(--shadow-glow-primary);
+  transform: translateX(6px);
 }
 
 .contact-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, rgba(0, 220, 130, 0.1), rgba(139, 92, 246, 0.1));
-  border-radius: var(--radius-md);
-  color: var(--color-primary);
+  width: 32px;
+  height: 32px;
+  color: #06b6d4;
   flex-shrink: 0;
 }
 
 .contact-item:hover .contact-icon {
-  background: linear-gradient(135deg, rgba(0, 220, 130, 0.2), rgba(139, 92, 246, 0.2));
-  color: var(--color-primary-light);
+  color: #00dc82;
 }
 
 .contact-icon svg {
@@ -385,73 +356,23 @@ useHead({
 .social-link {
   display: inline-flex;
   align-items: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--color-primary);
-  color: var(--color-bg);
-  border-radius: var(--radius-md);
-  font-weight: 500;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  padding: 10px 24px;
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 600;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  cursor: none;
 }
 
 .social-link:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-glow-primary);
+  border-color: #00dc82;
+  box-shadow: 0 0 30px rgba(0, 220, 130, 0.25);
 }
 
 .contact-form-wrapper {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md);
   position: relative;
-  overflow: hidden;
-}
-
-.contact-form-wrapper .gradient-border {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  padding: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-accent-purple),
-    var(--color-accent-pink),
-    var(--color-accent-cyan),
-    var(--color-primary)
-  );
-  background-size: 300% 300%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  animation: gradient-rotate 4s linear infinite;
-  pointer-events: none;
-}
-
-.contact-form-wrapper:hover .gradient-border {
-  opacity: 1;
-}
-
-.contact-form-wrapper:hover {
-  box-shadow: var(--shadow-xl), var(--shadow-glow-primary);
-}
-
-@keyframes gradient-rotate {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 .contact-form {
@@ -474,22 +395,23 @@ useHead({
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  font-size: 1rem;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  font-size: 1.125rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-  background: var(--color-bg-tertiary);
-  color: var(--color-text);
+  background: transparent;
+  color: #fff;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0, 220, 130, 0.15), var(--shadow-glow-primary);
-  background: var(--color-bg-secondary);
+  border-color: #06b6d4;
+  box-shadow: 0 1px 0 #00dc82;
 }
 
 .form-group textarea {
@@ -505,7 +427,7 @@ useHead({
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-sm);
-  cursor: pointer;
+  cursor: none;
   color: var(--color-text);
   font-size: 0.95rem;
   line-height: 1.4;
@@ -516,8 +438,8 @@ useHead({
   width: 18px;
   height: 18px;
   margin-top: 2px;
-  cursor: pointer;
-  accent-color: var(--color-primary);
+  cursor: none;
+  accent-color: #06b6d4;
 }
 
 .checkbox-text {
@@ -525,20 +447,24 @@ useHead({
 }
 
 .btn-submit {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: var(--color-bg);
-  padding: var(--spacing-md) var(--spacing-xl);
+  align-self: flex-start;
+  background: linear-gradient(135deg, #06b6d4 0%, #00dc82 100%);
+  color: #07110d;
+  padding: 14px 32px;
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: 999px;
   font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 800;
+  cursor: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.25);
 }
 
 .btn-submit:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow-primary);
+  transform: translateY(-3px);
+  color: #fff;
+  box-shadow: 0 0 50px rgba(0, 220, 130, 0.4);
 }
 
 .btn-submit:disabled {
@@ -548,20 +474,17 @@ useHead({
 
 .submit-message {
   margin-top: var(--spacing-md);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
-  text-align: center;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.125rem;
   font-weight: 500;
 }
 
 .submit-message.success {
-  background: rgba(40, 167, 69, 0.1);
-  color: var(--color-success);
+  color: #00dc82;
 }
 
 .submit-message.error {
-  background: rgba(220, 53, 69, 0.1);
-  color: var(--color-error);
+  color: #ef4444;
 }
 
 .map-section {
@@ -593,17 +516,9 @@ useHead({
 }
 
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-
   .contact-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
-  }
-
-  .contact-form-wrapper {
-    padding: var(--spacing-lg);
   }
 }
 </style>

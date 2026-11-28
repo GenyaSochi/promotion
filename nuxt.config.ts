@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   fonts: {
     provider: 'google',
     families: [
-      { name: 'Inter', weights: [400, 500, 700, 800] }
+      { name: 'Inter', weights: [400, 500, 600, 700, 800, 900] }
     ]
   },
   

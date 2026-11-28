@@ -43,10 +43,10 @@ onUnmounted(() => {
   width: 56px;
   height: 56px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: var(--color-bg);
+  background: linear-gradient(135deg, #00dc82 0%, #06b6d4 100%);
+  color: #0a0a0f;
   border: none;
-  cursor: pointer;
+  cursor: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +56,7 @@ onUnmounted(() => {
   visibility: hidden;
   transform: scale(0.8) translateY(20px);
   transition: all var(--transition-normal);
-  box-shadow: 0 0 20px var(--color-primary-glow);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
   z-index: 999;
   overflow: hidden;
 }
@@ -77,7 +77,7 @@ onUnmounted(() => {
   position: absolute;
   inset: -2px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent-purple), var(--color-accent-pink), var(--color-primary));
+  background: linear-gradient(135deg, #00dc82, #06b6d4, #00dc82);
   background-size: 300% 300%;
   animation: gradient-rotate 3s ease infinite;
   z-index: -1;
@@ -87,7 +87,8 @@ onUnmounted(() => {
 
 .scroll-to-top:hover {
   transform: scale(1.05) translateY(-3px);
-  box-shadow: 0 0 40px var(--color-primary-glow), 0 0 60px rgba(0, 220, 130, 0.5);
+  color: #fff;
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.5), 0 0 60px rgba(0, 220, 130, 0.45);
 }
 
 .scroll-to-top:hover::after {

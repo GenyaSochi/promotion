@@ -10,77 +10,22 @@
       <div class="container">
         <div class="hero-content">
           <div class="hero-badge">
-            <span class="badge-dot"></span>
-            <span>Доступны для новых проектов</span>
+            <span class="hero-badge-accent">Доступны</span> для новых проектов
           </div>
-          <h1>
-            <span class="gradient-text">Цифровые решения</span>
-            <br />
+          <h1 class="web-dev-hero-title">
+            <span class="web-dev-accent">Цифровые решения</span><br />
             для вашего бизнеса
           </h1>
-          <p class="hero-description">
+          <p class="hero-lead web-dev-hero-subtitle">
             Создаём современные веб-сайты, мобильные приложения и цифровые продукты,
             которые помогают компаниям расти и привлекать клиентов
           </p>
           <div ref="hookRef" class="hero-hook">
-            <h2 class="hero-hook-title">
-              <span class="gradient-text">Мы делаем не просто "сайты мечты"</span>
+            <h2 class="hero-hook-title web-dev-hero-title">
+              Мы делаем не просто <span class="web-dev-accent">"сайты мечты"</span>
             </h2>
-            <div class="hero-description">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют
-              круглосуточного присмотра</div>
-            <!-- <Transition name="timer-slide" appear @after-enter="startTimer">
-              <div v-if="cardVisible" ref="cardRef" class="hero-diagnosis-card hero-diagnosis-card--timer">
-                <div class="hero-diagnosis-card-glow"></div>
-                <div ref="timerRef" class="hero-timer-wrapper">
-
-                  <div class="hero-timer-ring" :class="[timerColorClass, { 'is-boom': timerValue === 0 }]">
-                    <div class="hero-timer-glow"></div> -->
-
-                    <!-- Внешнее орбитальное кольцо с тиками -->
-                    <!-- <svg class="hero-timer-orbit" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
-                      <circle class="hero-timer-orbit-track" cx="120" cy="120" r="115" />
-                      <g class="hero-timer-ticks">
-                        <line v-for="i in 24" :key="i" :class="{ 'is-major': i % 3 === 0 }" x1="120" y1="10" x2="120"
-                          y2="20" :transform="`rotate(${(i - 1) * 15} 120 120)`" />
-                      </g>
-                      <g class="hero-timer-satellite">
-                        <circle cx="120" cy="8" r="4" />
-                      </g>
-                    </svg> -->
-
-                    <!-- Внутренний progress -->
-                    <!-- <svg class="hero-timer-core" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                      <defs>
-                        <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="var(--timer-c1)" />
-                          <stop offset="100%" stop-color="var(--timer-c2)" />
-                        </linearGradient>
-                        <filter id="timerGlow" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="4" result="blur" />
-                          <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                          </feMerge>
-                        </filter>
-                      </defs>
-                      <circle class="hero-timer-track" cx="100" cy="100" r="88" />
-                      <circle class="hero-timer-progress" cx="100" cy="100" r="88" :stroke-dasharray="circumference"
-                        :stroke-dashoffset="dashOffset" stroke="url(#timerGrad)" filter="url(#timerGlow)" />
-                      <circle class="hero-timer-dot" cx="188" cy="100" r="7"
-                        :transform="`rotate(${progressAngle} 100 100)`" />
-                    </svg>
-
-                    <div class="hero-timer-digit" :class="{ shake: timerValue === 0 }" @click="openContactModal">
-                      <span class="hero-timer-digit-main">{{ timerValue }}</span>
-                      <button type="button" class="hero-timer-digit-sub">жми</button>
-                    </div>
-
-                    <div class="hero-timer-shockwave"></div>
-                    <div class="hero-timer-shockwave hero-timer-shockwave--delay"></div>
-                  </div>
-                </div>
-              </div> -->
-            <!-- </Transition> -->
+            <p class="hero-lead web-dev-hero-subtitle">Мы делаем сайты, которые работают как часы, приносят деньги и не требуют
+              круглосуточного присмотра</p>           
           </div>
 
           <div class="hero-diagnosis-cards">
@@ -88,13 +33,8 @@
 
 
           <div class="hero-buttons">
-            <NuxtLink to="/#contact" class="btn-primary">
+            <NuxtLink to="/#contact" class="btn-primary btn-project">
               обсудить проект
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
             </NuxtLink>
           </div>
           <d  iv class="hero-stats">
@@ -104,11 +44,7 @@
             </div>
           </d>
         </div>
-      </div>
-      <!-- <div class="scroll-indicator">
-        <span>Листай вниз</span>
-        <div class="scroll-line"></div>
-      </div> -->
+      </div>   
     </section>
 
     <!-- Features Section -->
@@ -272,7 +208,7 @@
         </div>
 
         <div class="section-footer">
-          <NuxtLink to="/#contact" class="btn-primary">обсудить проект</NuxtLink>
+          <NuxtLink to="/#contact" class="btn-primary btn-project">обсудить проект</NuxtLink>
         </div>
       </div>
     </section>
@@ -589,25 +525,21 @@ useHead({
 }
 
 .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-full);
-  font-size: 1rem;
-  color: var(--color-text-secondary);
+  display: inline-block;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #fff;
   margin-bottom: var(--spacing-xl);
-  backdrop-filter: blur(10px);
 }
 
-.badge-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
+.hero-badge-accent {
+  background: linear-gradient(135deg, #00dc82 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #00dc82;
 }
 
 .hero h1 {
@@ -627,6 +559,13 @@ useHead({
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.hero-content .hero-lead {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .hero-hook {
@@ -740,18 +679,9 @@ useHead({
 }
 
 .hero-hook-title {
-  font-size: clamp(1.75rem, 4vw, 3rem);
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  margin-bottom: var(--spacing-lg);
+  margin: 0 0 24px;
   position: relative;
   z-index: 1;
-}
-
-.hero-hook-title .gradient-text {
-  display: inline-block;
-  text-shadow: 0 0 40px var(--color-primary-glow);
 }
 
 /* ── Slide-in card animation (Vue Transition) ── */
@@ -1299,14 +1229,6 @@ useHead({
   line-height: 1.7;
 }
 
-/* Services Preview */
-/* .services-preview {
-  padding: var(--spacing-4xl) 0;
-  background: var(--color-bg-secondary);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-} */
-
 .services-preview {
   padding-top: var(--spacing-4xl);
 }
@@ -1434,6 +1356,21 @@ useHead({
   margin-top: var(--spacing-2xl);
 }
 
+.btn-project {
+  background: linear-gradient(135deg, #00dc82 0%, #06b6d4 100%);
+  color: #0a0a0f;
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+}
+
+.btn-project::before {
+  display: none;
+}
+
+.btn-project:hover {
+  color: #fff;
+  box-shadow: 0 0 50px rgba(6, 182, 212, 0.6);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
@@ -1494,8 +1431,7 @@ useHead({
   }
 
   .hero-badge {
-    padding: 8px 14px;
-    font-size: 0.9375rem;
+    font-size: 1rem;
   }
 
   .hero-buttons {
@@ -1619,6 +1555,14 @@ useHead({
 
 .web-dev-hero-title .web-dev-accent {
   color: #06b6d4;
+}
+
+.hero .hero-title-gradient {
+  background: linear-gradient(135deg, #00dc82 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #00dc82;
 }
 
 .web-dev-hero-subtitle {
